@@ -21,11 +21,11 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart.yaml)                                                        |   64x44    |      22s       |      1.20M       |
 |                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.1(95.6) | 92.5(92.0) | 80.4(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |      14s       | 9.46M / 15.6214M |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.5(97.4) | 95.1(94.5) | 83.5(83.6) | [gaitgl.yaml](config/gaitgl.yaml)                                                            |   64x44    |      31s       |      3.10M       |
+The results in the parentheses are mentioned in the papers
 
 
 **Note**:
 - All the models were tested on [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp) (Rank@1, excluding identical-view cases).
-- The results in the parentheses are mentioned in the papers
 - The shown result of GLN is implemented without compact block. 
 - Only 2 RTX6000 are used during the inference phase.
 - The results on [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html) will be released soon.
@@ -35,6 +35,9 @@ It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
 # Get Started
 ## Installation
 1. clone this repo.
+    ```
+    git clone https://github.com/ShiqiYu/OpenGait.git
+    ```
 2. Install dependenices:
     - pytorch >= 1.6
     - torchvision
@@ -42,6 +45,17 @@ It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
     - tensorboard
     - opencv-python
     - tqdm
+    
+    Install dependenices by [Anaconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html):
+    ```
+    conda install tqdm pyyaml tensorboard opencv
+    conda install pytorch==1.6.0 torchvision -c pytorch
+    ```    
+    Or, Install dependenices by pip:
+    ```
+    pip install tqdm pyyaml tensorboard opencv-python
+    pip install torch==1.6.0 torchvision==0.7.0
+    ```
 ## Prepare dataset
 See [prepare dataset](doc/prepare_dataset.md).
 

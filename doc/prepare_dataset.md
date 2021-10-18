@@ -2,7 +2,9 @@
 Suppose you have downloaded the original dataset, we need to preprocess the data and save it as pickle file. Remember to set your path to the root of processed dataset in [config/*.yaml](config/).
 
 ## Preprocess
-**CASIA-B**
+**CASIA-B** 
+
+Download URL: http://www.cbsr.ia.ac.cn/GaitDatasetB-silh.zip
 
 - Original
     ```
