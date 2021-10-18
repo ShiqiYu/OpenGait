@@ -1,0 +1,95 @@
+data_cfg:
+  dataset_name: CASIA-B
+  dataset_root: your_path
+  dataset_partition: ./misc/partitions/CASIA-B_include_005.json
+  num_workers: 1
+  remove_no_gallery: false
+  test_dataset_name: CASIA-B
+
+evaluator_cfg:
+  enable_distributed: true
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 40000
+  save_name: GLN_P2
+  sampler:
+    batch_size: 2
+    sample_type: all_ordered
+    type: InferenceSampler
+  metric: euc # euc
+  transform:
+    - img_w: 128
+      type: BaseSilCuttingTransform
+
+loss_cfg:
+  - loss_term_weights: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weights: 0.1
+    scale: 16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+
+model_cfg:
+  model: GLN
+  class_num: 74
+  lateral_dim : 256
+  hidden_dim : 256
+  dropout : 0.9
+  in_channels:
+    - 1
+    - 32
+    - 64
+    - 128
+  SeparateFCs:
+    in_channels: 256
+    out_channels: 256
+    parts_num: 93
+  bin_num:
+    - 16
+    - 8
+    - 4
+    - 2
+    - 1
+  Lateral_pretraining: false
+
+optimizer_cfg:
+  lr: 0.01
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 10000
+    - 20000
+    - 30000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_distributed: true
+  enable_float16: true
+  fix_BN: false
+  log_iter: 100
+  optimizer_reset: true
+  scheduler_reset: true
+  restore_ckpt_strict: false
+  restore_hint: output/CASIA-B/GLN/GLN_P1/checkpoints/GLN_P1-40000.pt
+  save_iter: 2000
+  save_name: GLN_P2
+  sync_BN: true
+  total_iter: 40000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 8
+      - 16
+    frames_num_fixed: 30
+    frames_skip_num: 0
+    sample_type: fixed_ordered
+    type: TripletSampler
+  transform:
+    - img_w: 128
+      type: BaseSilCuttingTransform
