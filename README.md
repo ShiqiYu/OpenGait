@@ -21,6 +21,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart.yaml)                                                        |   64x44    |      22s       |      1.20M       |
 |                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.1(95.6) | 92.5(92.0) | 80.4(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |      14s       | 9.46M / 15.6214M |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.5(97.4) | 95.1(94.5) | 83.5(83.6) | [gaitgl.yaml](config/gaitgl.yaml)                                                            |   64x44    |      31s       |      3.10M       |
+
 The results in the parentheses are mentioned in the papers
 
 
