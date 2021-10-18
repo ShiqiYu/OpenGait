@@ -1,0 +1,73 @@
+data_cfg:
+  dataset_name: CASIA-B
+  dataset_root: your_path
+  num_workers: 1
+  dataset_partition: ./misc/partitions/CASIA-B.json
+  remove_no_gallery: false
+  cache: false
+  test_dataset_name: CASIA-B
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 80000
+  save_name: tmp
+  eval_func: identification
+  sampler:
+    batch_size: 4
+    sample_type: all_ordered
+    type: InferenceSampler
+  transform:
+    - img_w: 64
+      type: BaseSilCuttingTransform
+  metric: euc # cos
+
+loss_cfg:
+  loss_term_weights: 1.0
+  margin: 0.2
+  type: TripletLoss
+  log_prefix: triplet
+
+model_cfg:
+  model: Baseline
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 20000
+    - 40000
+    - 60000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true
+  with_test: false
+  fix_BN: false
+  log_iter: 100
+  restore_ckpt_strict: true
+  optimizer_reset: false
+  scheduler_reset: false
+  restore_hint: 0
+  save_iter: 2000
+  save_name: tmp
+  sync_BN: false
+  total_iter: 80000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 8
+      - 16
+    frames_num_fixed: 30
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_unordered
+    type: TripletSampler
+  transform:
+    - img_w: 64
+      type: BaseSilCuttingTransform
