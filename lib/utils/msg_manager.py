@@ -23,7 +23,9 @@ class MessageManager:
         mkdir(osp.join(save_path, "summary/"))
         self.writer = SummaryWriter(
             osp.join(save_path, "summary/"), purge_step=self.iteration)
+        self.init_logger(save_path, log_to_file)
 
+    def init_logger(self, save_path, log_to_file):
         # init logger
         self.logger = logging.getLogger('opengait')
         self.logger.setLevel(logging.INFO)
