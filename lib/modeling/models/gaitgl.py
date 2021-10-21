@@ -63,8 +63,8 @@ class GeMHPP(nn.Module):
 
 class GaitGL(BaseModel):
     """
-        GaitGL: Gait Recognition via Effective Global-Local Feature Representation and Local Temporal Aggregation
-        Arxiv : https://arxiv.org/pdf/2011.01461.pdf
+        Title: Gait Recognition via Effective Global-Local Feature Representation and Local Temporal Aggregation
+        ICCV2021: https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf
     """
 
     def __init__(self, *args, **kargs):
