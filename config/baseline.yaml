@@ -95,7 +95,7 @@ trainer_cfg:
     frames_num_fixed: 30 # fixed frames number for training
     frames_num_max: 50 # max frames number for unfixed training
     frames_num_min: 25 # min frames number for unfixed traing
-    sample_type: fixed_unordered # fixed control input frames number, unordered for controling order of input tensor; Other options: unfixed_ordered or all_ordered
+    sample_type: fixed_unordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
     type: TripletSampler
   # transform:
   #   - type: BaseSilCuttingTransform

@@ -24,7 +24,7 @@ from utils import evaluation as eval_functions
 from utils import NoOp
 from utils import get_msg_mgr
 
-__all__ = ['BasicModel']
+__all__ = ['BaseModel']
 
 
 class MetaModel(metaclass=ABCMeta):
@@ -356,7 +356,7 @@ class BaseModel(MetaModel, nn.Module):
     @ staticmethod
     def run_train(model):
         '''
-            Accept the instace object(model) here, and then run the train loop handler.
+            Accept the instance object(model) here, and then run the train loop handler.
         '''
         for inputs in model.train_loader:
             ipts = model.inputs_pretreament(inputs)
