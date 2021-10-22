@@ -94,7 +94,7 @@ def identification(data, dataset, metric='euc'):
                 de_diag(acc[1, :, :, i]),
                 de_diag(acc[2, :, :, i])))
         result_dict["scalar/test_accuracy/NM"] = acc[0, :, :, i]
-        result_dict["scalar/test_accuracy/BG"] = acc[0, :, :, i]
+        result_dict["scalar/test_accuracy/BG"] = acc[1, :, :, i]
         result_dict["scalar/test_accuracy/CL"] = acc[2, :, :, i]
         np.set_printoptions(precision=2, floatmode='fixed')
         for i in range(1):
