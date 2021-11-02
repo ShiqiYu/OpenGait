@@ -6,6 +6,8 @@ __pycache__/
 # configuration
 ./config/*
 
+# checkpoint
+*.pt
 
 # summary
 events.out.tfevents.*

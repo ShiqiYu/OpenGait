@@ -60,6 +60,13 @@ It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
 ## Prepare dataset
 See [prepare dataset](doc/prepare_dataset.md).
 
+## Get pretrained model
+- Option 1:
+    ```
+    python misc/download_pretrained_model.py
+    ```
+- Option 2: Go to the [release page](https://github.com/ShiqiYu/OpenGait/releases/), then download the model file and uncompress it to `output`.
+
 ## Train
 Train a model by
 ```
