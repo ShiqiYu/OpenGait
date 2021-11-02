@@ -52,11 +52,11 @@ class GLN(BaseModel):
         self.sil_stage_2 = SetBlockWrapper(self.sil_stage_2)
 
         self.lateral_layer1 = nn.Conv2d(
-            in_channels[1]*2, lateral_dim, kernel_size=3, stride=1, padding=1, bias=False)
+            in_channels[1]*2, lateral_dim, kernel_size=1, stride=1, padding=0, bias=False)
         self.lateral_layer2 = nn.Conv2d(
-            in_channels[2]*2, lateral_dim, kernel_size=3, stride=1, padding=1, bias=False)
+            in_channels[2]*2, lateral_dim, kernel_size=1, stride=1, padding=0, bias=False)
         self.lateral_layer3 = nn.Conv2d(
-            in_channels[3]*2, lateral_dim, kernel_size=3, stride=1, padding=1, bias=False)
+            in_channels[3]*2, lateral_dim, kernel_size=1, stride=1, padding=0, bias=False)
 
         self.smooth_layer1 = nn.Conv2d(
             lateral_dim, lateral_dim, kernel_size=3, stride=1, padding=1, bias=False)
