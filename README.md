@@ -14,13 +14,13 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 # Model Zoo
 
-|                                                                                          Model                                                                                          |     NM     |     BG     |     CL     | Configuration                                                                                | Input Size | Inference Time |    Model Size    |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :--------: | :--------: | :------------------------------------------------------------------------------------------- | :--------: | :------------: | :--------------: |
-|                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline.yaml)                                                        |   64x44    |      12s       |      3.78M       |
-|                                                                [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                                                                | 95.8(95.0) | 90.0(87.2) | 75.4(70.4) | [gaitset.yaml](config/gaitset.yaml)                                                          |   64x44    |      11s       |      2.59M       |
-|                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart.yaml)                                                        |   64x44    |      22s       |      1.20M       |
+|                                                                                          Model                                                                                          |     NM     |     BG     |     CL     | Configuration                                                                                | Input Size | Inference Time |   Model Size   |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :--------: | :--------: | :------------------------------------------------------------------------------------------- | :--------: | :------------: | :------------: |
+|                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline.yaml)                                                        |   64x44    |      12s       |     3.78M      |
+|                                                                [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                                                                | 95.8(95.0) | 90.0(87.2) | 75.4(70.4) | [gaitset.yaml](config/gaitset.yaml)                                                          |   64x44    |      11s       |     2.59M      |
+|                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart.yaml)                                                        |   64x44    |      22s       |     1.20M      |
 |                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.4(95.6) | 93.1(92.0) | 81.0(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |      14s       | 8.54M / 14.70M |
-| [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.4(97.4) | 94.5(94.5) | 83.8(83.6) | [gaitgl.yaml](config/gaitgl.yaml)                                                            |   64x44    |      31s       |      3.10M       |
+| [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.4(97.4) | 94.5(94.5) | 83.8(83.6) | [gaitgl.yaml](config/gaitgl.yaml)                                                            |   64x44    |      31s       |     3.10M      |
 
 The results in the parentheses are mentioned in the papers
 
@@ -60,7 +60,7 @@ It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
 ## Prepare dataset
 See [prepare dataset](doc/prepare_dataset.md).
 
-## Get pretrained model
+## Get trained model
 - Option 1:
     ```
     python misc/download_pretrained_model.py
@@ -93,12 +93,13 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 l
 
 You can run commands in [test.sh](test.sh) for testing different models.
 ## Customize
-If you want customize your own model, see [here](doc/how_to_create_your_model.md).
+1. First, you need to read the [config documentation](doc/detailed_config.md) to figure out the usage of every item.
+2. If you want create your own model, see [here](doc/how_to_create_your_model.md).
 
 # Warning
 - Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
-- In `DDP` mode, zombie processes may occur when the program terminates abnormally. You can use this command `kill $(ps aux | grep main.py | grep -v grep | awk '{print $2}')` to clear them. 
-- We implemented the functionality of testing while training, but it slightly affected the results. None of our published models use this functionality. You can disable it by setting `with_test` **False**.
+- In `DDP` mode, zombie processes may be generated when the program terminates abnormally. You can use this command `kill $(ps aux | grep main.py | grep -v grep | awk '{print $2}')` to clear them. 
+- We implemented the functionality about testing while training, but it slightly affected the results. None of our published models use this functionality. You can disable it by setting `with_test` **False**.
 
 # Authors:
 **Open Gait Team (OGT)**

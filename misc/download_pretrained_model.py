@@ -101,6 +101,8 @@ def download_file_and_uncompress(url,
         if not os.path.exists(savepath):
             _download_file(url, savepath, print_progress)
 
+        if print_progress:
+            print("Uncompress %s" % os.path.basename(savepath))
         for total_num, index, rootpath in _uncompress_file_zip(savepath, extrapath):
             if print_progress:
                 done = int(50 * float(index) / total_num)
