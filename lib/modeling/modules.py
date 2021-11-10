@@ -193,8 +193,20 @@ def RmBN2dAffine(model):
             m.bias.requires_grad = False
 
 
-def fix_BN(model):
-    for module in model.modules():
-        classname = module.__class__.__name__
-        if classname.find('BatchNorm2d') != -1:
-            module.eval()
+from utils import get_msg_mgr, is_bool, is_list
+def fix_layers(model, layers):
+    if layers:
+        if is_list(layers):
+            get_msg_mgr().log_info("The fix_layers flag is not set to False or None, thus the layers whose name contains the following substrings will be fixed: ")
+            get_msg_mgr().log_info(layers)
+            for module in model.modules():
+                classname = module.__class__.__name__
+                for s in layers:
+                    if classname.find(s) != -1:
+                        module.eval()
+        else:
+            if is_bool(layers):
+                pass
+            else:
+                raise ValueError(
+                    "Error type for -fix_layers-, supported: bool or the list of string.")

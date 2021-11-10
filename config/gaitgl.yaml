@@ -49,7 +49,7 @@ scheduler_cfg:
 trainer_cfg:
   enable_distributed: true
   enable_float16: false
-  fix_BN: false
+  fix_layers: false
   log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0

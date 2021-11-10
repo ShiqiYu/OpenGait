@@ -13,7 +13,7 @@ from abc import abstractmethod
 
 from . import backbones
 from .loss_aggregator import LossAggregator
-from modeling.modules import fix_BN
+from modeling.modules import fix_layers
 from data.transform import get_transform
 from data.collate_fn import CollateFn
 from data.dataset import DataSet
@@ -132,8 +132,6 @@ class BaseModel(MetaModel, nn.Module):
             "cuda", self.device))
 
         if training:
-            if cfgs['trainer_cfg']['fix_BN']:
-                fix_BN(self)
             self.loss_aggregator = LossAggregator(cfgs['loss_cfg'])
             self.optimizer = self.get_optimizer(self.cfgs['optimizer_cfg'])
             self.scheduler = self.get_scheduler(cfgs['scheduler_cfg'])
@@ -141,6 +139,10 @@ class BaseModel(MetaModel, nn.Module):
         restore_hint = self.engine_cfg['restore_hint']
         if restore_hint != 0:
             self.resume_ckpt(restore_hint)
+        
+        if training:
+           if cfgs['trainer_cfg']['fix_layers']:
+                fix_layers(self)
 
     def get_backbone(self, model_cfg):
         def _get_backbone(backbone_cfg):

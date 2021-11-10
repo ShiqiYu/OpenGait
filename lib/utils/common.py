@@ -74,6 +74,10 @@ def is_list_or_tuple(x):
     return isinstance(x, (list, tuple))
 
 
+def is_bool(x):
+    return isinstance(x, bool)
+
+
 def is_str(x):
     return isinstance(x, str)
 

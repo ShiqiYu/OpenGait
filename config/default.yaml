@@ -48,7 +48,7 @@ scheduler_cfg:
 trainer_cfg:
   enable_float16: true
   with_test: false
-  fix_BN: false
+  fix_layers: false
   log_iter: 100
   restore_ckpt_strict: true
   optimizer_reset: false
