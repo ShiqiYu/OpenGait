@@ -1,0 +1,70 @@
+# Note  : *** the batch_size should be equal to the gpus number at the test phase!!! ***
+data_cfg:
+  dataset_name: OUMVLP
+  dataset_root: /home1/data/OUMVLP-64-pkl
+  dataset_partition: ./misc/partitions/OUMVLP.json
+  num_workers: 1
+  remove_no_gallery: false
+  test_dataset_name: OUMVLP
+
+evaluator_cfg:
+  enable_distributed: true
+  enable_float16: false 
+  restore_ckpt_strict: true
+  restore_hint: 210000
+  save_name: GaitGL
+  sampler:
+    batch_size: 2
+    sample_type: all_ordered
+    type: InferenceSampler
+
+loss_cfg:
+  - loss_term_weights: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weights: 1.0
+    scale: 1
+    type: CrossEntropyLoss
+    log_accuracy: true
+    label_smooth: true
+    log_prefix: softmax
+
+model_cfg:
+  model: GaitGL
+  channels: [32, 64, 128, 256]
+  class_num: 5153
+
+optimizer_cfg:
+  lr: 1.0e-4
+  solver: Adam
+  weight_decay: 0
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 150000
+    - 200000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_distributed: true
+  enable_float16: true
+  with_test: false
+  fix_layers: false
+  log_iter: 100
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 10000
+  save_name: GaitGL
+  sync_BN: true
+  total_iter: 210000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 32
+      - 8
+    frames_num_fixed: 30
+    frames_skip_num: 0
+    sample_type: fixed_ordered
+    type: TripletSampler

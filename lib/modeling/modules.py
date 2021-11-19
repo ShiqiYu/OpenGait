@@ -206,7 +206,7 @@ def fix_layers(model, layers):
                         module.eval()
         else:
             if is_bool(layers):
-                pass
+                get_msg_mgr().log_warning('The fix_layers should be a list of substing but not Bool!')
             else:
                 raise ValueError(
                     "Error type for -fix_layers-, supported: bool or the list of string.")

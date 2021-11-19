@@ -63,8 +63,8 @@ class GeMHPP(nn.Module):
 
 class GaitGL(BaseModel):
     """
-        Title: Gait Recognition via Effective Global-Local Feature Representation and Local Temporal Aggregation
-        ICCV2021: https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf
+        GaitGL: Gait Recognition via Effective Global-Local Feature Representation and Local Temporal Aggregation
+        Arxiv : https://arxiv.org/pdf/2011.01461.pdf
     """
 
     def __init__(self, *args, **kargs):
@@ -73,31 +73,69 @@ class GaitGL(BaseModel):
     def build_network(self, model_cfg):
         in_c = model_cfg['channels']
         class_num = model_cfg['class_num']
+        dataset_name = self.cfgs['data_cfg']['dataset_name']
+        
+        if dataset_name == 'OUMVLP':
+            # For OUMVLP
+            self.conv3d = nn.Sequential(
+                BasicConv3d(1, in_c[0], kernel_size=(3, 3, 3),
+                            stride=(1, 1, 1), padding=(1, 1, 1)),
+                nn.LeakyReLU(inplace=True), 
+                BasicConv3d(in_c[0], in_c[0], kernel_size=(3, 3, 3),
+                            stride=(1, 1, 1), padding=(1, 1, 1)),
+                nn.LeakyReLU(inplace=True), 
+            )
+            self.LTA = nn.Sequential(
+                BasicConv3d(in_c[0], in_c[0], kernel_size=(
+                    3, 1, 1), stride=(3, 1, 1), padding=(0, 0, 0)),
+                nn.LeakyReLU(inplace=True)
+            )
 
-        # For CASIA-B
-        self.conv3d = nn.Sequential(
-            BasicConv3d(1, in_c[0], kernel_size=(3, 3, 3),
-                        stride=(1, 1, 1), padding=(1, 1, 1)),
-            nn.LeakyReLU(inplace=True)
-        )
-        self.LTA = nn.Sequential(
-            BasicConv3d(in_c[0], in_c[0], kernel_size=(
-                3, 1, 1), stride=(3, 1, 1), padding=(0, 0, 0)),
-            nn.LeakyReLU(inplace=True)
-        )
+            self.GLConvA0 = nn.Sequential(
+                GLConv(in_c[0], in_c[1], halving=1, fm_sign=False, kernel_size=(
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                GLConv(in_c[1], in_c[1], halving=1, fm_sign=False, kernel_size=(
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+            )
+            self.MaxPool0 = nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2))
 
-        self.GLConvA0 = GLConv(in_c[0], in_c[1], halving=3, fm_sign=False, kernel_size=(
-            3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
-        self.MaxPool0 = nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2))
+            self.GLConvA1 = nn.Sequential(
+                GLConv(in_c[1], in_c[2], halving=1, fm_sign=False, kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                GLConv(in_c[2], in_c[2], halving=1, fm_sign=False, kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+            )
+            self.GLConvB2 = nn.Sequential(
+                GLConv(in_c[2], in_c[3], halving=1, fm_sign=False,  kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                GLConv(in_c[3], in_c[3], halving=1, fm_sign=True,  kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+            )
+        else:
+            # For CASIA-B or other unstated datasets.
+            self.conv3d = nn.Sequential(
+                BasicConv3d(1, in_c[0], kernel_size=(3, 3, 3),
+                            stride=(1, 1, 1), padding=(1, 1, 1)),
+                nn.LeakyReLU(inplace=True)
+            )
+            self.LTA = nn.Sequential(
+                BasicConv3d(in_c[0], in_c[0], kernel_size=(
+                    3, 1, 1), stride=(3, 1, 1), padding=(0, 0, 0)),
+                nn.LeakyReLU(inplace=True)
+            )
 
-        self.GLConvA1 = GLConv(in_c[1], in_c[2], halving=3, fm_sign=False, kernel_size=(
-            3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
-        self.GLConvB2 = GLConv(in_c[2], in_c[2], halving=3, fm_sign=True,  kernel_size=(
-            3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            self.GLConvA0 = GLConv(in_c[0], in_c[1], halving=3, fm_sign=False, kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            self.MaxPool0 = nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2))
 
-        self.Head0 = SeparateFCs(64, in_c[2], in_c[2])
-        self.Bn = nn.BatchNorm1d(in_c[2])
-        self.Head1 = SeparateFCs(64, in_c[2], class_num)
+            self.GLConvA1 = GLConv(in_c[1], in_c[2], halving=3, fm_sign=False, kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            self.GLConvB2 = GLConv(in_c[2], in_c[2], halving=3, fm_sign=True,  kernel_size=(
+                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+
+        self.Head0 = SeparateFCs(64, in_c[-1], in_c[-1])
+        self.Bn = nn.BatchNorm1d(in_c[-1])
+        self.Head1 = SeparateFCs(64, in_c[-1], class_num)
 
         self.TP = PackSequenceWrapper(torch.max)
         self.HPP = GeMHPP()
