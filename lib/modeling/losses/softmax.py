@@ -1,10 +1,10 @@
 import torch
 import torch.nn.functional as F
 
-from .base import BasicLoss
+from .base import BaseLoss
 
 
-class CrossEntropyLoss(BasicLoss):
+class CrossEntropyLoss(BaseLoss):
     def __init__(self, scale=2**4, label_smooth=True, eps=0.1, loss_term_weights=1.0, log_accuracy=False):
         super(CrossEntropyLoss, self).__init__()
         self.scale = scale

@@ -1,11 +1,11 @@
 import torch
 import torch.nn.functional as F
 
-from .base import BasicLoss
+from .base import BaseLoss
 from utils import ddp_all_gather
 
 
-class TripletLoss(BasicLoss):
+class TripletLoss(BaseLoss):
     def __init__(self, margin, loss_term_weights=1.0):
         super(TripletLoss, self).__init__()
         self.margin = margin

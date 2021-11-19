@@ -58,7 +58,7 @@ It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
     pip install torch==1.6.0 torchvision==0.7.0
     ```
 ## Prepare dataset
-See [prepare dataset](doc/prepare_dataset.md).
+See [prepare dataset](docs/0.prepare_dataset.md).
 
 ## Get trained model
 - Option 1:
@@ -93,8 +93,8 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 l
 
 You can run commands in [test.sh](test.sh) for testing different models.
 ## Customize
-1. First, you need to read the [config documentation](doc/detailed_config.md) to figure out the usage of every item.
-2. If you want create your own model, see [here](doc/how_to_create_your_model.md).
+1. First, you need to read the [config documentation](docs/1.detailed_config.md) to figure out the usage of every item.
+2. If you want create your own model, see [here](docs/2.how_to_create_your_model.md).
 
 # Warning
 - Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
