@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-from .base import BaseLoss, gather_input
+from .base import BaseLoss, gather_and_scale_wrapper
 
 
 class CrossEntropyLoss(BaseLoss):
@@ -13,9 +13,9 @@ class CrossEntropyLoss(BaseLoss):
         self.log_accuracy = log_accuracy
 
         self.loss_term_weights = loss_term_weights
-        self.pair_based_loss = False
+        self.gather_and_scale = False
 
-    @gather_input
+    @gather_and_scale_wrapper
     def forward(self, logits, labels):
         """
             logits: [n, p, c]
@@ -27,7 +27,7 @@ class CrossEntropyLoss(BaseLoss):
         one_hot_labels = self.label2one_hot(
             labels, c).unsqueeze(0).repeat(p, 1, 1)  # [p, n, c]
         loss = self.compute_loss(log_preds, one_hot_labels)
-        self.info.update({'loss': loss})
+        self.info.update({'loss': loss.detach().clone()})
         if self.log_accuracy:
             pred = logits.argmax(dim=-1)  # [p, n]
             accu = (pred == labels.unsqueeze(0)).float().mean()

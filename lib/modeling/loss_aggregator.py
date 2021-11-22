@@ -37,7 +37,7 @@ class LossAggregator():
         """
         Loss = get_attr_from([losses], loss_cfg['type'])
         valid_loss_arg = get_valid_args(
-            Loss, loss_cfg, ['type', 'pair_based_loss'])
+            Loss, loss_cfg, ['type', 'gather_and_scale'])
         loss = get_ddp_module(Loss(**valid_loss_arg))
         return loss
 
@@ -60,8 +60,6 @@ class LossAggregator():
                 for name, value in info.items():
                     loss_info['scalar/%s/%s' % (k, name)] = value
                 loss = loss.mean() * loss_func.loss_term_weights
-                if loss_func.pair_based_loss:
-                    loss = loss * torch.distributed.get_world_size()
                 loss_sum += loss
 
             else:

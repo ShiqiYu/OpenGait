@@ -1,23 +1,29 @@
 from ctypes import ArgumentError
 import torch.nn as nn
+import torch
 from utils import Odict
 import functools
 from utils import ddp_all_gather
 
 
-def gather_input(func):
-    """Internal wrapper: gather the input from multple cards to one card.
+def gather_and_scale_wrapper(func):
+    """Internal wrapper: gather the input from multple cards to one card, and scale the loss by the number of cards.
     """
 
     @functools.wraps(func)
     def inner(*args, **kwds):
         try:
-            if args[0].pair_based_loss:
+            if args[0].gather_and_scale:
                 for k, v in kwds.items():
                     kwds[k] = ddp_all_gather(v)
+
+                loss, loss_info = func(*args, **kwds)
+                loss *= torch.distributed.get_world_size()
+                return loss, loss_info
+            else:
+                return func(*args, **kwds)
         except:
             raise ArgumentError
-        return func(*args, **kwds)
     return inner
 
 
@@ -29,14 +35,14 @@ class BaseLoss(nn.Module):
 
     Attribute:
         loss_term_weights: the weight of the loss.
-        pair_based_loss: indicates whether the loss needs to make pairs like the triplet loss.
+        gather_and_scale: indicates whether the loss needs to make pairs like the triplet loss.
         info: the loss info.
     """
     loss_term_weights = 1.0
-    pair_based_loss = False
+    gather_and_scale = False
     info = Odict()
 
-    @gather_input
+    @gather_and_scale_wrapper
     def forward(self, logits, labels):
         """
         The default forward function.
@@ -50,5 +56,4 @@ class BaseLoss(nn.Module):
         Returns:
             tuple of loss and info.
         """
-        loss = .0
-        return loss, self.info
+        return .0, self.info
