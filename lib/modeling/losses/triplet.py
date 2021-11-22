@@ -1,8 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-from .base import BaseLoss
-from utils import ddp_all_gather
+from .base import BaseLoss, gather_input
 
 
 class TripletLoss(BaseLoss):
@@ -13,10 +12,9 @@ class TripletLoss(BaseLoss):
         self.loss_term_weights = loss_term_weights
         self.pair_based_loss = True
 
+    @gather_input
     def forward(self, embeddings, labels):
         # embeddings: [n, p, c], label: [n]
-        embeddings = ddp_all_gather(embeddings)
-        labels = ddp_all_gather(labels)
         embeddings = embeddings.permute(
             1, 0, 2).contiguous()  # [n, p, c] -> [p, n, c]
         embeddings = embeddings.float()
