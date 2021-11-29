@@ -38,7 +38,7 @@ class LossAggregator():
         Loss = get_attr_from([losses], loss_cfg['type'])
         valid_loss_arg = get_valid_args(
             Loss, loss_cfg, ['type', 'gather_and_scale'])
-        loss = get_ddp_module(Loss(**valid_loss_arg))
+        loss = get_ddp_module(Loss(**valid_loss_arg).cuda())
         return loss
 
     def __call__(self, training_feats):
@@ -65,7 +65,7 @@ class LossAggregator():
             else:
                 if isinstance(v, dict):
                     raise ValueError(
-                        "The key %s in -Trainng-Feat- should be stated as the log_prefix of a certain loss defined in your loss_cfg."
+                        "The key %s in -Trainng-Feat- should be stated as the log_prefix of a certain loss defined in your loss_cfg."%v
                     )
                 elif is_tensor(v):
                     _ = v.mean()
