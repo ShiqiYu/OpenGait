@@ -24,7 +24,6 @@ from abc import abstractmethod
 
 from . import backbones
 from .loss_aggregator import LossAggregator
-from modeling.modules import fix_layers
 from data.transform import get_transform
 from data.collate_fn import CollateFn
 from data.dataset import DataSet
@@ -169,8 +168,8 @@ class BaseModel(MetaModel, nn.Module):
             self.resume_ckpt(restore_hint)
 
         if training:
-            if cfgs['trainer_cfg']['fix_layers']:
-                fix_layers(self)
+            if cfgs['trainer_cfg']['fix_BN']:
+                self.fix_BN()
 
     def get_backbone(self, model_cfg):
         """Get the backbone of the model."""
@@ -297,7 +296,20 @@ class BaseModel(MetaModel, nn.Module):
                 "Error type for -Restore_Hint-, supported: int or string.")
         self._load_ckpt(save_name)
 
+    def fix_BN(self):
+        for module in self.modules():
+            classname = module.__class__.__name__
+            if classname.find('BatchNorm') != -1:
+                module.eval()
+
     def inputs_pretreament(self, inputs):
+        """Conduct transforms on input data.
+
+        Args:
+            inputs: the input data.
+        Returns:
+            tuple: training data including inputs, labels, and some meta data.
+        """
         seqs_batch, labs_batch, typs_batch, vies_batch, seqL_batch = inputs
         trf_cfgs = self.engine_cfg['transform']
         seq_trfs = get_transform(trf_cfgs)
@@ -327,10 +339,9 @@ class BaseModel(MetaModel, nn.Module):
         """Conduct loss_sum.backward(), self.optimizer.step() and self.scheduler.step().
 
         Args:
-        loss_sum:
-            The loss of the current batch.
+            loss_sum:The loss of the current batch.
         Returns:
-        bool: True if the training is finished, False otherwise.
+            bool: True if the training is finished, False otherwise.
         """
 
         self.optimizer.zero_grad()
@@ -358,6 +369,13 @@ class BaseModel(MetaModel, nn.Module):
         return True
 
     def inference(self, rank):
+        """Inference all the test data.
+
+        Args:
+            rank: the rank of the current process.Transform
+        Returns:
+            Odict: contains the inference results.
+        """
         total_size = len(self.test_loader)
         if rank == 0:
             pbar = tqdm(total=total_size, desc='Transforming')

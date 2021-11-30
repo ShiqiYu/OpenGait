@@ -10,7 +10,6 @@ class TripletLoss(BaseLoss):
         self.margin = margin
 
         self.loss_term_weights = loss_term_weights
-        self.gather_and_scale = True
 
     @gather_and_scale_wrapper
     def forward(self, embeddings, labels):
