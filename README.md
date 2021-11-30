@@ -12,8 +12,9 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 - **Nice log**: We use [`tensorboard`](https://pytorch.org/docs/stable/tensorboard.html) and `logging` to log everything, which looks pretty.
 
 
-# Model Zoo
+## Model Zoo
 
+###  CASIA-B
 |                                                                                          Model                                                                                          |     NM     |     BG     |     CL     | Configuration                                                                                | Input Size | Inference Time |   Model Size   |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :--------: | :--------: | :------------------------------------------------------------------------------------------- | :--------: | :------------: | :------------: |
 |                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline.yaml)                                                        |   64x44    |      12s       |     3.78M      |
@@ -24,7 +25,9 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 The results in the parentheses are mentioned in the papers
 
-
+86.734
+88.642
+87.228
 **Note**:
 - All the models were tested on [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp) (Rank@1, excluding identical-view cases).
 - The shown result of GLN is implemented without compact block. 
@@ -33,8 +36,8 @@ The results in the parentheses are mentioned in the papers
 It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
 
 
-# Get Started
-## Installation
+## Get Started
+### Installation
 1. clone this repo.
     ```
     git clone https://github.com/ShiqiYu/OpenGait.git
@@ -57,17 +60,17 @@ It's inference process just cost about 90 secs(Baseline & 8 RTX6000).
     pip install tqdm pyyaml tensorboard opencv-python
     pip install torch==1.6.0 torchvision==0.7.0
     ```
-## Prepare dataset
+### Prepare dataset
 See [prepare dataset](docs/0.prepare_dataset.md).
 
-## Get trained model
+### Get trained model
 - Option 1:
     ```
     python misc/download_pretrained_model.py
     ```
 - Option 2: Go to the [release page](https://github.com/ShiqiYu/OpenGait/releases/), then download the model file and uncompress it to `output`.
 
-## Train
+### Train
 Train a model by
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 lib/main.py --cfgs ./config/baseline.yaml --phase train
@@ -81,7 +84,7 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 l
 
 You can run commands in [train.sh](train.sh) for training different models.
 
-## Test
+### Test
 Use trained model to evaluate by
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 lib/main.py --cfgs ./config/baseline.yaml --phase test
@@ -92,11 +95,14 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 l
 **Tip**: Other arguments are the same as train phase.
 
 You can run commands in [test.sh](test.sh) for testing different models.
-## Customize
-1. First, you need to read the [config documentation](docs/1.detailed_config.md) to figure out the usage of every item.
-2. If you want create your own model, see [here](docs/2.how_to_create_your_model.md).
 
-# Warning
+## Customize
+You can read the following documentation to customize your model.
+1. First, you need to read the [config documentation](docs/1.detailed_config.md) to figure out the usage of every setting item.
+2. If you want create your own model, see [how to create your model](docs/2.how_to_create_your_model.md).
+3. There are some advanced usages, see [advanced usages](docs/3.advanced_usages.md).
+
+## Warning
 - Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
 - In `DDP` mode, zombie processes may be generated when the program terminates abnormally. You can use this command `kill $(ps aux | grep main.py | grep -v grep | awk '{print $2}')` to clear them. 
 - We implemented the functionality about testing while training, but it slightly affected the results. None of our published models use this functionality. You can disable it by setting `with_test` **False**.

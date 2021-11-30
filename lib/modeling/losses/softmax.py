@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-from .base import BaseLoss, gather_and_scale_wrapper
+from .base import BaseLoss
 
 
 class CrossEntropyLoss(BaseLoss):
@@ -13,9 +13,7 @@ class CrossEntropyLoss(BaseLoss):
         self.log_accuracy = log_accuracy
 
         self.loss_term_weights = loss_term_weights
-        self.gather_and_scale = False
 
-    @gather_and_scale_wrapper
     def forward(self, logits, labels):
         """
             logits: [n, p, c]
