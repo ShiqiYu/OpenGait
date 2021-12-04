@@ -74,16 +74,16 @@ class GaitGL(BaseModel):
         in_c = model_cfg['channels']
         class_num = model_cfg['class_num']
         dataset_name = self.cfgs['data_cfg']['dataset_name']
-        
+
         if dataset_name == 'OUMVLP':
             # For OUMVLP
             self.conv3d = nn.Sequential(
                 BasicConv3d(1, in_c[0], kernel_size=(3, 3, 3),
                             stride=(1, 1, 1), padding=(1, 1, 1)),
-                nn.LeakyReLU(inplace=True), 
+                nn.LeakyReLU(inplace=True),
                 BasicConv3d(in_c[0], in_c[0], kernel_size=(3, 3, 3),
                             stride=(1, 1, 1), padding=(1, 1, 1)),
-                nn.LeakyReLU(inplace=True), 
+                nn.LeakyReLU(inplace=True),
             )
             self.LTA = nn.Sequential(
                 BasicConv3d(in_c[0], in_c[0], kernel_size=(
@@ -93,23 +93,24 @@ class GaitGL(BaseModel):
 
             self.GLConvA0 = nn.Sequential(
                 GLConv(in_c[0], in_c[1], halving=1, fm_sign=False, kernel_size=(
-                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)),
                 GLConv(in_c[1], in_c[1], halving=1, fm_sign=False, kernel_size=(
-                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)),
             )
-            self.MaxPool0 = nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2))
+            self.MaxPool0 = nn.MaxPool3d(
+                kernel_size=(1, 2, 2), stride=(1, 2, 2))
 
             self.GLConvA1 = nn.Sequential(
                 GLConv(in_c[1], in_c[2], halving=1, fm_sign=False, kernel_size=(
-                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)),
                 GLConv(in_c[2], in_c[2], halving=1, fm_sign=False, kernel_size=(
-                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)),
             )
             self.GLConvB2 = nn.Sequential(
                 GLConv(in_c[2], in_c[3], halving=1, fm_sign=False,  kernel_size=(
-                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)),
                 GLConv(in_c[3], in_c[3], halving=1, fm_sign=True,  kernel_size=(
-                3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)), 
+                    3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1)),
             )
         else:
             # For CASIA-B or other unstated datasets.
@@ -126,7 +127,8 @@ class GaitGL(BaseModel):
 
             self.GLConvA0 = GLConv(in_c[0], in_c[1], halving=3, fm_sign=False, kernel_size=(
                 3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
-            self.MaxPool0 = nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2))
+            self.MaxPool0 = nn.MaxPool3d(
+                kernel_size=(1, 2, 2), stride=(1, 2, 2))
 
             self.GLConvA1 = GLConv(in_c[1], in_c[2], halving=3, fm_sign=False, kernel_size=(
                 3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
@@ -143,7 +145,9 @@ class GaitGL(BaseModel):
     def forward(self, inputs):
         ipts, labs, _, _, seqL = inputs
         seqL = None if not self.training else seqL
-
+        if not self.training and len(labs) != 1:
+            raise ValueError(
+                'The input size of each GPU must be 1 in testing mode, but got {}!'.format(len(labs)))
         sils = ipts[0].unsqueeze(1)
         del ipts
         n, _, s, h, w = sils.size()
