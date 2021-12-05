@@ -106,7 +106,7 @@ You can customize your model by:
 
 ## Warning
 - Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
-- In `DDP` mode, zombie processes may be generated when the program terminates abnormally. You can use this command `sh misc/clean_process.sh` to clear them. 
+- In `DDP` mode, zombie processes may be generated when the program terminates abnormally. You can use this command [sh misc/clean_process.sh](./misc/clean_process.sh) to clear them. 
 - We implemented the functionality about testing while training, but it slightly affected the results. None of our published models use this functionality. You can disable it by setting `with_test` **False**.
 - Recommended Pytorch version: 1.6-1.8 
 
@@ -122,9 +122,6 @@ You can customize your model by:
 
 ## Citation
 ```
-{
-    
-}
 ```
 
 **Note:**
