@@ -118,7 +118,7 @@ You can run commands in [test.sh](test.sh) for testing different models.
 
 ## Acknowledgement
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
-- GaitGL: Beibei Lin (林贝贝)
+- GaitGL: [Beibei Lin (林贝贝)](https://scholar.google.com/citations?user=KyvHam4AAAAJ&hl=en&oi=ao)
 
 <!-- ## Citation
 ```
