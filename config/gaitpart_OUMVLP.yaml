@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: OUMVLP
-  dataset_root: /home1/data/OUMVLP-64-pkl
+  dataset_root: your_path
   dataset_partition: ./misc/partitions/OUMVLP.json
   num_workers: 4
   remove_no_gallery: false

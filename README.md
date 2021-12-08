@@ -1,4 +1,6 @@
 # OpenGait
+ <div  align="center">    
+<img src="./assets/logo.png" width = "160" height = "150" alt="图片名称" align=center /></div>
 
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
@@ -17,16 +19,16 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline.yaml)                                                        |   64x44    |      12s       |     3.78M      |
 |                                                                [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                                                                | 95.8(95.0) | 90.0(87.2) | 75.4(70.4) | [gaitset.yaml](config/gaitset.yaml)                                                          |   64x44    |      13s       |     2.59M      |
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart.yaml)                                                        |   64x44    |      56s       |     1.20M      |
-|                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.4(95.6) | 93.1(92.0) | 81.0(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |      47s/46s       | 8.54M / 14.70M |
+|                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.4(95.6) | 93.1(92.0) | 81.0(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |    47s/46s     | 8.54M / 14.70M |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.4(97.4) | 94.5(94.5) | 83.8(83.6) | [gaitgl.yaml](config/gaitgl.yaml)                                                            |   64x44    |      38s       |     3.10M      |
 
 ### OUMVLP
 |                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :------------- | :--------: |
-|                                                                                        Baseline                                                                                         |    86.7    | [baseline.yaml](config/OUMVLP/baseline.yaml) |   64x44    | 1m13s           |   44.11M   |
+|                                                                                        Baseline                                                                                         |    86.7    | [baseline.yaml](config/OUMVLP/baseline.yaml) |   64x44    | 1m13s          |   44.11M   |
 |                                                                [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                                                                | 87.2(87.1) |  [gaitset.yaml](config/OUMVLP/gaitset.yaml)  |   64x44    | 1m26s          |   6.31M    |
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 88.6(88.7) | [gaitpart.yaml](config/OUMVLP/gaitpart.yaml) |   64x44    | 8m04s          |   3.78M    |
-| [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 89.9(89.7) |   [gaitgl.yaml](config/OUMVLP/gaitgl.yaml)   |   64x44    | 5m23s         |   95.62M   |
+| [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 89.9(89.7) |   [gaitgl.yaml](config/OUMVLP/gaitgl.yaml)   |   64x44    | 5m23s          |   95.62M   |
 
 
 The results in the parentheses are mentioned in the papers
