@@ -1,22 +1,19 @@
 import torch
 import torch.nn.functional as F
 
-from .base import BasicLoss
-from utils import ddp_all_gather
+from .base import BaseLoss, gather_and_scale_wrapper
 
 
-class TripletLoss(BasicLoss):
+class TripletLoss(BaseLoss):
     def __init__(self, margin, loss_term_weights=1.0):
         super(TripletLoss, self).__init__()
         self.margin = margin
 
         self.loss_term_weights = loss_term_weights
-        self.pair_based_loss = True
 
+    @gather_and_scale_wrapper
     def forward(self, embeddings, labels):
         # embeddings: [n, p, c], label: [n]
-        embeddings = ddp_all_gather(embeddings)
-        labels = ddp_all_gather(labels)
         embeddings = embeddings.permute(
             1, 0, 2).contiguous()  # [n, p, c] -> [p, n, c]
         embeddings = embeddings.float()
@@ -32,10 +29,10 @@ class TripletLoss(BasicLoss):
         loss_avg, loss_num = self.AvgNonZeroReducer(loss)
 
         self.info.update({
-            'loss': loss_avg,
-            'hard_loss': hard_loss,
-            'loss_num': loss_num,
-            'mean_dist': mean_dist})
+            'loss': loss_avg.detach().clone(),
+            'hard_loss': hard_loss.detach().clone(),
+            'loss_num': loss_num.detach().clone(),
+            'mean_dist': mean_dist.detach().clone()})
 
         return loss_avg, self.info
 

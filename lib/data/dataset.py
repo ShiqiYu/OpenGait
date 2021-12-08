@@ -52,14 +52,14 @@ class DataSet(tordata.Dataset):
 
     def __getitem__(self, idx):
         if not self.cache:
-            data_lst = self.__loader__(self.seqs_info[idx][-1])
+            data_list = self.__loader__(self.seqs_info[idx][-1])
         elif self.seqs_data[idx] is None:
-            data_lst = self.__loader__(self.seqs_info[idx][-1])
-            self.seqs_data[idx] = data_lst
+            data_list = self.__loader__(self.seqs_info[idx][-1])
+            self.seqs_data[idx] = data_list
         else:
-            data_lst = self.seqs_data[idx]
+            data_list = self.seqs_data[idx]
         seq_info = self.seqs_info[idx]
-        return data_lst, seq_info
+        return data_list, seq_info
 
     def __load_all_data(self):
         for idx in range(len(self)):

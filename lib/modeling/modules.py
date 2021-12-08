@@ -191,10 +191,3 @@ def RmBN2dAffine(model):
         if isinstance(m, nn.BatchNorm2d):
             m.weight.requires_grad = False
             m.bias.requires_grad = False
-
-
-def fix_BN(model):
-    for module in model.modules():
-        classname = module.__class__.__name__
-        if classname.find('BatchNorm2d') != -1:
-            module.eval()

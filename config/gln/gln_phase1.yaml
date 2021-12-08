@@ -76,7 +76,7 @@ scheduler_cfg:
 trainer_cfg:
   enable_distributed: true
   enable_float16: true
-  fix_BN: false
+  fix_layers: false
   with_test: false
   log_iter: 100
   optimizer_reset: false
