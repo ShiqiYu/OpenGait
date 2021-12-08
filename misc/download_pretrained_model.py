@@ -118,8 +118,11 @@ def download_file_and_uncompress(url,
 
 
 if __name__ == "__main__":
-    url = "https://github.com/ShiqiYu/OpenGait/releases/download/v1.0-beta/pretrained_model.zip"
-    download_file_and_uncompress(
-        url=url, extrapath='output')
+    urls = [
+        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.0/pretrained_casiab_model.zip",
+        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.0/pretrained_oumvlp_model.zip"]
+    for url in urls:
+        download_file_and_uncompress(
+            url=url, extrapath='output')
 
     print("Pretrained model download success!")
