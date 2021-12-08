@@ -70,39 +70,38 @@ See [prepare dataset](docs/0.prepare_dataset.md).
     ```
     python misc/download_pretrained_model.py
     ```
-- Option 2: Go to the [release page](https://github.com/ShiqiYu/OpenGait/releases/), then download the model file and uncompress it to `output`.
+- Option 2: Go to the [release page](https://github.com/ShiqiYu/OpenGait/releases/), then download the model file and uncompress it to [output](output).
 
 ### Train
 Train a model by
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 lib/main.py --cfgs ./config/baseline.yaml --phase train
 ```
-- `python -m torch.distributed.launch` Our implementation uses DistributedDataParallel.
-- `--nproc_per_node` The number of gpu to use, it must equal the length of `CUDA_VISIBLE_DEVICES`.
-- `--cfgs` The path of config file.
+- `python -m torch.distributed.launch` [DDP](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) launch instruction.
+- `--nproc_per_node` The number of gpus to use, and it must equal the length of `CUDA_VISIBLE_DEVICES`.
+- `--cfgs` The path to config file.
 - `--phase` Specified as `train`.
-- `--iter` You can specify a number of iterations or use `restore_hint` in the configuration file and resume training from there.
-- `--log_to_file` If specified, log will be written on disk simultaneously. 
+<!-- - `--iter` You can specify a number of iterations or use `restore_hint` in the config file and resume training from there. -->
+- `--log_to_file` If specified, the terminal log will be written on disk simultaneously. 
 
 You can run commands in [train.sh](train.sh) for training different models.
 
 ### Test
-Use trained model to evaluate by
+Evaluate the trained model by
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 lib/main.py --cfgs ./config/baseline.yaml --phase test
 ```
 - `--phase` Specified as `test`.
-- `--iter` You can specify a number of iterations or or use `restore_hint` in the configuration file and restore model from there.
+- `--iter` Specify a iteration checkpoint.
 
 **Tip**: Other arguments are the same as train phase.
 
 You can run commands in [test.sh](test.sh) for testing different models.
 
 ## Customize
-You can customize your model by:
-1. First, you need to read the [config documentation](docs/1.detailed_config.md) to figure out the usage of every setting item.
-2. If you want create your own model, see [how to create your model](docs/2.how_to_create_your_model.md).
-3. There are some advanced usages, see [advanced usages](docs/3.advanced_usages.md).
+1. Read the [detailed config](docs/1.detailed_config.md) to figure out the usage of needed setting items;
+2. See [how to create your model](docs/2.how_to_create_your_model.md);
+3. There are some advanced usages, refer to [advanced usages](docs/3.advanced_usages.md), please.
 
 ## Warning
 - Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
@@ -120,9 +119,9 @@ You can customize your model by:
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
 - GaitGL: Beibei Lin (林贝贝)
 
-## Citation
+<!-- ## Citation
 ```
-```
+``` -->
 
 **Note:**
 This code is only used for **academic purposes**, people cannot use this code for anything that might be considered commercial use.
