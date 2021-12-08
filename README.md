@@ -1,5 +1,8 @@
-<img src="./assets/logo2.png" width = "160" height = "60" alt="图片名称" />
-<div align="center"><img src="./assets/nm.gif" width = "80" height = "80" alt="nm" /><img src="./assets/bg.gif" width = "80" height = "80" alt="bg" /><img src="./assets/cl.gif" width = "80" height = "80" alt="cl" /></div>
+<img src="./assets/logo2.png" width = "320" height = "110" alt="logo" />
+
+<div align="center"><img src="./assets/nm.gif" width = "100" height = "100" alt="nm" /><img src="./assets/bg.gif" width = "100" height = "100" alt="bg" /><img src="./assets/cl.gif" width = "100" height = "100" alt="cl" /></div>
+
+------------------------------------------
 
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
