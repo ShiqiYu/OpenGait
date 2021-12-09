@@ -5,14 +5,12 @@ from .base import BaseLoss
 
 
 class CrossEntropyLoss(BaseLoss):
-    def __init__(self, scale=2**4, label_smooth=True, eps=0.1, loss_term_weights=1.0, log_accuracy=False):
-        super(CrossEntropyLoss, self).__init__()
+    def __init__(self, scale=2**4, label_smooth=True, eps=0.1, loss_term_weight=1.0, log_accuracy=False):
+        super(CrossEntropyLoss, self).__init__(loss_term_weight)
         self.scale = scale
         self.label_smooth = label_smooth
         self.eps = eps
         self.log_accuracy = log_accuracy
-
-        self.loss_term_weights = loss_term_weights
 
     def forward(self, logits, labels):
         """

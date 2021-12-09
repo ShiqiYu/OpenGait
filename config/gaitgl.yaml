@@ -19,11 +19,11 @@ evaluator_cfg:
     type: InferenceSampler
 
 loss_cfg:
-  - loss_term_weights: 1.0
+  - loss_term_weight: 1.0
     margin: 0.2
     type: TripletLoss
     log_prefix: triplet
-  - loss_term_weights: 1.0
+  - loss_term_weight: 1.0
     scale: 1
     type: CrossEntropyLoss
     log_accuracy: true

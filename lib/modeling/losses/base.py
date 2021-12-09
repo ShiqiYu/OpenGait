@@ -29,14 +29,19 @@ class BaseLoss(nn.Module):
     """
     Base class for all losses.
 
-    Your loss should also subclass this class. 
-
-    Attribute:
-        loss_term_weights: the weight of the loss.
-        info: the loss info.
+    Your loss should also subclass this class.
     """
-    loss_term_weights = 1.0
-    info = Odict()
+
+    def __init__(self, loss_term_weight=1.0):
+        """
+        Initialize the base class.
+
+        Args:
+            loss_term_weight: the weight of the loss term.
+        """
+        super(BaseLoss, self).__init__()
+        self.loss_term_weight = loss_term_weight
+        self.info = Odict()
 
     def forward(self, logits, labels):
         """

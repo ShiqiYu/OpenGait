@@ -22,11 +22,11 @@ evaluator_cfg:
       type: BaseSilCuttingTransform
 
 loss_cfg:
-  - loss_term_weights: 1.0
+  - loss_term_weight: 1.0
     margin: 0.2
     type: TripletLoss
     log_prefix: triplet
-  - loss_term_weights: 0.1
+  - loss_term_weight: 0.1
     scale: 16
     type: CrossEntropyLoss
     log_prefix: softmax

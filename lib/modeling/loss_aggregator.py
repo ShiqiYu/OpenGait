@@ -59,7 +59,7 @@ class LossAggregator():
                 loss, info = loss_func(**v)
                 for name, value in info.items():
                     loss_info['scalar/%s/%s' % (k, name)] = value
-                loss = loss.mean() * loss_func.loss_term_weights
+                loss = loss.mean() * loss_func.loss_term_weight
                 loss_sum += loss
 
             else:
