@@ -14,7 +14,7 @@ class TripletSampler(tordata.sampler.Sampler):
         self.rank = dist.get_rank()
 
     def __iter__(self):
-        while (True):
+        while True:
             sample_indices = []
             pid_list = sync_random_sample_list(
                 self.dataset.label_set, self.batch_size[0])
@@ -29,10 +29,11 @@ class TripletSampler(tordata.sampler.Sampler):
                 sample_indices = sync_random_sample_list(
                     sample_indices, len(sample_indices))
 
-            _ = self.batch_size[0] * self.batch_size[1]
-            total_size = int(math.ceil(_ / self.world_size)
-                             ) * self.world_size
-            sample_indices += sample_indices[:(_ - len(sample_indices))]
+            total_batch_size = self.batch_size[0] * self.batch_size[1]
+            total_size = int(math.ceil(total_batch_size /
+                                       self.world_size)) * self.world_size
+            sample_indices += sample_indices[:(
+                total_batch_size - len(sample_indices))]
 
             sample_indices = sample_indices[self.rank:total_size:self.world_size]
             yield sample_indices
@@ -66,10 +67,10 @@ class InferenceSampler(tordata.sampler.Sampler):
                 world_size, batch_size))
 
         if batch_size != 1:
-            _ = math.ceil(self.size / batch_size) * \
+            complement_size = math.ceil(self.size / batch_size) * \
                 batch_size
-            indices += indices[:(_ - self.size)]
-            self.size = _
+            indices += indices[:(complement_size - self.size)]
+            self.size = complement_size
 
         batch_size_per_rank = int(self.batch_size / world_size)
         indx_batch_per_rank = []

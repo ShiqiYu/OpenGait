@@ -3,6 +3,7 @@ import random
 import numpy as np
 from utils import get_msg_mgr
 
+
 class CollateFn(object):
     def __init__(self, label_set, sample_config):
         self.label_set = label_set
@@ -34,6 +35,7 @@ class CollateFn(object):
 
     def __call__(self, batch):
         batch_size = len(batch)
+        # currently, the functionality of feature_num is not fully supported yet, it refers to 1 now. We are supposed to make our framework support multiple source of input data, such as silhouette, or skeleton.
         feature_num = len(batch[0][0])
         seqs_batch, labs_batch, typs_batch, vies_batch = [], [], [], []
 
@@ -78,7 +80,7 @@ class CollateFn(object):
 
                     if seq_len == 0:
                         get_msg_mgr().log_debug('Find no frames in the sequence %s-%s-%s.'
-                            %(str(labs_batch[count]), str(typs_batch[count]), str(vies_batch[count])))
+                                                % (str(labs_batch[count]), str(typs_batch[count]), str(vies_batch[count])))
 
                     count += 1
                     indices = np.random.choice(

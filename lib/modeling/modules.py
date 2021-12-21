@@ -43,9 +43,9 @@ class SetBlockWrapper(nn.Module):
         """
         n, s, c, h, w = x.size()
         x = self.forward_block(x.view(-1, c, h, w), *args, **kwargs)
-        _ = x.size()
-        _ = [n, s] + [*_[1:]]
-        return x.view(*_)
+        input_size = x.size()
+        output_size = [n, s] + [*input_size[1:]]
+        return x.view(*output_size)
 
 
 class PackSequenceWrapper(nn.Module):
