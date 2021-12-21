@@ -14,7 +14,7 @@ evaluator_cfg:
   restore_hint: 40000
   save_name: GLN_P1
   sampler:
-    batch_size: 2
+    batch_size: 8
     sample_type: all_ordered
     type: InferenceSampler
   metric: euc # euc

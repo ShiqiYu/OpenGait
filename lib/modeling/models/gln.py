@@ -86,7 +86,6 @@ class GLN(BaseModel):
 
     def forward(self, inputs):
         ipts, labs, _, _, seqL = inputs
-        seqL = None if not self.training else seqL
         sils = ipts[0]  # [n, s, h, w]
         del ipts
         if len(sils.size()) == 4:
