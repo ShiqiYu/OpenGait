@@ -4,6 +4,11 @@ import numpy as np
 from utils import is_list, is_dict, get_valid_args
 
 
+class NoOperation():
+    def __call__(self, x):
+        return x
+
+
 class BaseSilTransform():
     def __init__(self, disvor=255.0, img_shape=None):
         self.disvor = disvor

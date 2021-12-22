@@ -88,7 +88,7 @@ class GaitPart(BaseModel):
 
     def build_network(self, model_cfg):
 
-        self.Backbone = self.get_backbone(model_cfg)
+        self.Backbone = self.get_backbone(model_cfg['backbone_cfg'])
         head_cfg = model_cfg['SeparateFCs']
         self.Head = SeparateFCs(**model_cfg['SeparateFCs'])
         self.Backbone = SetBlockWrapper(self.Backbone)

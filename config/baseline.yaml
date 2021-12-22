@@ -79,7 +79,7 @@ scheduler_cfg:
   scheduler: MultiStepLR
 trainer_cfg:
   enable_float16: true # half_percesion float for memory reduction and speedup
-  fix_BN: true
+  fix_BN: false
   log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0
