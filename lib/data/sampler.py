@@ -63,7 +63,7 @@ class InferenceSampler(tordata.sampler.Sampler):
         rank = dist.get_rank()
 
         if batch_size % world_size != 0:
-            raise AssertionError("World size({}) need be divisible by batch_size({})".format(
+            raise ValueError("World size({}) is not divisible by batch_size({})".format(
                 world_size, batch_size))
 
         if batch_size != 1:

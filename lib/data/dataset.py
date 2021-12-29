@@ -46,7 +46,7 @@ class DataSet(tordata.Dataset):
             data_list.append(_)
         for data in data_list:
             if len(data) != len(data_list[0]):
-                raise AssertionError
+                raise ValueError('Each input data should have the same length.')
 
         return data_list
 

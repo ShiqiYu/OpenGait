@@ -43,7 +43,7 @@ class Plain(nn.Module):
             cfg = cfg.split('-')
             typ = cfg[0]
             if typ not in ['BC', 'FC']:
-                raise AssertionError
+                raise ValueError('Only support BC or FC, but got {}'.format(typ))
             out_c = int(cfg[1])
 
             if typ == 'BC':
