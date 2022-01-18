@@ -41,13 +41,14 @@ class DataSet(tordata.Dataset):
                 f.close()
             else:
                 raise ValueError('- Loader - just support .pkl !!!')
-            # if len(_) >= 200:
-            #     _ = _[:200]
             data_list.append(_)
-        for data in data_list:
+        for idx, data in enumerate(data_list):
             if len(data) != len(data_list[0]):
-                raise ValueError('Each input data should have the same length.')
-
+                raise ValueError(
+                    'Each input data({}) should have the same length.'.format(paths[idx]))
+            if len(data) == 0:
+                raise ValueError(
+                    'Each input data({}) should have at least one element.'.format(paths[idx]))
         return data_list
 
     def __getitem__(self, idx):
@@ -116,7 +117,8 @@ class DataSet(tordata.Dataset):
                                     seq_dirs, data_in_use) if use_bl]
                             seqs_info_list.append([*seq_info, seq_dirs])
                         else:
-                            msg_mgr.log_debug('Find no .pkl file in %s-%s-%s.'%(lab, typ, vie))
+                            msg_mgr.log_debug(
+                                'Find no .pkl file in %s-%s-%s.' % (lab, typ, vie))
             return seqs_info_list
 
         self.seqs_info = get_seqs_info_list(
