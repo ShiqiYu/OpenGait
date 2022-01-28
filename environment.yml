@@ -1,0 +1,22 @@
+name: opengait
+channels:
+  - pytorch
+  - defaults
+  - anaconda
+  - conda-forge
+dependencies:
+  - python
+  - pip
+  - tqdm
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - pytorch
+  - torchvision
+  - cudatoolkit=10.2
+  - ipykernel
+  - pip:
+    - tensorboard
+    - seaborn
+    - py7zr
