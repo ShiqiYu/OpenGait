@@ -40,7 +40,7 @@ def de_diag(acc, each_angle=False):
 
 def identification(data, dataset, metric='euc'):
     msg_mgr = get_msg_mgr()
-
+    
     feature, label, seq_type, view = data['embeddings'], data['labels'], data['types'], data['views']
     label = np.array(label)
     view_list = list(set(view))
@@ -78,6 +78,7 @@ def identification(data, dataset, metric='euc'):
                         np.sum(np.cumsum(np.reshape(probe_y, [-1, 1]) == gallery_y[idx[:, 0:num_rank]], 1) > 0,
                                0) * 100 / dist.shape[0], 2)
     result_dict = {}
+    np.set_printoptions(precision=3, suppress=True)
     if 'OUMVLP' not in dataset:
         for i in range(1):
             msg_mgr.log_info(
@@ -108,6 +109,9 @@ def identification(data, dataset, metric='euc'):
         msg_mgr.log_info('NM: %.3f ' % (np.mean(acc[0, :, :, 0])))
         msg_mgr.log_info('===Rank-1 (Exclude identical-view cases)===')
         msg_mgr.log_info('NM: %.3f ' % (de_diag(acc[0, :, :, 0])))
+        msg_mgr.log_info(
+            '===Rank-1 of each angle (Exclude identical-view cases)===')
+        msg_mgr.log_info('NM: {}'.format(de_diag(acc[0, :, :, 0], True)))
         result_dict["scalar/test_accuracy/NM"] = de_diag(acc[0, :, :, 0])
     return result_dict
 
