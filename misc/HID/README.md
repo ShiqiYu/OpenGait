@@ -1,5 +1,6 @@
 # HID Tutorial
-This is the official suppor for competition of Human Identification at a Distance (HID). We report our result is 68.7% using the baseline model. In order for participants to better start the first step, we provide a tutorial on how to use OpenGait for HID.
+![](http://hid2022.iapr-tc4.org/wp-content/uploads/sites/7/2022/03/%E5%9B%BE%E7%89%871-2.png)
+This is the official support for competition of [Human Identification at a Distance (HID)](http://hid2022.iapr-tc4.org/). We report our result is 68.7% using the baseline model. In order for participants to better start the first step, we provide a tutorial on how to use OpenGait for HID.
 
 ## Preprocess the dataset
 Download the raw dataset from the [official link](http://hid2022.iapr-tc4.org/). You will get three compressed files, i.e. `train.tar`, `HID2022_test_gallery.zip` and `HID2022_test_probe.zip`.
@@ -13,7 +14,7 @@ Modify the `dataset_root` in `./misc/HID/baseline_hid.yaml`, and then run this c
 ```shell
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 lib/main.py --cfgs ./misc/HID/baseline_hid.yaml --phase train
 ```
-You can also download the [trained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.pt) and place it in `output` after unzipping.
+You can also download the [trained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip) and place it in `output` after unzipping.
 
 ## Get the submission file.
 ```shell
