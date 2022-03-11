@@ -1,5 +1,6 @@
 # HID Tutorial
-This is the official suppor for competition of Human Identification at a Distance (HID). We report our result is 68.7% using the baseline model. In order for participants to better start the first step, we provide a tutorial on how to use OpenGait for HID.
+![](http://hid2022.iapr-tc4.org/wp-content/uploads/sites/7/2022/03/%E5%9B%BE%E7%89%871-2.png)
+This is the official support for competition of [Human Identification at a Distance (HID)](http://hid2022.iapr-tc4.org/). We report our result is 68.7% using the baseline model. In order for participants to better start the first step, we provide a tutorial on how to use OpenGait for HID.
 
 ## Preprocess the dataset
 Download the raw dataset from the [official link](http://hid2022.iapr-tc4.org/). You will get three compressed files, i.e. `train.tar`, `HID2022_test_gallery.zip` and `HID2022_test_probe.zip`.
