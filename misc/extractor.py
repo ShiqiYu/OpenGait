@@ -6,7 +6,7 @@ import py7zr
 from tqdm import tqdm
 
 
-def extractall(base_path: Path, output_path: Path) -> None:
+def extractall(base_path: Path, output_path: Path, passwords) -> None:
     """Extract all archives in base_path to output_path.
 
     Args:
@@ -18,7 +18,7 @@ def extractall(base_path: Path, output_path: Path) -> None:
     for file_path in tqdm(list(base_path.rglob('Silhouette_*.7z'))):
         if output_path.joinpath(file_path.stem).exists():
             continue
-        with py7zr.SevenZipFile(file_path, password='OUMVLP_20180214') as archive:
+        with py7zr.SevenZipFile(file_path, password=passwords) as archive:
             total_items = len(
                 [f for f in archive.getnames() if f.endswith('.png')]
             )
@@ -32,11 +32,13 @@ def extractall(base_path: Path, output_path: Path) -> None:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='OUMVLP extractor')
-    parser.add_argument('-b', '--base_path', type=str,
+    parser.add_argument('-b', '--input_path', type=str,
                         required=True, help='Base path to OUMVLP .7z files')
     parser.add_argument('-o', '--output_path', type=str,
                         required=True, help='Output path for extracted files')
+    parser.add_argument('-p', '--password', type=str,
+                        required=True, help='password for extracted files')
 
     args = parser.parse_args()
 
-    extractall(Path(args.base_path), Path(args.output_path))
+    extractall(Path(args.input_path), Path(args.output_path), args.password)
