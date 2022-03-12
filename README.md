@@ -58,15 +58,16 @@ The results in the parentheses are mentioned in the papers
     - tensorboard
     - opencv-python
     - tqdm
+    - py7zr
     
     Install dependenices by [Anaconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html):
     ```
-    conda install tqdm pyyaml tensorboard opencv
+    conda install tqdm pyyaml tensorboard opencv py7zr
     conda install pytorch==1.6.0 torchvision -c pytorch
     ```    
     Or, Install dependenices by pip:
     ```
-    pip install tqdm pyyaml tensorboard opencv-python
+    pip install tqdm pyyaml tensorboard opencv-python py7zr
     pip install torch==1.6.0 torchvision==0.7.0
     ```
 ### Prepare dataset
