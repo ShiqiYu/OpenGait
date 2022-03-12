@@ -5,21 +5,16 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description='Test')
-parser.add_argument('--input_path', default='/home1/data/OUMVLP_raw', type=str,
+parser.add_argument('--input_path', default='OUMVLP', type=str,
                     help='Root path of raw dataset.')
-parser.add_argument('--output_path', default='/home1/data/OUMVLP_rearranged', type=str,
+parser.add_argument('--output_path', default='OUMVLP_rearranged', type=str,
                     help='Root path for output.')
 
 
 opt = parser.parse_args()
 
-INPUT_PATH = opt.input_path
-OUTPUT_PATH = opt.output_path
-
-
-def mv_dir(src, dst):
-    shutil.copytree(src, dst)
-    print(src, dst)
+INPUT_PATH = os.path.abspath(opt.input_path)
+OUTPUT_PATH = os.path.abspath(opt.output_path)
 
 
 sils_name_list = os.listdir(INPUT_PATH)
@@ -32,12 +27,9 @@ ids = list()
 for each in sils_name_list:
     ids.extend(os.listdir(os.path.join(INPUT_PATH, each)))
 
-
 progress = tqdm(total=len(set(ids)))
 
-
 results = list()
-pid = 0
 for _id in sorted(set(ids)):
     progress.update(1)
     for _view in views:
@@ -48,12 +40,10 @@ for _id in sorted(set(ids)):
             dst = os.path.join(OUTPUT_PATH, *seq_info)
             if os.path.exists(src):
                 try:
-                    if os.path.exists(dst):
-                        pass
-                    else:
-                        os.makedirs(dst)
+                    os.makedirs(dst, exist_ok=True)
                     for subfile in os.listdir(src):
-                        os.symlink(os.path.join(src, subfile),
-                                   os.path.join(dst, subfile))
+                        if subfile not in os.listdir(dst):  # subfile exits, pass
+                            os.symlink(os.path.join(src, subfile),
+                                       os.path.join(dst, subfile))
                 except OSError as err:
                     print(err)
