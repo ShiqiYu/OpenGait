@@ -138,6 +138,7 @@ def cut_pickle(seq_info, pid):
     all_imgs = np.asarray(all_imgs)
 
     if count_frame > 0:
+        os.makedirs(out_dir, exist_ok=True)
         all_imgs_pkl = os.path.join(out_dir, '{}.pkl'.format(view))
         pickle.dump(all_imgs, open(all_imgs_pkl, 'wb'))    
 
@@ -177,7 +178,6 @@ if __name__ == '__main__':
             for _view in view:
                 seq_info = [_id, _seq_type, _view]
                 out_dir = os.path.join(OUTPUT_PATH, *seq_info)
-                os.makedirs(out_dir, exist_ok=True)
                 all_imgs_pkl = os.path.join(out_dir, '{}.pkl'.format(_view))
                 if os.path.exists(all_imgs_pkl):
                     print(all_imgs_pkl + ' exists.')  # path exists, print and pass
