@@ -15,6 +15,7 @@ START = "START"
 FINISH = "FINISH"
 WARNING = "WARNING"
 FAIL = "FAIL"
+IMG_EXT = ('.png')
 
 
 def boolean_string(s):
@@ -125,18 +126,18 @@ def cut_pickle(seq_info, pid):
     all_imgs = []
     view = seq_info[-1]
     for _frame_name in frame_list:
-        frame_path = os.path.join(seq_path, _frame_name)
-        img = cv2.imread(frame_path)[:, :, 0]
-        img = cut_img(img, seq_info, _frame_name, pid)
-        if img is not None:
-            # Save the cut img
-            all_imgs.append(img)
-            count_frame += 1
+         if _frame_name.lower().endswith(IMG_EXT):  # filter png files
+            frame_path = os.path.join(seq_path, _frame_name)
+            img = cv2.imread(frame_path)[:, :, 0]
+            img = cut_img(img, seq_info, _frame_name, pid)
+            if img is not None:
+                # Save the cut img
+                all_imgs.append(img)
+                count_frame += 1
 
     all_imgs = np.asarray(all_imgs)
 
     if count_frame > 0:
-        os.makedirs(out_dir)
         all_imgs_pkl = os.path.join(out_dir, '{}.pkl'.format(view))
         pickle.dump(all_imgs, open(all_imgs_pkl, 'wb'))    
 
@@ -152,50 +153,52 @@ def cut_pickle(seq_info, pid):
               % (count_frame, out_dir))
 
 
-pool = Pool(WORKERS)
-results = list()
-pid = 0
+if __name__ == '__main__':
+    pool = Pool(WORKERS)
+    results = list()
+    pid = 0
 
-print('Pretreatment Start.\n'
-      'Input path: %s\n'
-      'Output path: %s\n'
-      'Log file: %s\n'
-      'Worker num: %d' % (
-          INPUT_PATH, OUTPUT_PATH, LOG_PATH, WORKERS))
+    print('Pretreatment Start.\n'
+          'Input path: %s\n'
+          'Output path: %s\n'
+          'Log file: %s\n'
+          'Worker num: %d' % (
+              INPUT_PATH, OUTPUT_PATH, LOG_PATH, WORKERS))
 
-id_list = os.listdir(INPUT_PATH)
-id_list.sort()
-# Walk the input path
-for _id in id_list:
-    seq_type = os.listdir(os.path.join(INPUT_PATH, _id))
-    seq_type.sort()
-    for _seq_type in seq_type:
-        view = os.listdir(os.path.join(INPUT_PATH, _id, _seq_type))
-        view.sort()
-        for _view in view:
-            seq_info = [_id, _seq_type, _view]
-            out_dir = os.path.join(OUTPUT_PATH, *seq_info)
-            # os.makedirs(out_dir)
-            results.append(
-                pool.apply_async(
-                    cut_pickle,
-                    args=(seq_info, pid)))
-            sleep(0.02)
-            pid += 1
+    id_list = os.listdir(INPUT_PATH)
+    id_list.sort()
+    # Walk the input path
+    for _id in id_list:
+        seq_type = os.listdir(os.path.join(INPUT_PATH, _id))
+        seq_type.sort()
+        for _seq_type in seq_type:
+            view = os.listdir(os.path.join(INPUT_PATH, _id, _seq_type))
+            view.sort()
+            for _view in view:
+                seq_info = [_id, _seq_type, _view]
+                out_dir = os.path.join(OUTPUT_PATH, *seq_info)
+                os.makedirs(out_dir, exist_ok=True)
+                all_imgs_pkl = os.path.join(out_dir, '{}.pkl'.format(_view))
+                if os.path.exists(all_imgs_pkl):
+                    print(all_imgs_pkl + ' exists.')  # path exists, print and pass
+                else:
+                    results.append(pool.apply_async(cut_pickle, args=(seq_info, pid)))
+                sleep(0.02)
+                pid += 1
 
-pool.close()
-unfinish = 1
-while unfinish > 0:
-    unfinish = 0
-    for i, res in enumerate(results):
-        try:
-            res.get(timeout=0.1)
-        except Exception as e:
-            if type(e) == MP_TimeoutError:
-                unfinish += 1
-                continue
-            else:
-                print('\n\n\nERROR OCCUR: PID ##%d##, ERRORTYPE: %s\n\n\n',
-                      i, type(e))
-                raise e
-pool.join()
+    pool.close()
+    unfinish = 1
+    while unfinish > 0:
+        unfinish = 0
+        for i, res in enumerate(results):
+            try:
+                res.get(timeout=0.1)
+            except Exception as e:
+                if type(e) == MP_TimeoutError:
+                    unfinish += 1
+                    continue
+                else:
+                    print('\n\n\nERROR OCCUR: PID ##%d##, ERRORTYPE: %s\n\n\n',
+                          i, type(e))
+                    raise e
+    pool.join()
