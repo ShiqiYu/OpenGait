@@ -46,8 +46,8 @@ def imgs2pickle(img_groups: Tuple, output_path: Path, img_size: int = 64, verbos
 
         # As the height of a person is larger than the width,
         # use the height to calculate resize ratio.
-        ratio = img.shape[1] // img.shape[0]
-        img = cv2.resize(img, (img_size * ratio, img_size), interpolation=cv2.INTER_CUBIC)
+        ratio = img.shape[1] / img.shape[0]
+        img = cv2.resize(img, (int(img_size * ratio), img_size), interpolation=cv2.INTER_CUBIC)
 
         # Get the median of the x-axis and take it as the person's x-center.
         x_csum = img.sum(axis=0).cumsum()
@@ -81,11 +81,12 @@ def imgs2pickle(img_groups: Tuple, output_path: Path, img_size: int = 64, verbos
         if verbose:
             logging.debug(f'Saving {pkl_path}...')
         pickle.dump(to_pickle, open(pkl_path, 'wb'))   
+        logging.info(f'Saved {len(to_pickle)} valid frames to {pkl_path}.')
+
 
     if len(to_pickle) < 5:
         logging.warning(f'{sinfo} has less than 5 valid data.')
 
-    logging.info(f'Saved {len(to_pickle)} valid frames to {pkl_path}.')
 
 
 def pretreat(input_path: Path, output_path: Path, img_size: int = 64, workers: int = 4, verbose: bool = False) -> None:
@@ -121,7 +122,7 @@ def pretreat(input_path: Path, output_path: Path, img_size: int = 64, workers: i
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='OpenGait dataset pretreatment module.')
-    parser.add_argument('-r', '--root_path', default='', type=str, help='Root path of raw dataset.')
+    parser.add_argument('-r', '--input_path', default='', type=str, help='Root path of raw dataset.')
     parser.add_argument('-o', '--output_path', default='', type=str, help='Output path of pickled dataset.')
     parser.add_argument('-l', '--log_file', default='./pretreatment.log', type=str, help='Log file path. Default: ./pretreatment.log')
     parser.add_argument('-n', '--n_workers', default=4, type=int, help='Number of thread workers. Default: 4')
@@ -137,4 +138,4 @@ if __name__ == '__main__':
         for k, v in args.__dict__.items():
             logging.debug(f'{k}: {v}')
 
-    pretreat(Path(args.root_path), Path(args.output_path), args.n_workers, args.img_size, args.verbose)
+    pretreat(input_path=Path(args.root_path), output_path=Path(args.output_path), img_size=args.img_size, workers=args.n_workers, verbose=args.verbose)

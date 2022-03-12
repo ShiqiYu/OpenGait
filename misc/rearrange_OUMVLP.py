@@ -25,11 +25,11 @@ def rearrange(input_path: Path, output_path: Path) -> None:
             dst = os.path.join(output_path, sid.name, seq, view)
             os.makedirs(dst, exist_ok=True)
             for subfile in os.listdir(src):
-                if subfile.endswith('.png'):
+                if subfile not in os.listdir(dst) and subfile.endswith('.png'):
                     os.symlink(os.path.join(src, subfile),
                                os.path.join(dst, subfile))
-                else:
-                    os.remove(os.path.join(src, subfile))
+                # else:
+                #     os.remove(os.path.join(src, subfile))
             progress.update(1)
 
 
