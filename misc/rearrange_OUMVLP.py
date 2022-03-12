@@ -1,59 +1,45 @@
+import argparse
 import os
 import shutil
+from pathlib import Path
+
 from tqdm import tqdm
-import argparse
 
 
-parser = argparse.ArgumentParser(description='Test')
-parser.add_argument('--input_path', default='/home1/data/OUMVLP_raw', type=str,
-                    help='Root path of raw dataset.')
-parser.add_argument('--output_path', default='/home1/data/OUMVLP_rearranged', type=str,
-                    help='Root path for output.')
+TOTAL_SUBJECTS = 10307
 
 
-opt = parser.parse_args()
-
-INPUT_PATH = opt.input_path
-OUTPUT_PATH = opt.output_path
+def sanitize(name: str) -> (str, str):
+    return name.split('_')[1].split('-')
 
 
-def mv_dir(src, dst):
-    shutil.copytree(src, dst)
-    print(src, dst)
+def rearrange(input_path: Path, output_path: Path) -> None:
+    os.makedirs(output_path, exist_ok=True)
+
+    for folder in input_path.iterdir():
+        print(f'Rearranging {folder}')
+        view, seq = sanitize(folder.name)
+        progress = tqdm(total=TOTAL_SUBJECTS)
+        for sid in folder.iterdir():
+            src = os.path.join(input_path, f'Silhouette_{view}-{seq}', sid.name)
+            dst = os.path.join(output_path, sid.name, seq, view)
+            os.makedirs(dst, exist_ok=True)
+            for subfile in os.listdir(src):
+                if subfile not in os.listdir(dst) and subfile.endswith('.png'):
+                    os.symlink(os.path.join(src, subfile),
+                               os.path.join(dst, subfile))
+                # else:
+                #     os.remove(os.path.join(src, subfile))
+            progress.update(1)
 
 
-sils_name_list = os.listdir(INPUT_PATH)
-name_space = 'Silhouette_'
-views = sorted(list(
-    set([each.replace(name_space, '').split('-')[0] for each in sils_name_list])))
-seqs = sorted(list(
-    set([each.replace(name_space, '').split('-')[1] for each in sils_name_list])))
-ids = list()
-for each in sils_name_list:
-    ids.extend(os.listdir(os.path.join(INPUT_PATH, each)))
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='OUMVLP rearrange tool')
+    parser.add_argument('-i', '--input_path', required=True, type=str,
+                        help='Root path of raw dataset.')
+    parser.add_argument('-o', '--output_path', default='OUMVLP_rearranged', type=str,
+                        help='Root path for output.')
 
+    args = parser.parse_args()
 
-progress = tqdm(total=len(set(ids)))
-
-
-results = list()
-pid = 0
-for _id in sorted(set(ids)):
-    progress.update(1)
-    for _view in views:
-        for _seq in seqs:
-            seq_info = [_id, _seq, _view]
-            name = name_space + _view + '-' + _seq + '/' + _id
-            src = os.path.join(INPUT_PATH, name)
-            dst = os.path.join(OUTPUT_PATH, *seq_info)
-            if os.path.exists(src):
-                try:
-                    if os.path.exists(dst):
-                        pass
-                    else:
-                        os.makedirs(dst)
-                    for subfile in os.listdir(src):
-                        os.symlink(os.path.join(src, subfile),
-                                   os.path.join(dst, subfile))
-                except OSError as err:
-                    print(err)
+    rearrange(Path(args.input_path), Path(args.output_path))
