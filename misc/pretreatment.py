@@ -105,7 +105,7 @@ def pretreat(input_path: Path, output_path: Path, img_size: int = 64, workers: i
     for img_path in input_path.rglob('*.png'):
         if verbose:
             logging.debug(f'Adding {img_path}')
-        *_, sid, seq, view, _ = img_path.as_posix().split(os.sep)
+        *_, sid, seq, view, _ = img_path.as_posix().split('/')
         img_groups[(sid, seq, view)].append(img_path)
         total_files += 1
 
@@ -138,4 +138,4 @@ if __name__ == '__main__':
         for k, v in args.__dict__.items():
             logging.debug(f'{k}: {v}')
 
-    pretreat(input_path=Path(args.root_path), output_path=Path(args.output_path), img_size=args.img_size, workers=args.n_workers, verbose=args.verbose)
+    pretreat(input_path=Path(args.input_path), output_path=Path(args.output_path), img_size=args.img_size, workers=args.n_workers, verbose=args.verbose)
