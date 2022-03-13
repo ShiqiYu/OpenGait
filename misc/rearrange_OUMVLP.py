@@ -42,4 +42,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    rearrange(Path(args.input_path), Path(args.output_path))
+    input_path = Path(args.input_path).resolve()
+    output_path = Path(args.output_path).resolve()
+    rearrange(input_path, output_path)
