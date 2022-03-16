@@ -79,7 +79,7 @@ trainer_cfg:
   fix_BN: false
   log_iter: 100
   restore_ckpt_strict: true
-  restore_hint: 20000
+  restore_hint: 0
   save_iter: 10000
   save_name: Baseline
   sync_BN: true
