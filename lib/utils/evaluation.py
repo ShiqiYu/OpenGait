@@ -122,11 +122,13 @@ def identification_real_scene(data, dataset, metric='euc'):
     label = np.array(label)
 
     gallery_seq_type = {'0001-1000': ['1', '2'],
-                        "HID2021": ['0'], '0001-1000-test': ['0']}
+                        "HID2021": ['0'], '0001-1000-test': ['0'],
+                        'GREW': ['01']}
     probe_seq_type = {'0001-1000': ['3', '4', '5', '6'],
-                      "HID2021": ['1'], '0001-1000-test': ['1']}
+                      "HID2021": ['1'], '0001-1000-test': ['1'],
+                      'GREW': ['02']}
 
-    num_rank = 5
+    num_rank = 20
     acc = np.zeros([num_rank]) - 1.
     gseq_mask = np.isin(seq_type, gallery_seq_type[dataset])
     gallery_x = feature[gseq_mask, :]
@@ -143,8 +145,46 @@ def identification_real_scene(data, dataset, metric='euc'):
     msg_mgr.log_info('%.3f' % (np.mean(acc[0])))
     msg_mgr.log_info('==Rank-5==')
     msg_mgr.log_info('%.3f' % (np.mean(acc[4])))
+    msg_mgr.log_info('==Rank-10==')
+    msg_mgr.log_info('%.3f' % (np.mean(acc[9])))
+    msg_mgr.log_info('==Rank-20==')
+    msg_mgr.log_info('%.3f' % (np.mean(acc[19])))
     return {"scalar/test_accuracy/Rank-1": np.mean(acc[0]), "scalar/test_accuracy/Rank-5": np.mean(acc[4])}
 
+def identification_GREW_submission(data, dataset, metric='euc'):
+    msg_mgr = get_msg_mgr()
+    feature, label, seq_type, view = data['embeddings'], data['labels'], data['types'], data['views']
+    label = np.array(label)
+    view  = np.array(view)
+    gallery_seq_type = {'GREW': ['01','02']}
+    probe_seq_type = {'GREW': ['03']}
+
+    num_rank = 20
+    acc = np.zeros([num_rank]) - 1.
+    gseq_mask = np.isin(seq_type, gallery_seq_type[dataset])
+    gallery_x = feature[gseq_mask, :]
+    gallery_y = label[gseq_mask]
+    pseq_mask = np.isin(seq_type, probe_seq_type[dataset])
+    probe_x = feature[pseq_mask, :]
+    probe_y = view[pseq_mask]
+
+    dist = cuda_dist(probe_x, gallery_x, metric)
+    idx = dist.cpu().sort(1)[1].numpy()
+
+    import os
+    from time import strftime, localtime
+    save_path = os.path.join(
+        "GREW_result/"+strftime('%Y-%m%d-%H%M%S', localtime())+".csv")
+    os.makedirs("GREW_result", exist_ok=True)
+    with open(save_path, "w") as f:
+        f.write("videoId,rank1,rank2,rank3,rank4,rank5,rank6,rank7,rank8,rank9,rank10,rank11,rank12,rank13,rank14,rank15,rank16,rank17,rank18,rank19,rank20\n")
+        for i in range(len(idx)):
+            r_format = [int(idx) for idx in gallery_y[idx[i, 0:20]]]
+            output_row = '{}'+',{}'*20+'\n'
+            f.write(output_row.format(probe_y[i], *r_format))
+        print("GREW result saved to {}/{}".format(os.getcwd(), save_path))
+
+    return 
 
 def evaluate_HID(data, dataset, metric='euc'):
     msg_mgr = get_msg_mgr()
@@ -168,6 +208,76 @@ def evaluate_HID(data, dataset, metric='euc'):
     with open(save_path, "w") as f:
         f.write("videoID,label\n")
         for i in range(len(idx)):
-            f.write("{},{}\n".format(probe_y[i], gallery_y[idx[i, 0]]))
-        print("HID result saved to {}/{}".format(os.getcwd(), save_path))
+            f.write("{},{},\n".format(probe_y[i], gallery_y[idx[i, 0]]))
+        print("GREW result saved to {}/{}".format(os.getcwd(), save_path))
     return
+
+
+def evaluate_GREW(data, dataset, metric='euc'):
+    msg_mgr = get_msg_mgr()
+    msg_mgr.log_info("Evaluating GREW")
+
+    feature, label, seq_type, view = data['embeddings'], data['labels'], data['types'], data['views']
+    label = np.array(label)
+
+    if dataset not in (probe_seq_dict or gallery_seq_dict):
+        raise KeyError("DataSet %s hasn't been supported !" % dataset)
+    num_rank = 5
+    acc = np.zeros([len(probe_seq_dict[dataset]),
+                    view_num, view_num, num_rank]) - 1.
+    for (p, probe_seq) in enumerate(probe_seq_dict[dataset]):
+        for gallery_seq in gallery_seq_dict[dataset]:
+            for (v1, probe_view) in enumerate(view_list):
+                for (v2, gallery_view) in enumerate(view_list):
+                    gseq_mask = np.isin(seq_type, gallery_seq) & np.isin(
+                        view, [gallery_view])
+                    gallery_x = feature[gseq_mask, :]
+                    gallery_y = label[gseq_mask]
+
+                    pseq_mask = np.isin(seq_type, probe_seq) & np.isin(
+                        view, [probe_view])
+                    probe_x = feature[pseq_mask, :]
+                    probe_y = label[pseq_mask]
+
+                    dist = cuda_dist(probe_x, gallery_x, metric)
+                    idx = dist.sort(1)[1].cpu().numpy()
+                    acc[p, v1, v2, :] = np.round(
+                        np.sum(np.cumsum(np.reshape(probe_y, [-1, 1]) == gallery_y[idx[:, 0:num_rank]], 1) > 0,
+                               0) * 100 / dist.shape[0], 2)
+    result_dict = {}
+    np.set_printoptions(precision=3, suppress=True)
+    if 'OUMVLP' not in dataset:
+        for i in range(1):
+            msg_mgr.log_info(
+                '===Rank-%d (Include identical-view cases)===' % (i + 1))
+            msg_mgr.log_info('NM: %.3f,\tBG: %.3f,\tCL: %.3f' % (
+                np.mean(acc[0, :, :, i]),
+                np.mean(acc[1, :, :, i]),
+                np.mean(acc[2, :, :, i])))
+        for i in range(1):
+            msg_mgr.log_info(
+                '===Rank-%d (Exclude identical-view cases)===' % (i + 1))
+            msg_mgr.log_info('NM: %.3f,\tBG: %.3f,\tCL: %.3f' % (
+                de_diag(acc[0, :, :, i]),
+                de_diag(acc[1, :, :, i]),
+                de_diag(acc[2, :, :, i])))
+        result_dict["scalar/test_accuracy/NM"] = de_diag(acc[0, :, :, i])
+        result_dict["scalar/test_accuracy/BG"] = de_diag(acc[1, :, :, i])
+        result_dict["scalar/test_accuracy/CL"] = de_diag(acc[2, :, :, i])
+        np.set_printoptions(precision=2, floatmode='fixed')
+        for i in range(1):
+            msg_mgr.log_info(
+                '===Rank-%d of each angle (Exclude identical-view cases)===' % (i + 1))
+            msg_mgr.log_info('NM: {}'.format(de_diag(acc[0, :, :, i], True)))
+            msg_mgr.log_info('BG: {}'.format(de_diag(acc[1, :, :, i], True)))
+            msg_mgr.log_info('CL: {}'.format(de_diag(acc[2, :, :, i], True)))
+    else:
+        msg_mgr.log_info('===Rank-1 (Include identical-view cases)===')
+        msg_mgr.log_info('NM: %.3f ' % (np.mean(acc[0, :, :, 0])))
+        msg_mgr.log_info('===Rank-1 (Exclude identical-view cases)===')
+        msg_mgr.log_info('NM: %.3f ' % (de_diag(acc[0, :, :, 0])))
+        msg_mgr.log_info(
+            '===Rank-1 of each angle (Exclude identical-view cases)===')
+        msg_mgr.log_info('NM: {}'.format(de_diag(acc[0, :, :, 0], True)))
+        result_dict["scalar/test_accuracy/NM"] = de_diag(acc[0, :, :, 0])
+    return result_dict
