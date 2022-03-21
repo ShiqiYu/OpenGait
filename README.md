@@ -8,6 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
+- [Mar 2022] Dataset GREW is supported.
 - [Mar 2022] [HID](http://hid2022.iapr-tc4.org/) support is ready in [misc/HID](./misc/HID).
 
 ## Highlighted features
@@ -35,8 +36,12 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 88.6(88.7) | [gaitpart.yaml](config/gaitpart_OUMVLP.yaml) |   64x44    | 8m04s          |   3.78M    |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 89.9(89.7) |   [gaitgl.yaml](config/gaitgl_OUMVLP.yaml)   |   64x44    | 5m23s          |   95.62M   |
 
+### GREW
+|                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :------------- | :--------: |
+|                                                                                        Baseline                                                                                         |    43.3    | [baseline.yaml](config/baseline_GREW.yaml) |   64x44    | 2m23s          |   84.12M   |
 
-The results in the parentheses are mentioned in the papers
+The results in the parentheses are mentioned in the papers, other results on GREW is comming soon.
 
 **Note**:
 - All results are Rank@1, excluding identical-view cases.

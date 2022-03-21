@@ -9,7 +9,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 60000
+  restore_hint: 120000
   save_name: Baseline
   eval_func: identification_GREW_submission # identification_real_scene
   sampler:
