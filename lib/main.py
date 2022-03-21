@@ -58,7 +58,7 @@ if __name__ == '__main__':
     torch.distributed.init_process_group('nccl', init_method='env://')
     if torch.distributed.get_world_size() != torch.cuda.device_count():
         raise ValueError("Expect number of availuable GPUs({}) equals to the world size({}).".format(
-            torch.distributed.get_world_size(), torch.cuda.device_count()))
+            torch.cuda.device_count(), torch.distributed.get_world_size()))
     cfgs = config_loader(opt.cfgs)
     if opt.iter != 0:
         cfgs['evaluator_cfg']['restore_hint'] = int(opt.iter)
