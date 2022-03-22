@@ -212,7 +212,7 @@ def evaluate_HID(data, dataset, metric='euc'):
         f.write("videoID,label\n")
         for i in range(len(idx)):
             f.write("{},{}\n".format(probe_y[i], gallery_y[idx[i, 0]]))
-        print("GREW result saved to {}/{}".format(os.getcwd(), save_path))
+        print("HID result saved to {}/{}".format(os.getcwd(), save_path))
     return
 
 
