@@ -70,7 +70,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 
 ## Get the submission file
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 lib/main.py --cfgs ./misc/HID/baseline_hid.yaml --phase test
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 lib/main.py --cfgs ./config/baseline_GREW.yaml --phase test
 ```
 The result will be generated in your working directory, you must rename and compress it as the requirements before submitting.
 
