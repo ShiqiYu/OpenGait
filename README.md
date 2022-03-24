@@ -8,7 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
-- [Mar 2022] Dataset GREW is supported.
+- [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported.
 - [Mar 2022] [HID](http://hid2022.iapr-tc4.org/) support is ready in [misc/HID](./misc/HID).
 
 ## Highlighted features
@@ -19,7 +19,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 ## Model Zoo
 
-###  CASIA-B
+###  [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp)
 |                                                                                          Model                                                                                          |     NM     |     BG     |     CL     | Configuration                                                                                | Input Size | Inference Time |   Model Size   |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :--------: | :--------: | :------------------------------------------------------------------------------------------- | :--------: | :------------: | :------------: |
 |                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline.yaml)                                                        |   64x44    |      12s       |     3.78M      |
@@ -28,7 +28,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.4(95.6) | 93.1(92.0) | 81.0(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |    47s/46s     | 8.54M / 14.70M |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.4(97.4) | 94.5(94.5) | 83.8(83.6) | [gaitgl.yaml](config/gaitgl.yaml)                                                            |   64x44    |      38s       |     3.10M      |
 
-### OUMVLP
+### [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html)
 |                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :------------- | :--------: |
 |                                                                                        Baseline                                                                                         |    86.7    | [baseline.yaml](config/baseline_OUMVLP.yaml) |   64x44    | 1m13s          |   44.11M   |
@@ -36,7 +36,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 88.6(88.7) | [gaitpart.yaml](config/gaitpart_OUMVLP.yaml) |   64x44    | 8m04s          |   3.78M    |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 89.9(89.7) |   [gaitgl.yaml](config/gaitgl_OUMVLP.yaml)   |   64x44    | 5m23s          |   95.62M   |
 
-### GREW
+### [GREW](https://www.grew-benchmark.org)
 |                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :------------- | :--------: |
 |                                                                                        Baseline                                                                                         |    43.3    | [baseline.yaml](config/baseline_GREW.yaml) |   64x44    | 2m23s          |   84.12M   |
@@ -131,7 +131,7 @@ You can run commands in [test.sh](test.sh) for testing different models.
 ## Acknowledgement
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
 - GaitGL: [Beibei Lin (林贝贝)](https://scholar.google.com/citations?user=KyvHam4AAAAJ&hl=en&oi=ao)
-
+- GREW: [GREW TEAM](https://www.grew-benchmark.org)
 <!-- ## Citation
 ```
 ``` -->
