@@ -12,6 +12,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 - [Mar 2022] [HID](http://hid2022.iapr-tc4.org/) support is ready in [misc/HID](./misc/HID).
 
 ## Highlighted features
+- **Mutiple Dataset supported**: OpenGait supports four popular gait datasets: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), and [GREW](https://www.grew-benchmark.org).
 - **Multiple Models Support**: We reproduced several SOTA methods, and reached the same or even the better performance. 
 - **DDP Support**: The officially recommended [`Distributed Data Parallel (DDP)`](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) mode is used during both the training and testing phases.
 - **AMP Support**: The [`Auto Mixed Precision (AMP)`](https://pytorch.org/tutorials/recipes/recipes/amp_recipe.html?highlight=amp) option is available.
