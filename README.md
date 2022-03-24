@@ -8,7 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
-- [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported.
+- [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [misc/GREW](./misc/GREW).
 - [Mar 2022] [HID](http://hid2022.iapr-tc4.org/) support is ready in [misc/HID](./misc/HID).
 
 ## Highlighted features
