@@ -32,8 +32,8 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |  [RealGait(Arxiv now)](https://arxiv.org/pdf/2201.04806.pdf)|    (54.1)    | -                                            |   -        | -              |   -        |
 |  [SMPLGait(CVPR2022)](https://gait3d.github.io)|    (53.2)    | -                                            |   -        | -              |   -     |
 
-The results of GaitSet, GaitPart, GaitGL and RealGait are coming from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, 
-and our reproducing results is comming soon. 
+The results of GaitSet, GaitPart, GaitGL and RealGait come from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, 
+and our reproducing results are comming soon. 
 
 ### [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html)
 |                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
