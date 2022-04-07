@@ -24,7 +24,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 ### [GREW](https://www.grew-benchmark.org)
 |                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :-------------: | :--------: |
-|  Baseline                       |    48.0    | [baseline.yaml](config/baseline_GREW.yaml)   |   64x44    | 2m23s          |   84.12M   |
+|  Baseline                       |    48.5    | [baseline.yaml](config/baseline_GREW.yaml)   |   64x44    | 2m23s          |   84.12M   |
 |  Baseline-ResNet9               |    56.0    | -                                            |   64x44    | -              |   -        |
 | [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                        |    48.4    | -                                            |   -        | -              |   -        |
 |  [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                       |    47.6    | -                                            |   -        | -              |   -        |
