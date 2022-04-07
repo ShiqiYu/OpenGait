@@ -30,7 +30,6 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |  [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                       |    44.0    | -                                            |   -        | -              |   -        |
 |  [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    47.3    | -                                            |   -        | -              |   -        |
 |  [RealGait(Arxiv now)](https://arxiv.org/pdf/2201.04806.pdf)|    (54.1)    | -                                            |   -        | -              |   -        |
-|  [SMPLGait(CVPR2022)](https://gait3d.github.io)|    (53.2)    | -                                            |   -        | -              |   -     |
 
 The results of GaitSet, GaitPart, GaitGL and RealGait come from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, 
 and our reproducing results are comming soon. 
