@@ -26,12 +26,12 @@ After unpacking these compressed files, run this command:
 
 Step2 : To rearrange directory of GREW dataset, turning to id-type-view structure, Run 
 ```
-python misc/rearrange_GREW.py --input_path Path_of_GREW-raw --output_path Path_of_GREW-rearranged
+python datasets/GREW/rearrange_GREW.py --input_path Path_of_GREW-raw --output_path Path_of_GREW-rearranged
 ```  
 
 Step3: Transforming images to pickle file, run 
 ```
-python misc/pretreatment.py --input_path Path_of_GREW-rearranged --output_path Path_of_GREW-pkl
+python datasets/pretreatment.py --input_path Path_of_GREW-rearranged --output_path Path_of_GREW-pkl
 ```
 Then you will see the structure like:
 
@@ -62,17 +62,16 @@ Then you will see the structure like:
     ```
 
 ## Train the dataset
-Modify the `dataset_root` in `./config/baseline_GREW.yaml`, and then run this command:
+Modify the `dataset_root` in `./config/baseline/baseline_GREW.yaml`, and then run this command:
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./config/baseline_GREW.yaml --phase train
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./config/baseline/baseline_GREW.yaml --phase train
 ```
-<!-- You can also download the [trained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip) and place it in `output` after unzipping. -->
 
 ## Get the submission file
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./config/baseline_GREW.yaml --phase test
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./config/baseline/baseline_GREW.yaml --phase test
 ```
 The result will be generated in your working directory, you must rename and compress it as the requirements before submitting.
 
 ## Evaluation locally
-While the original grew treat both seq_01 and seq_02 as gallery, but there is no ground truth for probe. Therefore, it is nessesary to upload the submission file on grew competitation. We seperate test set to: seq_01 as gallery, seq_02 as probe. Then you can modify `eval_func` in the `./config/baseline_GREW.yaml` to `identification_real_scene`, you can obtain result localy like setting of OUMVLP. 
+While the original grew treat both seq_01 and seq_02 as gallery, but there is no ground truth for probe. Therefore, it is nessesary to upload the submission file on grew competitation. We seperate test set to: seq_01 as gallery, seq_02 as probe. Then you can modify `eval_func` in the `./config/baseline/baseline_GREW.yaml` to `identification_real_scene`, you can obtain result localy like setting of OUMVLP. 
