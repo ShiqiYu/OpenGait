@@ -64,13 +64,13 @@ Then you will see the structure like:
 ## Train the dataset
 Modify the `dataset_root` in `./config/baseline_GREW.yaml`, and then run this command:
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 lib/main.py --cfgs ./config/baseline_GREW.yaml --phase train
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./config/baseline_GREW.yaml --phase train
 ```
 <!-- You can also download the [trained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip) and place it in `output` after unzipping. -->
 
 ## Get the submission file
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 lib/main.py --cfgs ./config/baseline_GREW.yaml --phase test
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./config/baseline_GREW.yaml --phase test
 ```
 The result will be generated in your working directory, you must rename and compress it as the requirements before submitting.
 
