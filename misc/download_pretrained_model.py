@@ -120,7 +120,8 @@ def download_file_and_uncompress(url,
 if __name__ == "__main__":
     urls = [
         "https://github.com/ShiqiYu/OpenGait/releases/download/v1.0/pretrained_casiab_model.zip",
-        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_oumvlp_model.zip"]
+        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_oumvlp_model.zip",
+        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_grew_model.zip"]
     for url in urls:
         download_file_and_uncompress(
             url=url, extrapath='output')
