@@ -9,9 +9,9 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 120000
+  restore_hint: 250000
   save_name: Baseline
-  eval_func: identification_GREW_submission # identification_real_scene
+  eval_func: identification_GREW_submission # identification_real_scene # identification_GREW_submission
   sampler:
     batch_shuffle: false
     batch_size: 64
@@ -38,12 +38,14 @@ model_cfg:
   backbone_cfg:
     in_channels: 1
     layers_cfg: # Layers configuration for automatically model construction
+      - BC-32
+      - BC-32
+      - M
       - BC-64
       - BC-64
       - M
       - BC-128
       - BC-128
-      - M
       - BC-256
       - BC-256
       # - M
@@ -74,8 +76,7 @@ optimizer_cfg:
 scheduler_cfg:
   gamma: 0.1
   milestones: # Learning Rate Reduction at each milestones
-    - 80000
-    - 100000
+    - 150000
   scheduler: MultiStepLR
 trainer_cfg:
   enable_float16: true # half_percesion float for memory reduction and speedup
@@ -83,14 +84,14 @@ trainer_cfg:
   log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0
-  save_iter: 5000
+  save_iter: 10000
   save_name: Baseline
   sync_BN: true
-  total_iter: 120000
+  total_iter: 250000
   sampler:
     batch_shuffle: true
     batch_size:
-      - 16 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 32 # TripletSampler, batch_size[0] indicates Number of Identity
       - 4 #                 batch_size[1] indicates Samples sequqnce for each Identity
     frames_num_fixed: 30 # fixed frames number for training
     frames_num_max: 50 # max frames number for unfixed training
