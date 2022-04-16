@@ -167,10 +167,6 @@ class BaseModel(MetaModel, nn.Module):
         if restore_hint != 0:
             self.resume_ckpt(restore_hint)
 
-        if training:
-            if cfgs['trainer_cfg']['fix_BN']:
-                self.fix_BN()
-
     def get_backbone(self, backbone_cfg):
         """Get the backbone of the model."""
         if is_dict(backbone_cfg):
@@ -427,6 +423,8 @@ class BaseModel(MetaModel, nn.Module):
                     model.eval()
                     result_dict = BaseModel.run_test(model)
                     model.train()
+                    if model.cfgs['trainer_cfg']['fix_BN']:
+                        model.fix_BN()
                     model.msg_mgr.write_to_tensorboard(result_dict)
                     model.msg_mgr.reset_time()
             if model.iteration >= model.engine_cfg['total_iter']:

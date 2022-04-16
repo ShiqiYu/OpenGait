@@ -44,6 +44,8 @@ def run_model(cfgs, training):
     model = Model(cfgs, training)
     if training and cfgs['trainer_cfg']['sync_BN']:
         model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
+    if cfgs['trainer_cfg']['fix_BN']:
+        model.fix_BN()
     model = get_ddp_module(model)
     msg_mgr.log_info(params_count(model))
     msg_mgr.log_info("Model Initialization Finished!")
