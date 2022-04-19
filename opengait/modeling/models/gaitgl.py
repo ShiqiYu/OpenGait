@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from ..base_model import BaseModel
-from ..modules import SeparateFCs, BasicConv3d, PackSequenceWrapper
+from ..modules import SeparateFCs, BasicConv3d, PackSequenceWrapper, SeparateBNNecks
 
 
 class GLConv(nn.Module):
@@ -75,8 +75,8 @@ class GaitGL(BaseModel):
         class_num = model_cfg['class_num']
         dataset_name = self.cfgs['data_cfg']['dataset_name']
 
-        if dataset_name == 'OUMVLP':
-            # For OUMVLP
+        if dataset_name in ['OUMVLP','GREW']:
+            # For OUMVLP and GREW
             self.conv3d = nn.Sequential(
                 BasicConv3d(1, in_c[0], kernel_size=(3, 3, 3),
                             stride=(1, 1, 1), padding=(1, 1, 1)),
@@ -135,12 +135,19 @@ class GaitGL(BaseModel):
             self.GLConvB2 = GLConv(in_c[2], in_c[2], halving=3, fm_sign=True,  kernel_size=(
                 3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
 
-        self.Head0 = SeparateFCs(64, in_c[-1], in_c[-1])
-        self.Bn = nn.BatchNorm1d(in_c[-1])
-        self.Head1 = SeparateFCs(64, in_c[-1], class_num)
-
+        
         self.TP = PackSequenceWrapper(torch.max)
         self.HPP = GeMHPP()
+        
+        self.Head0 = SeparateFCs(64, in_c[-1], in_c[-1])
+        
+        if 'SeparateBNNecks' in model_cfg.keys():
+            self.BNNecks = SeparateBNNecks(**model_cfg['SeparateBNNecks'])
+            self.Bn_head = False
+        else:
+            self.Bn = nn.BatchNorm1d(in_c[-1])
+            self.Head1 = SeparateFCs(64, in_c[-1], class_num)
+            self.Bn_head = True
 
     def forward(self, inputs):
         ipts, labs, _, _, seqL = inputs
@@ -169,12 +176,16 @@ class GaitGL(BaseModel):
         outs = outs.permute(2, 0, 1).contiguous()  # [p, n, c]
 
         gait = self.Head0(outs)  # [p, n, c]
-        gait = gait.permute(1, 2, 0).contiguous()  # [n, c, p]
-        bnft = self.Bn(gait)  # [n, c, p]
-        logi = self.Head1(bnft.permute(2, 0, 1).contiguous())  # [p, n, c]
+        
+        if self.Bn_head: # Original GaitGL Head
+            gait = gait.permute(1, 2, 0).contiguous()  # [n, c, p]
+            bnft = self.Bn(gait)  # [n, c, p]
+            logi = self.Head1(bnft.permute(2, 0, 1).contiguous())  # [p, n, c]
+            bnft = bnft.permute(0, 2, 1).contiguous()  # [n, p, c]
+        else: # BNNechk as Head
+            bnft, logi = self.BNNecks(gait)  # [p, n, c]
+            bnft = bnft.permute(1, 0, 2).contiguous()  # [n, p, c]
 
-        gait = gait.permute(0, 2, 1).contiguous()  # [n, p, c]
-        bnft = bnft.permute(0, 2, 1).contiguous()  # [n, p, c]
         logi = logi.permute(1, 0, 2).contiguous()  # [n, p, c]
 
         n, _, s, h, w = sils.size()

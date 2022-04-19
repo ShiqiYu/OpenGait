@@ -1,0 +1,70 @@
+# Note  : *** the batch_size should be equal to the gpus number at the test phase!!! ***
+data_cfg:
+  dataset_name: GREW
+  dataset_root: your_path
+  dataset_partition: ./datasets/GREW/GREW.json
+  num_workers: 16
+  remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: GREW
+
+evaluator_cfg:
+  enable_distributed: true
+  enable_float16: false 
+  restore_ckpt_strict: true
+  restore_hint: 250000
+  save_name: GaitGL
+  eval_func: identification_GREW_submission # identification_real_scene # identification_GREW_submission
+  sampler:
+    batch_size: 4
+    sample_type: all_ordered
+    type: InferenceSampler
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weight: 1.0
+    scale: 1
+    type: CrossEntropyLoss
+    log_accuracy: true
+    label_smooth: true
+    log_prefix: softmax
+
+model_cfg:
+  model: GaitGL
+  channels: [32, 64, 128, 256]
+  class_num: 20000
+
+optimizer_cfg:
+  lr: 1.0e-4
+  solver: Adam
+  weight_decay: 0
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 150000
+    - 200000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_distributed: true
+  enable_float16: true
+  with_test: false
+  log_iter: 100
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 10000
+  save_name: GaitGL
+  sync_BN: true
+  total_iter: 250000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 32
+      - 4
+    frames_num_fixed: 30
+    frames_skip_num: 0
+    sample_type: fixed_ordered
+    type: TripletSampler
