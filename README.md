@@ -48,8 +48,9 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |  [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    51.7    | [gaitgl.yaml](config/gaitgl/gaitgl_GREW_BNNeck.yaml)                                            |   64x44        | -              |   -        |
 |  [RealGait(Arxiv now)](https://arxiv.org/pdf/2201.04806.pdf)|    (54.1)    | -                                            |   -        | -              |   -        |
 
-The result of GaitGL comes from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, 
-and our reproducing results are comming soon. 
+The result of GaitGL comes from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, and our reproducing results are comming soon. 
+
+------------------------------------------
 
 The results in the parentheses are mentioned in the papers. 
 
@@ -127,10 +128,7 @@ You can run commands in [test.sh](test.sh) for testing different models.
 3. There are some advanced usages, refer to [advanced usages](docs/3.advanced_usages.md), please.
 
 ## Warning
-- Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
 - In `DDP` mode, zombie processes may be generated when the program terminates abnormally. You can use this command [sh misc/clean_process.sh](./misc/clean_process.sh) to clear them. 
-- We implemented the functionality about testing while training, but it slightly affected the results. None of our published models use this functionality. You can disable it by setting `with_test` **False**.
-- Recommended Pytorch version: 1.6-1.8 
 
 ## Authors:
 **Open Gait Team (OGT)**
