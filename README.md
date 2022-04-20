@@ -45,10 +45,10 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 |  Baseline                       |    48.5    | [baseline.yaml](config/baseline/baseline_GREW.yaml)   |   64x44    | 2m23s          |   84.12M   |
 | [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                        |    48.4    | [gaitset.yaml](config/gaitset/gaitset_GREW.yaml)                                            |   64x44        | -              |   -        |
 |  [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                       |    47.6    | [gaitpart.yaml](config/gaitpart/gaitpart_GREW.yaml)                                            |   64x44        | -              |   -        |
-|  [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    51.7    | [gaitgl.yaml](config/gaitgl/gaitgl_GREW_BNNeck.yaml)                                            |   64x44        | -              |   -        |
+|  [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    41.5    | [gaitgl.yaml](config/gaitgl/gaitgl_GREW.yaml)                                            |   64x44        | -              |   -        |
+|  [GaitGL(BNNeck)(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    51.7    | [gaitgl.yaml](config/gaitgl/gaitgl_GREW_BNNeck.yaml)                                            |   64x44        | -              |   -        |
 |  [RealGait(Arxiv now)](https://arxiv.org/pdf/2201.04806.pdf)|    (54.1)    | -                                            |   -        | -              |   -        |
 
-The result of GaitGL comes from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, and our reproducing results are comming soon. 
 
 ------------------------------------------
 
