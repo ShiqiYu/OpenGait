@@ -21,18 +21,14 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 ## Model Zoo
 
-### [GREW](https://www.grew-benchmark.org)
-|                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :-------------: | :--------: |
-|  Baseline                       |    48.5    | [baseline.yaml](config/baseline/baseline_GREW.yaml)   |   64x44    | 2m23s          |   84.12M   |
-|  Baseline-ResNet9               |    56.0    | -                                            |   64x44    | -              |   -        |
-| [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                        |    48.4    | -                                            |   -        | -              |   -        |
-|  [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                       |    47.6    | -                                            |   -        | -              |   -        |
-|  [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    47.3    | -                                            |   -        | -              |   -        |
-|  [RealGait(Arxiv now)](https://arxiv.org/pdf/2201.04806.pdf)|    (54.1)    | -                                            |   -        | -              |   -        |
-
-The result of GaitGL comes from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, 
-and our reproducing results are comming soon. 
+###  [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp)
+|                                                                                          Model                                                                                          |     NM     |     BG     |     CL     | Configuration                                                                                | Input Size | Inference Time |   Model Size   |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :--------: | :--------: | :-------------------------------------------------------------------------------------------: | :--------: | :------------: | :------------: |
+|                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline/baseline.yaml)                                                        |   64x44    |      12s       |     3.78M      |
+|                                                                [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                                                                | 95.8(95.0) | 90.0(87.2) | 75.4(70.4) | [gaitset.yaml](config/gaitset/gaitset.yaml)                                                          |   64x44    |      13s       |     2.59M      |
+|                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart/gaitpart.yaml)                                                        |   64x44    |      56s       |     1.20M      |
+|                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.4(95.6) | 93.1(92.0) | 81.0(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |    47s/46s     | 8.54M / 14.70M |
+| [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.4(97.4) | 94.5(94.5) | 83.8(83.6) | [gaitgl.yaml](config/gaitgl/gaitgl.yaml)                                                            |   64x44    |      38s       |     3.10M      |
 
 ### [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html)
 |                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
@@ -42,14 +38,19 @@ and our reproducing results are comming soon.
 |                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 88.6(88.7) | [gaitpart.yaml](config/gaitpart/gaitpart_OUMVLP.yaml) |   64x44    | 8m04s          |   3.78M    |
 | [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 89.9(89.7) |   [gaitgl.yaml](config/gaitgl/gaitgl_OUMVLP.yaml)   |   64x44    | 5m23s          |   95.62M   |
 
-###  [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp)
-|                                                                                          Model                                                                                          |     NM     |     BG     |     CL     | Configuration                                                                                | Input Size | Inference Time |   Model Size   |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :--------: | :--------: | :------------------------------------------------------------------------------------------- | :--------: | :------------: | :------------: |
-|                                                                                        Baseline                                                                                         |    96.3    |    92.2    |    77.6    | [baseline.yaml](config/baseline/baseline.yaml)                                                        |   64x44    |      12s       |     3.78M      |
-|                                                                [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                                                                | 95.8(95.0) | 90.0(87.2) | 75.4(70.4) | [gaitset.yaml](config/gaitset/gaitset.yaml)                                                          |   64x44    |      13s       |     2.59M      |
-|                                                   [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                                                    | 96.1(96.2) | 90.7(91.5) | 78.7(78.7) | [gaitpart.yaml](config/gaitpart/gaitpart.yaml)                                                        |   64x44    |      56s       |     1.20M      |
-|                                                        [GLN*(ECCV2020)](http://home.ustc.edu.cn/~saihui/papers/eccv2020_gln.pdf)                                                        | 96.4(95.6) | 93.1(92.0) | 81.0(77.2) | [gln_phase1.yaml](config/gln/gln_phase1.yaml), [gln_phase2.yaml](config/gln/gln_phase2.yaml) |   128x88   |    47s/46s     | 8.54M / 14.70M |
-| [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf) | 97.4(97.4) | 94.5(94.5) | 83.8(83.6) | [gaitgl.yaml](config/gaitgl/gaitgl.yaml)                                                            |   64x44    |      38s       |     3.10M      |
+
+### [GREW](https://www.grew-benchmark.org)
+|                                                                                          Model                                                                                          |   Rank@1   |                Configuration                 | Input Size | Inference Time | Model Size |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :------------------------------------------: | :--------: | :-------------: | :--------: |
+|  Baseline                       |    48.5    | [baseline.yaml](config/baseline/baseline_GREW.yaml)   |   64x44    | 2m23s          |   84.12M   |
+| [GaitSet(AAAI2019)](https://arxiv.org/pdf/1811.06186.pdf)                        |    48.4    | [gaitset.yaml](config/gaitset/gaitset_GREW.yaml)                                            |   64x44        | -              |   -        |
+|  [GaitPart(CVPR2020)](http://home.ustc.edu.cn/~saihui/papers/cvpr2020_gaitpart.pdf)                       |    47.6    | [gaitpart.yaml](config/gaitpart/gaitpart_GREW.yaml)                                            |   64x44        | -              |   -        |
+|  [GaitGL(ICCV2021)](https://openaccess.thecvf.com/content/ICCV2021/papers/Lin_Gait_Recognition_via_Effective_Global-Local_Feature_Representation_and_Local_Temporal_ICCV_2021_paper.pdf)                         |    51.7    | [gaitgl.yaml](config/gaitgl/gaitgl_GREW_BNNeck.yaml)                                            |   64x44        | -              |   -        |
+|  [RealGait(Arxiv now)](https://arxiv.org/pdf/2201.04806.pdf)|    (54.1)    | -                                            |   -        | -              |   -        |
+
+The result of GaitGL comes from [RealGait](https://arxiv.org/pdf/2201.04806.pdf) now, and our reproducing results are comming soon. 
+
+------------------------------------------
 
 The results in the parentheses are mentioned in the papers. 
 
@@ -127,10 +128,7 @@ You can run commands in [test.sh](test.sh) for testing different models.
 3. There are some advanced usages, refer to [advanced usages](docs/3.advanced_usages.md), please.
 
 ## Warning
-- Some models may not be compatible with `AMP`, you can disable it by setting `enable_float16` **False**.
 - In `DDP` mode, zombie processes may be generated when the program terminates abnormally. You can use this command [sh misc/clean_process.sh](./misc/clean_process.sh) to clear them. 
-- We implemented the functionality about testing while training, but it slightly affected the results. None of our published models use this functionality. You can disable it by setting `with_test` **False**.
-- Recommended Pytorch version: 1.6-1.8 
 
 ## Authors:
 **Open Gait Team (OGT)**
