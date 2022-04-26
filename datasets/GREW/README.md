@@ -31,7 +31,7 @@ python datasets/GREW/rearrange_GREW.py --input_path Path_of_GREW-raw --output_pa
 
 Step3: Transforming images to pickle file, run 
 ```
-python datasets/pretreatment.py --input_path Path_of_GREW-rearranged --output_path Path_of_GREW-pkl
+python datasets/pretreatment.py --input_path Path_of_GREW-rearranged --output_path Path_of_GREW-pkl --dataset GREW
 ```
 Then you will see the structure like:
 
