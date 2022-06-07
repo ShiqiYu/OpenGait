@@ -75,7 +75,7 @@ class GaitGL(BaseModel):
         class_num = model_cfg['class_num']
         dataset_name = self.cfgs['data_cfg']['dataset_name']
 
-        if dataset_name in ['OUMVLP','GREW']:
+        if dataset_name in ['OUMVLP', 'GREW']:
             # For OUMVLP and GREW
             self.conv3d = nn.Sequential(
                 BasicConv3d(1, in_c[0], kernel_size=(3, 3, 3),
@@ -135,12 +135,11 @@ class GaitGL(BaseModel):
             self.GLConvB2 = GLConv(in_c[2], in_c[2], halving=3, fm_sign=True,  kernel_size=(
                 3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
 
-        
         self.TP = PackSequenceWrapper(torch.max)
         self.HPP = GeMHPP()
-        
+
         self.Head0 = SeparateFCs(64, in_c[-1], in_c[-1])
-        
+
         if 'SeparateBNNecks' in model_cfg.keys():
             self.BNNecks = SeparateBNNecks(**model_cfg['SeparateBNNecks'])
             self.Bn_head = False
@@ -171,20 +170,20 @@ class GaitGL(BaseModel):
         outs = self.GLConvA1(outs)
         outs = self.GLConvB2(outs)  # [n, c, s, h, w]
 
-        outs = self.TP(outs, dim=2, seq_dim=2, seqL=seqL)[0]  # [n, c, h, w]
+        outs = self.TP(outs, seqL=seqL, options={"dim": 2})[0]  # [n, c, h, w]
         outs = self.HPP(outs)  # [n, c, p]
         outs = outs.permute(2, 0, 1).contiguous()  # [p, n, c]
 
         gait = self.Head0(outs)  # [p, n, c]
-        
-        if self.Bn_head: # Original GaitGL Head
+
+        if self.Bn_head:  # Original GaitGL Head
             gait = gait.permute(1, 2, 0).contiguous()  # [n, c, p]
             bnft = self.Bn(gait)  # [n, c, p]
             logi = self.Head1(bnft.permute(2, 0, 1).contiguous())  # [p, n, c]
             embed = bnft.permute(0, 2, 1).contiguous()  # [n, p, c]
-        else: # BNNechk as Head
-            bnft, logi = self.BNNecks(gait)  # [p, n, c]   
-            embed = gait.permute(1, 0, 2).contiguous()  # [n, p, c]     
+        else:  # BNNechk as Head
+            bnft, logi = self.BNNecks(gait)  # [p, n, c]
+            embed = gait.permute(1, 0, 2).contiguous()  # [n, p, c]
 
         logi = logi.permute(1, 0, 2).contiguous()  # [n, p, c]
 

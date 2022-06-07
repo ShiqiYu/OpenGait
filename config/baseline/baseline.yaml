@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: your_path
+  dataset_root: /home1/data/casiab-64-pkl
   dataset_partition: ./datasets/CASIA-B/CASIA-B_include_005.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
@@ -58,6 +58,8 @@ model_cfg:
     class_num: 74
     in_channels: 256
     parts_num: 31
+    # parallel_BN1d: False
+    # norm: False
   bin_num:
     - 16
     - 8
@@ -81,6 +83,7 @@ trainer_cfg:
   enable_float16: true # half_percesion float for memory reduction and speedup
   fix_BN: false
   log_iter: 100
+  with_test: true
   restore_ckpt_strict: true
   restore_hint: 0
   save_iter: 10000

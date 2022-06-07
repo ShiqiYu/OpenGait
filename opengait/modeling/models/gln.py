@@ -94,7 +94,7 @@ class GLN(BaseModel):
 
         ### stage 0 sil ###
         sil_0_outs = self.sil_stage_0(sils)
-        stage_0_sil_set = self.set_pooling(sil_0_outs, seqL, dim=1)[0]
+        stage_0_sil_set = self.set_pooling(sil_0_outs, seqL, options={"dim": 2})[0]
 
         ### stage 1 sil ###
         sil_1_ipts = self.MaxP_sil(sil_0_outs)
