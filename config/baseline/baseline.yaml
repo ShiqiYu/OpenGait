@@ -46,9 +46,6 @@ model_cfg:
       - M
       - BC-256
       - BC-256
-      # - M
-      # - BC-512
-      # - BC-512
     type: Plain
   SeparateFCs:
     in_channels: 256
@@ -58,8 +55,6 @@ model_cfg:
     class_num: 74
     in_channels: 256
     parts_num: 31
-    # parallel_BN1d: False
-    # norm: False
   bin_num:
     - 16
     - 8
