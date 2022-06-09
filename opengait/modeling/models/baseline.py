@@ -31,10 +31,6 @@ class Baseline(BaseModel):
 
         embed_1 = self.FCs(feat)  # [n, c, p]
         embed_2, logits = self.BNNecks(embed_1)  # [n, c, p]
-
-        # embed_1 = embed_1.permute(1, 0, 2).contiguous()  # [n, p, c]
-        # embed_2 = embed_2.permute(1, 0, 2).contiguous()  # [n, p, c]
-        # logits = logits.permute(1, 0, 2).contiguous()  # [n, p, c]
         embed = embed_1
 
         n, _, s, h, w = sils.size()

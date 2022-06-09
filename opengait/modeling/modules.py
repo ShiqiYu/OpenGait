@@ -42,9 +42,10 @@ class SetBlockWrapper(nn.Module):
             Out x: [n, c_out, s, h_out, w_out]
         """
         n, c, s, h, w = x.size()
-        x = self.forward_block(x.view(-1, c, h, w), *args, **kwargs)
+        x = self.forward_block(x.transpose(
+            1, 2).view(-1, c, h, w), *args, **kwargs)
         output_size = x.size()
-        return x.view(n, output_size[1], s, *output_size[-2:])
+        return x.reshape(n, s, *output_size[1:]).transpose(1, 2)
 
 
 class PackSequenceWrapper(nn.Module):
@@ -54,7 +55,7 @@ class PackSequenceWrapper(nn.Module):
 
     def forward(self, seqs, seqL, dim=2, options={}):
         """
-            In  seqs: [n, s, ...]
+            In  seqs: [n, c, s, ...]
             Out rets: [n, ...]
         """
         if seqL is None:

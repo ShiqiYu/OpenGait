@@ -68,9 +68,7 @@ class GaitSet(BaseModel):
         feature1 = self.HPP(outs)  # [n, c, p]
         feature2 = self.HPP(gl)  # [n, c, p]
         feature = torch.cat([feature1, feature2], -1)  # [n, c, p]
-        # feature = feature.permute(2, 0, 1).contiguous()  # [p, n, c]
         embs = self.Head(feature)
-        # embs = embs.permute(1, 0, 2).contiguous()  # [n, p, c]
 
         n, _, s, h, w = sils.size()
         retval = {

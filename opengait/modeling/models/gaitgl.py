@@ -172,20 +172,16 @@ class GaitGL(BaseModel):
 
         outs = self.TP(outs, seqL=seqL, options={"dim": 2})[0]  # [n, c, h, w]
         outs = self.HPP(outs)  # [n, c, p]
-        outs = outs.permute(2, 0, 1).contiguous()  # [p, n, c]
 
-        gait = self.Head0(outs)  # [p, n, c]
+        gait = self.Head0(outs)  # [n, c, p]
 
         if self.Bn_head:  # Original GaitGL Head
-            gait = gait.permute(1, 2, 0).contiguous()  # [n, c, p]
             bnft = self.Bn(gait)  # [n, c, p]
-            logi = self.Head1(bnft.permute(2, 0, 1).contiguous())  # [p, n, c]
-            embed = bnft.permute(0, 2, 1).contiguous()  # [n, p, c]
+            logi = self.Head1(bnft)  # [n, c, p]
+            embed = bnft
         else:  # BNNechk as Head
-            bnft, logi = self.BNNecks(gait)  # [p, n, c]
-            embed = gait.permute(1, 0, 2).contiguous()  # [n, p, c]
-
-        logi = logi.permute(1, 0, 2).contiguous()  # [n, p, c]
+            bnft, logi = self.BNNecks(gait)  # [n, c, p]
+            embed = gait
 
         n, _, s, h, w = sils.size()
         retval = {

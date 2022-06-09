@@ -1,7 +1,7 @@
 # Note  : *** the batch_size should be equal to the gpus number at the test phase!!! ***
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: your_path
+  dataset_root: /home1/data/casiab-64-pkl
   dataset_partition: ./datasets/CASIA-B/CASIA-B_include_005.json
   num_workers: 1
   remove_no_gallery: false
@@ -47,8 +47,8 @@ scheduler_cfg:
   scheduler: MultiStepLR
 
 trainer_cfg:
-  enable_distributed: true
-  enable_float16: false
+  enable_float16: true
+  with_test: true
   log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0
@@ -59,8 +59,8 @@ trainer_cfg:
   sampler:
     batch_shuffle: true
     batch_size:
-      - 8
-      - 8
+      - 2
+      - 4
     frames_num_fixed: 30
     frames_skip_num: 0
     sample_type: fixed_ordered

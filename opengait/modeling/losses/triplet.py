@@ -49,7 +49,7 @@ class TripletLoss(BaseLoss):
         """
         x2 = torch.sum(x ** 2, -1).unsqueeze(2)  # [p, n_x, 1]
         y2 = torch.sum(y ** 2, -1).unsqueeze(1)  # [p, 1, n_y]
-        inner = x.matmul(y.transpose(-1, -2))  # [p, n_x, n_y]
+        inner = x.matmul(y.transpose(1, 2))  # [p, n_x, n_y]
         dist = x2 + y2 - 2 * inner
         dist = torch.sqrt(F.relu(dist))  # [p, n_x, n_y]
         return dist

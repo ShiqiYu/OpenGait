@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: your_path
+  dataset_root: /home1/data/casiab-128-pkl
   dataset_partition: ./datasets/CASIA-B/CASIA-B_include_005.json
   num_workers: 1
   cache: false
@@ -74,10 +74,9 @@ scheduler_cfg:
   scheduler: MultiStepLR
 
 trainer_cfg:
-  enable_distributed: true
   enable_float16: true
   fix_layers: false
-  with_test: false
+  with_test: true
   log_iter: 100
   optimizer_reset: false
   restore_ckpt_strict: true
@@ -89,8 +88,8 @@ trainer_cfg:
   sampler:
     batch_shuffle: false
     batch_size:
-      - 8
-      - 16
+      - 1
+      - 2
     frames_num_fixed: 30
     frames_skip_num: 0
     sample_type: fixed_ordered
