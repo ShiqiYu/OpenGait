@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: /home1/data/casiab-64-pkl
+  dataset_root: your_path
   dataset_partition: ./datasets/CASIA-B/CASIA-B_include_005.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
@@ -9,7 +9,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 10000
+  restore_hint: 60000
   save_name: Baseline
   eval_func: identification
   sampler:

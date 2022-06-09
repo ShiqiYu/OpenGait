@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: /home1/data/casiab-64-pkl
+  dataset_root: your_path
   num_workers: 1
   remove_no_gallery: false
   test_dataset_name: CASIA-B

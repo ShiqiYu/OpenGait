@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: /home1/data/casiab-64-pkl
+  dataset_root: your_path
   num_workers: 1
   remove_no_gallery: false
   test_dataset_name: CASIA-B
@@ -69,8 +69,8 @@ trainer_cfg:
   sampler:
     batch_shuffle: false
     batch_size:
-      - 2
-      - 4
+      - 8
+      - 16
     frames_num_fixed: 30
     frames_num_max: 50
     frames_num_min: 25
