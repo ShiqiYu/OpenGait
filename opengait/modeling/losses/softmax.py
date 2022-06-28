@@ -17,7 +17,6 @@ class CrossEntropyLoss(BaseLoss):
             logits: [n, c, p]
             labels: [n]
         """
-        # logits = logits.permute(1, 0, 2).contiguous()  # [n, p, c] -> [p, n, c]
         n, c, p = logits.size()
         log_preds = F.log_softmax(logits * self.scale, dim=1)  # [n, c, p]
         one_hot_labels = self.label2one_hot(
