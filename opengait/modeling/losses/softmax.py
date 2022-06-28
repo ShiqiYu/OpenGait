@@ -14,31 +14,29 @@ class CrossEntropyLoss(BaseLoss):
 
     def forward(self, logits, labels):
         """
-            logits: [n, p, c]
+            logits: [n, c, p]
             labels: [n]
         """
-        logits = logits.permute(1, 0, 2).contiguous()  # [n, p, c] -> [p, n, c]
-        p, _, c = logits.size()
-        log_preds = F.log_softmax(logits * self.scale, dim=-1)  # [p, n, c]
+        n, c, p = logits.size()
+        log_preds = F.log_softmax(logits * self.scale, dim=1)  # [n, c, p]
         one_hot_labels = self.label2one_hot(
-            labels, c).unsqueeze(0).repeat(p, 1, 1)  # [p, n, c]
+            labels, c).unsqueeze(2).repeat(1, 1, p)  # [n, c, p]
         loss = self.compute_loss(log_preds, one_hot_labels)
         self.info.update({'loss': loss.detach().clone()})
         if self.log_accuracy:
-            pred = logits.argmax(dim=-1)  # [p, n]
-            accu = (pred == labels.unsqueeze(0)).float().mean()
+            pred = logits.argmax(dim=1)  # [n, p]
+            accu = (pred == labels.unsqueeze(1)).float().mean()
             self.info.update({'accuracy': accu})
         return loss, self.info
 
     def compute_loss(self, predis, labels):
-        softmax_loss = -(labels * predis).sum(-1)  # [p, n]
-        losses = softmax_loss.mean(-1)
+        softmax_loss = -(labels * predis).sum(1)  # [n, p]
+        losses = softmax_loss.mean(0)   # [p]
 
         if self.label_smooth:
-            smooth_loss = - predis.mean(dim=-1)  # [p, n]
-            smooth_loss = smooth_loss.mean()  # [p]
-            smooth_loss = smooth_loss * self.eps
-            losses = smooth_loss + losses * (1. - self.eps)
+            smooth_loss = - predis.mean(dim=1)  # [n, p]
+            smooth_loss = smooth_loss.mean(0)  # [p]
+            losses = smooth_loss * self.eps + losses * (1. - self.eps)
         return losses
 
     def label2one_hot(self, label, class_num):

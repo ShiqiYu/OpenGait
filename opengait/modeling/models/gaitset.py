@@ -49,30 +49,28 @@ class GaitSet(BaseModel):
         ipts, labs, _, _, seqL = inputs
         sils = ipts[0]  # [n, s, h, w]
         if len(sils.size()) == 4:
-            sils = sils.unsqueeze(2)
+            sils = sils.unsqueeze(1)
 
         del ipts
         outs = self.set_block1(sils)
-        gl = self.set_pooling(outs, seqL, dim=1)[0]
+        gl = self.set_pooling(outs, seqL, options={"dim": 2})[0]
         gl = self.gl_block2(gl)
 
         outs = self.set_block2(outs)
-        gl = gl + self.set_pooling(outs, seqL, dim=1)[0]
+        gl = gl + self.set_pooling(outs, seqL, options={"dim": 2})[0]
         gl = self.gl_block3(gl)
 
         outs = self.set_block3(outs)
-        outs = self.set_pooling(outs, seqL, dim=1)[0]
+        outs = self.set_pooling(outs, seqL, options={"dim": 2})[0]
         gl = gl + outs
 
         # Horizontal Pooling Matching, HPM
         feature1 = self.HPP(outs)  # [n, c, p]
         feature2 = self.HPP(gl)  # [n, c, p]
         feature = torch.cat([feature1, feature2], -1)  # [n, c, p]
-        feature = feature.permute(2, 0, 1).contiguous()  # [p, n, c]
         embs = self.Head(feature)
-        embs = embs.permute(1, 0, 2).contiguous()  # [n, p, c]
 
-        n, s, _, h, w = sils.size()
+        n, _, s, h, w = sils.size()
         retval = {
             'training_feat': {
                 'triplet': {'embeddings': embs, 'labels': labs}

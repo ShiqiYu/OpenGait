@@ -47,8 +47,8 @@ scheduler_cfg:
   scheduler: MultiStepLR
 
 trainer_cfg:
-  enable_distributed: true
-  enable_float16: false
+  enable_float16: true
+  with_test: true
   log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0
