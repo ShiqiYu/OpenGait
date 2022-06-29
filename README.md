@@ -8,6 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
+- [Jun 2022] Paper "[A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets and Challenges](https://arxiv.org/pdf/2206.13732.pdf)" is available now.
 - [Jun 2022] Paper "[Learning Gait Representation from Massive Unlabelled Walking Sequences: A Benchmark](https://arxiv.org/pdf/2206.13964.pdf)" is available now. And the code will be released as soon as possible.
 - [Mar 2022] More results on [GREW](https://www.grew-benchmark.org) are supported, and the model files are coming soon.
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW).
