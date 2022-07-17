@@ -1,7 +1,7 @@
 # Note  : *** the batch_size should be equal to the gpus number at the test phase!!! ***
 data_cfg:
   dataset_name: CASIA-B_new
-  dataset_root: /home1/data/casiab-new-64-cut-pkl/
+  dataset_root: your_path
   dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
   num_workers: 1
   remove_no_gallery: false

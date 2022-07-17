@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B_new
-  dataset_root: /home1/data/casiab-128-end2end
+  dataset_root: your_path
   dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
@@ -12,7 +12,6 @@ evaluator_cfg:
   restore_ckpt_strict: true
   restore_hint: 20000
   save_name: GaitEdge
-  eval_func: identification_real_scene
   sampler:
     batch_size: 4
     sample_type: all_ordered
