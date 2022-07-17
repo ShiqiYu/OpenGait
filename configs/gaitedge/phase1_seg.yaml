@@ -1,0 +1,71 @@
+# Note  : *** the batch_size should be equal to the gpus number at the test phase!!! ***
+data_cfg:
+  dataset_name: CASIA-B_new
+  dataset_root: /home1/data/casiab-128-end2end
+  dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
+  num_workers: 1
+  remove_no_gallery: false
+  test_dataset_name: CASIA-B
+
+evaluator_cfg:
+  enable_float16: true 
+  restore_ckpt_strict: true
+  restore_hint: 30000
+  save_name: Segmentation
+  eval_func: mean_iou
+  sampler:
+    batch_size: 4
+    sample_type: all_ordered
+    type: InferenceSampler
+    frames_all_limit: 720 
+  transform:
+    - type: NoOperation
+    - type: BaseRgbTransform
+    - type: BaseSilTransform
+    
+loss_cfg:
+  - loss_term_weight: 1.0
+    type: BinaryCrossEntropyLoss
+    log_prefix: bce
+    kld: false
+
+model_cfg:
+  model: Segmentation
+  backbone_cfg:
+    type: U_Net
+    in_channels: 3
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones: # Learning Rate Reduction at each milestones
+    - 10000
+    - 20000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true
+  with_test: true
+  log_iter: 100
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 10000
+  save_name: Segmentation
+  total_iter: 30000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 8
+      - 16
+    frames_num_fixed: 15
+    sample_type: fixed_unordered
+    type: TripletSampler
+  transform:
+    - type: NoOperation
+    - type: BaseRgbTransform
+    - type: BaseSilTransform

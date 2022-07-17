@@ -8,7 +8,6 @@ data_cfg:
   test_dataset_name: GREW
 
 evaluator_cfg:
-  enable_distributed: true
   enable_float16: false 
   restore_ckpt_strict: true
   restore_hint: 250000
@@ -49,7 +48,6 @@ scheduler_cfg:
   scheduler: MultiStepLR
 
 trainer_cfg:
-  enable_distributed: true
   enable_float16: true
   with_test: false
   log_iter: 100

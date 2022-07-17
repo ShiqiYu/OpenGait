@@ -1,0 +1,90 @@
+data_cfg:
+  dataset_name: CASIA-B_new
+  dataset_root: /home1/data/casiab-128-end2end
+  dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
+  num_workers: 1
+  remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: CASIA-B
+  cache: false
+
+evaluator_cfg:
+  enable_float16: true
+  restore_ckpt_strict: true
+  restore_hint: 20000
+  save_name: GaitEdge
+  eval_func: identification_real_scene
+  sampler:
+    batch_size: 4
+    sample_type: all_ordered
+    type: InferenceSampler
+    frames_all_limit: 512 # limit the number of sampled frames to prevent out of memory
+  metric: euc # cos
+  transform:
+    - type: NoOperation
+    - type: BaseRgbTransform
+    - type: BaseSilTransform
+
+loss_cfg:
+  - loss_term_weight: 1
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weight: 10
+    type: BinaryCrossEntropyLoss
+    log_prefix: bce
+  - loss_term_weight: 1
+    scale: 1
+    type: CrossEntropyLoss
+    log_accuracy: true
+    label_smooth: false
+    log_prefix: softmax
+
+model_cfg:
+  model: GaitEdge
+  GaitGL:
+    channels: [32, 64, 128]
+    class_num: 74
+  Segmentation:
+    type: U_Net
+    in_channels: 3
+    freeze_half: true
+  edge: true
+  align: true
+  seg_lr: 0.00001
+
+optimizer_cfg:
+  lr: 0.0001
+  solver: Adam
+  weight_decay: 0.0005
+scheduler_cfg:
+  gamma: 0.1
+  milestones: # Learning Rate Reduction at each milestones
+    - 10000
+  scheduler: MultiStepLR
+trainer_cfg:
+  enable_float16: true # half_percesion float for memory reduction and speedup
+  with_test: true
+  log_iter: 100
+  restore_ckpt_strict: false
+  optimizer_reset: true
+  scheduler_reset: true
+  sync_BN: true
+  restore_hint: 
+   - Segmentation-30000.pt
+   - GaitGL-80000.pt
+  save_iter: 2000
+  save_name: GaitEdge
+  total_iter: 20000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 8 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 8 #                 batch_size[1] indicates Samples sequqnce for each Identity
+    frames_num_fixed: 30
+    frames_skip_num: 0
+    sample_type: fixed_ordered
+    type: TripletSampler
+  transform:
+    - type: NoOperation
+    - type: BaseRgbTransform
+    - type: BaseSilTransform
