@@ -1,6 +1,7 @@
 data_cfg:
   dataset_name: CASIA-B*
   dataset_root: your_path
+  data_in_use: [false, true, true, true]
   dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
@@ -68,9 +69,9 @@ trainer_cfg:
   optimizer_reset: true
   scheduler_reset: true
   sync_BN: true
-  restore_hint: 
-   - /home/leeeung/workspace/OpenGait/output/CASIA-B_new/Segmentation/Segmentation/checkpoints/Segmentation-25000.pt
-   - /home/leeeung/OpenGait/output/CASIA-B_new/GaitGL/GaitGL/checkpoints/GaitGL-80000.pt
+  restore_hint:
+    - /home/leeeung/workspace/OpenGait/output/CASIA-B_new/Segmentation/Segmentation/checkpoints/Segmentation-25000.pt
+    - /home/leeeung/OpenGait/output/CASIA-B_new/GaitGL/GaitGL/checkpoints/GaitGL-80000.pt
   save_iter: 2000
   save_name: GaitGL_E2E
   total_iter: 20000

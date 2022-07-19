@@ -2,13 +2,14 @@
 data_cfg:
   dataset_name: CASIA-B*
   dataset_root: your_path
+  data_in_use: [true, false, false, false]
   dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
   num_workers: 1
   remove_no_gallery: false
   test_dataset_name: CASIA-B
 
 evaluator_cfg:
-  enable_float16: true 
+  enable_float16: true
   restore_ckpt_strict: true
   restore_hint: 80000
   save_name: GaitGL

@@ -2,13 +2,14 @@
 data_cfg:
   dataset_name: CASIA-B*
   dataset_root: your_path
+  data_in_use: [false, false, true, true]
   dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
   num_workers: 1
   remove_no_gallery: false
   test_dataset_name: CASIA-B
 
 evaluator_cfg:
-  enable_float16: true 
+  enable_float16: true
   restore_ckpt_strict: true
   restore_hint: 30000
   save_name: Segmentation
@@ -17,17 +18,15 @@ evaluator_cfg:
     batch_size: 4
     sample_type: all_ordered
     type: InferenceSampler
-    frames_all_limit: 720 
+    frames_all_limit: 720
   transform:
-    - type: NoOperation
     - type: BaseRgbTransform
     - type: BaseSilTransform
-    
+
 loss_cfg:
   - loss_term_weight: 1.0
     type: BinaryCrossEntropyLoss
     log_prefix: bce
-    kld: false
 
 model_cfg:
   model: Segmentation
@@ -45,6 +44,7 @@ scheduler_cfg:
   gamma: 0.1
   milestones: # Learning Rate Reduction at each milestones
     - 10000
+    - 15000
     - 20000
   scheduler: MultiStepLR
 
@@ -54,9 +54,9 @@ trainer_cfg:
   log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0
-  save_iter: 10000
+  save_iter: 5000
   save_name: Segmentation
-  total_iter: 30000
+  total_iter: 25000
   sampler:
     batch_shuffle: true
     batch_size:
@@ -66,6 +66,5 @@ trainer_cfg:
     sample_type: fixed_unordered
     type: TripletSampler
   transform:
-    - type: NoOperation
     - type: BaseRgbTransform
     - type: BaseSilTransform

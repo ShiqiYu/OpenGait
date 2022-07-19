@@ -15,9 +15,8 @@ class Segmentation(BaseModel):
     def forward(self, inputs):
         ipts, labs, typs, vies, seqL = inputs
         del seqL
-        # ratios = ipts[0]
-        rgbs = ipts[1]
-        sils = ipts[2]
+        rgbs = ipts[0]
+        sils = ipts[1]
         # del ipts
         n, s, c, h, w = rgbs.size()
         rgbs = rgbs.view(n*s, c, h, w)
