@@ -1,5 +1,5 @@
 data_cfg:
-  dataset_name: CASIA-B_new
+  dataset_name: CASIA-B*
   dataset_root: your_path
   dataset_partition: ./datasets/CASIA-B*/CASIA-B*.json
   num_workers: 1

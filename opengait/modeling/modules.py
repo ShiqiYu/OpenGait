@@ -183,9 +183,9 @@ class BasicConv3d(nn.Module):
         return outs
 
 
-class SilhouetteCropAndResize(nn.Module):
+class GaitAlign(nn.Module):
     def __init__(self, H=64, W=44, eps=1, **kwargs):
-        super(SilhouetteCropAndResize, self).__init__()
+        super(GaitAlign, self).__init__()
         self.H, self.W, self.eps = H, W, eps
         self.Pad = nn.ZeroPad2d((int(self.W / 2), int(self.W / 2), 0, 0))
         self.RoiPool = RoIAlign((self.H, self.W), 1, sampling_ratio=-1)
