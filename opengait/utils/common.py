@@ -43,9 +43,9 @@ def Ntuple(description, keys, values):
 
 def get_valid_args(obj, input_args, free_keys=[]):
     if inspect.isfunction(obj):
-        expected_keys = inspect.getargspec(obj)[0]
+        expected_keys = inspect.getfullargspec(obj)[0]
     elif inspect.isclass(obj):
-        expected_keys = inspect.getargspec(obj.__init__)[0]
+        expected_keys = inspect.getfullargspec(obj.__init__)[0]
     else:
         raise ValueError('Just support function and class object!')
     unexpect_keys = list()
