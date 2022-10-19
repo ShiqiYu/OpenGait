@@ -2,6 +2,7 @@ import argparse
 import os
 import shutil
 from pathlib import Path
+from typing import Tuple
 
 from tqdm import tqdm
 
@@ -9,7 +10,7 @@ from tqdm import tqdm
 TOTAL_SUBJECTS = 10307
 
 
-def sanitize(name: str) -> (str, str):
+def sanitize(name: str) -> Tuple[str, str]:
     return name.split('_')[1].split('-')
 
 
