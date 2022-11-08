@@ -19,6 +19,11 @@ silhouettes of CASIA-B and denote it as CASIA-B*. You can visit [this link](http
 
 ***The results here are higher than those in the paper because we use a different optimization strategy. But this does not affect the conclusion of the paper.***
 
+## How to train
+- **Phase 1**: 
+Train recognition network (phase1_rec.yaml) and segmentation network (phase1_seg.yaml) on CASIA-B*.
+- **Phase 2**: Restore the checkpoints of recognition network and segmentation network from phase 1, and train gait recognition network in end2end (phase2_e2e.yaml/phase2_gaitedge.yaml).
+
 ## Citation
 
 ```bibtex
