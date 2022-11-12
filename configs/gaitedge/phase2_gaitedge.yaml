@@ -70,8 +70,8 @@ trainer_cfg:
   optimizer_reset: true
   scheduler_reset: true
   sync_BN: true
-  restore_hint:
-    - Segmentation-30000.pt
+  restore_hint: 
+    - Segmentation-25000.pt
     - GaitGL-80000.pt
   save_iter: 2000
   save_name: GaitEdge

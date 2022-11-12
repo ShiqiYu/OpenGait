@@ -50,7 +50,7 @@ class GaitEdge(GaitGL):
         self.is_edge = model_cfg['edge']
         self.seg_lr = model_cfg['seg_lr']
         self.kernel = torch.ones(
-            (model_cfg['kernel_size'], model_cfg['kernel_size'])).cuda()
+            (model_cfg['kernel_size'], model_cfg['kernel_size']))
 
     def finetune_parameters(self):
         fine_tune_params = list()

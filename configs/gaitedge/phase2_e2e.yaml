@@ -70,8 +70,8 @@ trainer_cfg:
   scheduler_reset: true
   sync_BN: true
   restore_hint:
-    - /home/leeeung/workspace/OpenGait/output/CASIA-B_new/Segmentation/Segmentation/checkpoints/Segmentation-25000.pt
-    - /home/leeeung/OpenGait/output/CASIA-B_new/GaitGL/GaitGL/checkpoints/GaitGL-80000.pt
+    - Segmentation-25000.pt
+    - GaitGL-80000.pt
   save_iter: 2000
   save_name: GaitGL_E2E
   total_iter: 20000
