@@ -8,6 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
+- [Nov 2022] Paper "[OpenGait: Revisiting Gait Recognition Toward Better Practicality](https://arxiv.org/pdf/2211.06597.pdf)" is available now. And the code will be released as soon as possible.
 - [Jul 2022] Our paper "[GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality](configs/gaitedge/README.md)" has been accepted by ECCV 2022.
 - [Jun 2022] Paper "[A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets and Challenges](https://arxiv.org/pdf/2206.13732.pdf)" is available now.
 - [Jun 2022] Paper "[Learning Gait Representation from Massive Unlabelled Walking Sequences: A Benchmark](https://arxiv.org/pdf/2206.13964.pdf)" is available now. And the code will be released as soon as possible.
@@ -45,9 +46,18 @@ Results and models are available in the [model zoo](docs/1.model_zoo.md).
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
 - GaitGL: [Beibei Lin (林贝贝)](https://scholar.google.com/citations?user=KyvHam4AAAAJ&hl=en&oi=ao)
 - GREW: [GREW TEAM](https://www.grew-benchmark.org)
-<!-- ## Citation
+
+## Citation
 ```
-``` -->
+@misc{fan2022opengait,
+      title={OpenGait: Revisiting Gait Recognition Toward Better Practicality}, 
+      author={Chao Fan and Junhao Liang and Chuanfu Shen and Saihui Hou and Yongzhen Huang and Shiqi Yu},
+      year={2022},
+      eprint={2211.06597},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
 **Note:**
 This code is only used for **academic purposes**, people cannot use this code for anything that might be considered commercial use.
