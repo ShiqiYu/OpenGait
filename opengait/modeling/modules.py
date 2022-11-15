@@ -44,7 +44,7 @@ class SetBlockWrapper(nn.Module):
         """
         n, c, s, h, w = x.size()
         x = self.forward_block(x.transpose(
-            1, 2).view(-1, c, h, w), *args, **kwargs)
+            1, 2).reshape(-1, c, h, w), *args, **kwargs)
         output_size = x.size()
         return x.reshape(n, s, *output_size[1:]).transpose(1, 2).contiguous()
 
