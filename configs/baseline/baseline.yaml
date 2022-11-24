@@ -11,7 +11,6 @@ evaluator_cfg:
   restore_ckpt_strict: true
   restore_hint: 60000
   save_name: Baseline
-  eval_func: identification
   sampler:
     batch_shuffle: false
     batch_size: 16

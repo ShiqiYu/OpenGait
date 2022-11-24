@@ -9,7 +9,7 @@ evaluator_cfg:
   restore_ckpt_strict: true
   restore_hint: 60000
   save_name: Baseline
-  eval_func: evaluate_HID
+  eval_func: HID_submission
   sampler:
     batch_shuffle: false
     batch_size: 8

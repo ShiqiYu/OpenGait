@@ -12,7 +12,7 @@ evaluator_cfg:
   restore_ckpt_strict: true
   restore_hint: 80000
   save_name: tmp
-  eval_func: identification
+  eval_func: evaluate_indoor_dataset
   sampler:
     batch_size: 4
     sample_type: all_ordered
@@ -21,6 +21,7 @@ evaluator_cfg:
     - img_w: 64
       type: BaseSilCuttingTransform
   metric: euc # cos
+  cross_view_gallery: false
 
 loss_cfg:
   loss_term_weight: 1.0

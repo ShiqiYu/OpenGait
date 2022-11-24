@@ -12,7 +12,7 @@ evaluator_cfg:
   restore_ckpt_strict: true
   restore_hint: 250000
   save_name: GaitGL_BNNeck
-  eval_func: identification_GREW_submission # identification_real_scene # identification_GREW_submission
+  eval_func: GREW_submission # identification_real_scene # identification_GREW_submission
   sampler:
     batch_size: 4
     sample_type: all_ordered

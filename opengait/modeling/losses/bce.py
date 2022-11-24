@@ -1,6 +1,6 @@
 import torch
 from .base import BaseLoss
-from utils import MeanIOU
+from evaluation import mean_iou
 
 
 class BinaryCrossEntropyLoss(BaseLoss):
@@ -24,7 +24,7 @@ class BinaryCrossEntropyLoss(BaseLoss):
         loss = loss.view(n, -1)
         mean_loss = loss.mean()
         hard_loss = loss.max()
-        miou = MeanIOU((logits > 0.5).float(), labels)
+        miou = mean_iou((logits > 0.5).float(), labels)
         self.info.update({
             'loss': mean_loss.detach().clone(),
             'hard_loss': hard_loss.detach().clone(),

@@ -7,5 +7,4 @@ from .common import mkdir, clones
 from .common import MergeCfgsDict
 from .common import get_attr_from
 from .common import NoOp
-from .common import MeanIOU
 from .msg_manager import get_msg_mgr

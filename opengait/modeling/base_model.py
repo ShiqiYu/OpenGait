@@ -30,7 +30,7 @@ from data.dataset import DataSet
 import data.sampler as Samplers
 from utils import Odict, mkdir, ddp_all_gather
 from utils import get_valid_args, is_list, is_dict, np2var, ts2np, list2var, get_attr_from
-from utils import evaluation as eval_functions
+from evaluation import evaluator as eval_functions
 from utils import NoOp
 from utils import get_msg_mgr
 
