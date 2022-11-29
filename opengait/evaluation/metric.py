@@ -51,8 +51,8 @@ def compute_ACC_mAP(distmat, q_pids, g_pids, q_views=None, g_views=None, rank=1)
         q_idx_dist = distmat[q_idx]
         q_idx_glabels = g_pids
         if q_views is not None and g_views is not None:
-            q_idx_mask = np.isin(g_views, [q_views[q_idx]], invert=True) | np.isin(
-                g_pids, [q_pids[q_idx]], invert=True)
+            q_idx_mask = np.isin(g_views, q_views[q_idx], invert=True) | np.isin(
+                g_pids, q_pids[q_idx], invert=True)
             q_idx_dist = q_idx_dist[q_idx_mask]
             q_idx_glabels = q_idx_glabels[q_idx_mask]
 

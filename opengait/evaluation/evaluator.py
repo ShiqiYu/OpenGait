@@ -16,40 +16,49 @@ def de_diag(acc, each_angle=False):
     return result
 
 
-def cross_view_gallery_evaluation(feature, label, seq_type, view, probe_seq_dict, gallery_seq_list, metric):
+def cross_view_gallery_evaluation(feature, label, seq_type, view, dataset, metric):
+    '''More details can be found: More details can be found in 
+        [A Comprehensive Study on the Evaluation of Silhouette-based Gait Recognition](https://ieeexplore.ieee.org/document/9928336).
+    '''
+    probe_seq_dict = {'CASIA-B': {'NM': ['nm-01'], 'BG': ['bg-01'], 'CL': ['cl-01']},
+                      'OUMVLP': {'NM': ['00']}}
+
+    gallery_seq_dict = {'CASIA-B': ['nm-02', 'bg-02', 'cl-02'],
+                        'OUMVLP': ['01']}
+
     msg_mgr = get_msg_mgr()
     acc = {}
-    map = {}
+    mean_ap = {}
     view_list = sorted(np.unique(view))
-    for (type_, probe_seq) in probe_seq_dict.items():
+    for (type_, probe_seq) in probe_seq_dict[dataset].items():
         acc[type_] = np.zeros(len(view_list)) - 1.
-        map[type_] = np.zeros(len(view_list)) - 1.
+        mean_ap[type_] = np.zeros(len(view_list)) - 1.
         for (v1, probe_view) in enumerate(view_list):
             pseq_mask = np.isin(seq_type, probe_seq) & np.isin(
-                view, [probe_view])
+                view, probe_view)
             probe_x = feature[pseq_mask, :]
             probe_y = label[pseq_mask]
-            gseq_mask = np.isin(seq_type, gallery_seq_list)
+            gseq_mask = np.isin(seq_type, gallery_seq_dict[dataset])
             gallery_y = label[gseq_mask]
             gallery_x = feature[gseq_mask, :]
             dist = cuda_dist(probe_x, gallery_x, metric)
             eval_results = compute_ACC_mAP(
-                dist.cpu().numpy(), probe_y, gallery_y, np.asarray(view)[pseq_mask], np.asarray(view)[gseq_mask])
+                dist.cpu().numpy(), probe_y, gallery_y, view[pseq_mask], view[gseq_mask])
             acc[type_][v1] = np.round(eval_results[0] * 100, 2)
-            map[type_][v1] = np.round(eval_results[1] * 100, 2)
+            mean_ap[type_][v1] = np.round(eval_results[1] * 100, 2)
 
     result_dict = {}
     msg_mgr.log_info(
         '===Cross View Gallery Evaluation (Excluded identical-view cases)===')
     out_acc_str = "========= Rank@1 Acc =========\n"
     out_map_str = "============= mAP ============\n"
-    for type_ in probe_seq_dict.keys():
+    for type_ in probe_seq_dict[dataset].keys():
         avg_acc = np.mean(acc[type_])
-        avg_map = np.mean(map[type_])
+        avg_map = np.mean(mean_ap[type_])
         result_dict[f'scalar/test_accuracy/{type_}-Rank@1'] = avg_acc
         result_dict[f'scalar/test_accuracy/{type_}-mAP'] = avg_map
         out_acc_str += f"{type_}:\t{acc[type_]}, mean: {avg_acc:.2f}%\n"
-        out_map_str += f"{type_}:\t{map[type_]}, mean: {avg_map:.2f}%\n"
+        out_map_str += f"{type_}:\t{mean_ap[type_]}, mean: {avg_map:.2f}%\n"
     # msg_mgr.log_info(f'========= Rank@1 Acc =========')
     msg_mgr.log_info(f'{out_acc_str}')
     # msg_mgr.log_info(f'========= mAP =========')
@@ -59,24 +68,26 @@ def cross_view_gallery_evaluation(feature, label, seq_type, view, probe_seq_dict
 # Modified From https://github.com/AbnerHqC/GaitSet/blob/master/model/utils/evaluator.py
 
 
-def single_view_gallery_evaluation(feature, label, seq_type, view, probe_seq_dict, gallery_seq_list, metric):
+def single_view_gallery_evaluation(feature, label, seq_type, view, dataset, metric):
+    probe_seq_dict = {'CASIA-B': {'NM': ['nm-05', 'nm-06'], 'BG': ['bg-01', 'bg-02'], 'CL': ['cl-01', 'cl-02']},
+                      'OUMVLP': {'NM': ['00']}}
+    gallery_seq_dict = {'CASIA-B': ['nm-01', 'nm-02', 'nm-03', 'nm-04'],
+                        'OUMVLP': ['01']}
     msg_mgr = get_msg_mgr()
     acc = {}
-    map = {}
     view_list = sorted(np.unique(view))
     view_num = len(view_list)
     num_rank = 1
-    for (type_, probe_seq) in probe_seq_dict.items():
+    for (type_, probe_seq) in probe_seq_dict[dataset].items():
         acc[type_] = np.zeros((view_num, view_num)) - 1.
-        map[type_] = np.zeros((view_num, view_num)) - 1.
         for (v1, probe_view) in enumerate(view_list):
             pseq_mask = np.isin(seq_type, probe_seq) & np.isin(
-                view, [probe_view])
+                view, probe_view)
             probe_x = feature[pseq_mask, :]
             probe_y = label[pseq_mask]
 
             for (v2, gallery_view) in enumerate(view_list):
-                gseq_mask = np.isin(seq_type, gallery_seq_list) & np.isin(
+                gseq_mask = np.isin(seq_type, gallery_seq_dict[dataset]) & np.isin(
                     view, [gallery_view])
                 gallery_y = label[gseq_mask]
                 gallery_x = feature[gseq_mask, :]
@@ -88,7 +99,7 @@ def single_view_gallery_evaluation(feature, label, seq_type, view, probe_seq_dic
     result_dict = {}
     msg_mgr.log_info('===Rank-1 (Exclude identical-view cases)===')
     out_str = ""
-    for type_ in probe_seq_dict.keys():
+    for type_ in probe_seq_dict[dataset].keys():
         sub_acc = de_diag(acc[type_], each_angle=True)
         msg_mgr.log_info(f'{type_}: {sub_acc}')
         result_dict[f'scalar/test_accuracy/{type_}'] = np.mean(sub_acc)
@@ -102,20 +113,14 @@ def evaluate_indoor_dataset(data, dataset, metric='euc', cross_view_gallery=Fals
     label = np.array(label)
     view = np.array(view)
 
-    probe_seq_dict = {'CASIA-B': {'NM': ['nm-05', 'nm-06'], 'BG': ['bg-01', 'bg-02'], 'CL': ['cl-01', 'cl-02']},
-                      'OUMVLP': {'NM': ['00']}}
-
-    gallery_seq_dict = {'CASIA-B': ['nm-01', 'nm-02', 'nm-03', 'nm-04'],
-                        'OUMVLP': ['01']}
-
-    if dataset not in (probe_seq_dict or gallery_seq_dict):
+    if dataset not in ('CASIA-B', 'OUMVLP'):
         raise KeyError("DataSet %s hasn't been supported !" % dataset)
     if cross_view_gallery:
         return cross_view_gallery_evaluation(
-            feature, label, seq_type, view, probe_seq_dict[dataset], gallery_seq_dict[dataset], metric)
+            feature, label, seq_type, view, dataset, metric)
     else:
         return single_view_gallery_evaluation(
-            feature, label, seq_type, view, probe_seq_dict[dataset], gallery_seq_dict[dataset], metric)
+            feature, label, seq_type, view, dataset, metric)
 
 
 def evaluate_real_scene(data, dataset, metric='euc'):
