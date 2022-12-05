@@ -13,7 +13,7 @@ Download URL: http://www.cbsr.ia.ac.cn/GaitDatasetB-silh.zip
             ......
         ......
     ```
-- Run `python misc/pretreatment.py --input_path CASIA-B --output_path CASIA-B-pkl`
+- Run `python datasets/pretreatment.py --input_path CASIA-B --output_path CASIA-B-pkl`
 - Processed
     ```
     CASIA-B-pkl
