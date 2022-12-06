@@ -8,7 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
-- [Decx 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
+- [Dec 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
 - [Nov 2022] Paper "[OpenGait: Revisiting Gait Recognition Toward Better Practicality](https://arxiv.org/pdf/2211.06597.pdf)" is available now. And the code will be released as soon as possible.
 - [Jul 2022] Our paper "[GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality](configs/gaitedge/README.md)" has been accepted by ECCV 2022.
 - [Jun 2022] Paper "[A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets and Challenges](https://arxiv.org/pdf/2206.13732.pdf)" is available now.
