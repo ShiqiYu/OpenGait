@@ -8,13 +8,12 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
+- [Decx 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
 - [Nov 2022] Paper "[OpenGait: Revisiting Gait Recognition Toward Better Practicality](https://arxiv.org/pdf/2211.06597.pdf)" is available now. And the code will be released as soon as possible.
 - [Jul 2022] Our paper "[GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality](configs/gaitedge/README.md)" has been accepted by ECCV 2022.
 - [Jun 2022] Paper "[A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets and Challenges](https://arxiv.org/pdf/2206.13732.pdf)" is available now.
 - [Jun 2022] Paper "[Learning Gait Representation from Massive Unlabelled Walking Sequences: A Benchmark](https://arxiv.org/pdf/2206.13964.pdf)" is available now. And the code will be released as soon as possible.
-- [Mar 2022] More results on [GREW](https://www.grew-benchmark.org) are supported, and the model files are coming soon.
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW).
-- [Mar 2022] [HID](http://hid2022.iapr-tc4.org/) support is ready in [datasets/HID](./datasets/HID).
 
 ## Highlighted features
 - **Mutiple Dataset supported**: OpenGait supports four popular gait datasets: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), and [GREW](https://www.grew-benchmark.org).
