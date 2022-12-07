@@ -11,7 +11,7 @@ python datasets/pretreatment_smpl.py --input_path 'Gait3D/3D_SMPLs' --output_pat
 
 python datasets/Gait3D/merge_two_modality.py --sils_path 'Gait3D-sils-64-64-pkl' --smpls_path 'Gait3D-smpls-pkl' --output_path 'Gait3D-merged-pkl' --link 'hard'
 ```
-
+**Note**: If you use the processed pickle files directly, then the size of silhouette is `64x44`, which means that the pixels on both sides of the horizontal direction can no longer be cut when transforming.
 ## Train
 ### Baseline model:
 `CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs ./configs/baseline/baseline_Gait3D.yaml --phase train`
@@ -28,6 +28,16 @@ booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
 year={2022}
 }
 ```
-
+If you think the re-implementation of OpenGait is useful, please cite the following paper:
+```
+@misc{fan2022opengait,
+      title={OpenGait: Revisiting Gait Recognition Toward Better Practicality}, 
+      author={Chao Fan and Junhao Liang and Chuanfu Shen and Saihui Hou and Yongzhen Huang and Shiqi Yu},
+      year={2022},
+      eprint={2211.06597},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 ## Acknowledgements
-This dataset was collected by the [Zheng at. al.](https://gait3d.github.io/). The pre-processing instructions are based on (https://github.com/Gait3D/Gait3D-Benchmark).
+This dataset was collected by the [Zheng at. al.](https://gait3d.github.io/). The pre-processing instructions are modified from (https://github.com/Gait3D/Gait3D-Benchmark).
