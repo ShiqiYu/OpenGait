@@ -85,7 +85,7 @@ trainer_cfg:
   enable_float16: true # half_percesion float for memory reduction and speedup
   fix_BN: false
   log_iter: 100
-  with_test: 10000
+  with_test: true
   restore_ckpt_strict: true
   restore_hint: 0
   save_iter: 10000
