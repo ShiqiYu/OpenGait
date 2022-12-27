@@ -65,7 +65,7 @@ class LossAggregator():
             else:
                 if isinstance(v, dict):
                     raise ValueError(
-                        "The key %s in -Trainng-Feat- should be stated as the log_prefix of a certain loss defined in your loss_cfg."%v
+                        "The key %s in -Trainng-Feat- should be stated in your loss_cfg as log_prefix."%k
                     )
                 elif is_tensor(v):
                     _ = v.mean()
