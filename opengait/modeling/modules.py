@@ -151,6 +151,11 @@ class SeparateBNNecks(nn.Module):
 
 
 class FocalConv2d(nn.Module):
+    """
+        GaitPart: Temporal Part-based Model for Gait Recognition
+        CVPR2020: https://openaccess.thecvf.com/content_CVPR_2020/papers/Fan_GaitPart_Temporal_Part-Based_Model_for_Gait_Recognition_CVPR_2020_paper.pdf
+        Github: https://github.com/ChaoFan96/GaitPart
+    """
     def __init__(self, in_channels, out_channels, kernel_size, halving, **kwargs):
         super(FocalConv2d, self).__init__()
         self.halving = halving
