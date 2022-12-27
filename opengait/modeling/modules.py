@@ -109,7 +109,7 @@ class SeparateFCs(nn.Module):
 
 class SeparateBNNecks(nn.Module):
     """
-        GaitSet: Bag of Tricks and a Strong Baseline for Deep Person Re-Identification
+        Bag of Tricks and a Strong Baseline for Deep Person Re-Identification
         CVPR Workshop:  https://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf
         Github: https://github.com/michuanhaohao/reid-strong-baseline
     """
@@ -184,6 +184,11 @@ class BasicConv3d(nn.Module):
 
 
 class GaitAlign(nn.Module):
+    """
+        GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality
+        ECCV2022: https://arxiv.org/pdf/2203.03972v2.pdf
+        Github: https://github.com/ShiqiYu/OpenGait/tree/master/configs/gaitedge
+    """
     def __init__(self, H=64, W=44, eps=1, **kwargs):
         super(GaitAlign, self).__init__()
         self.H, self.W, self.eps = H, W, eps
