@@ -21,7 +21,7 @@ class LossAggregator(nn.Module):
     """
     def __init__(self, loss_cfg) -> None:
         """
-        Initialize the loss aggregator. 
+        Initialize the loss aggregator.
 
         LossAggregator can be indexed like a regular Python dictionary, 
         but modules it contains are properly registered, and will be visible by all Module methods.
