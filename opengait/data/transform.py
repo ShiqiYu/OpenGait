@@ -10,8 +10,8 @@ class NoOperation():
 
 
 class BaseSilTransform():
-    def __init__(self, disvor=255.0, img_shape=None):
-        self.disvor = disvor
+    def __init__(self, divsor=255.0, img_shape=None):
+        self.divsor = divsor
         self.img_shape = img_shape
 
     def __call__(self, x):
@@ -19,22 +19,21 @@ class BaseSilTransform():
             s = x.shape[0]
             _ = [s] + [*self.img_shape]
             x = x.reshape(*_)
-        return x / self.disvor
+        return x / self.divsor
 
 
 class BaseSilCuttingTransform():
-    def __init__(self, img_w=64, disvor=255.0, cutting=None):
-        self.img_w = img_w
-        self.disvor = disvor
+    def __init__(self, divsor=255.0, cutting=None):
+        self.divsor = divsor
         self.cutting = cutting
 
     def __call__(self, x):
         if self.cutting is not None:
             cutting = self.cutting
         else:
-            cutting = int(self.img_w // 64) * 10
+            cutting = int(x.shape[-1] // 64) * 10
         x = x[..., cutting:-cutting]
-        return x / self.disvor
+        return x / self.divsor
 
 
 class BaseRgbTransform():
