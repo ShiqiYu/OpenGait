@@ -192,7 +192,7 @@ def GREW_submission(data, dataset, metric='euc'):
 def HID_submission(data, dataset, metric='euc'):
     msg_mgr = get_msg_mgr()
     msg_mgr.log_info("Evaluating HID")
-    feature, label, seq_type = data['embeddings'], data['labels'], data['types']
+    feature, label, seq_type = data['embeddings'], data['labels'], data['views']
     label = np.array(label)
     seq_type = np.array(seq_type)
     probe_mask = (label == "probe")
