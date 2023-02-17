@@ -1,7 +1,7 @@
 data_cfg:
   dataset_name: HID
   dataset_root: your_path
-  dataset_partition: ./datasets/HID/HID.json
+  dataset_partition: ./datasets/HID/HID2023.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
 evaluator_cfg:
@@ -10,6 +10,7 @@ evaluator_cfg:
   restore_hint: 60000
   save_name: Baseline
   eval_func: HID_submission
+  rerank: False
   sampler:
     batch_shuffle: false
     batch_size: 8
