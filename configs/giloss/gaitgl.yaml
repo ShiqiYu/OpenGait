@@ -72,3 +72,6 @@ trainer_cfg:
     frames_skip_num: 0
     sample_type: fixed_ordered
     type: TripletSampler
+    transform:
+      - type: BaseSilCuttingTransform
+        img_w: 64
