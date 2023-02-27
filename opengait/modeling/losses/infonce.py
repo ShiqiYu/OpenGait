@@ -14,6 +14,8 @@ class InfoLoss(BaseLoss):
 
     # @gather_and_scale_wrapper
     def forward(self, embeddings, labels):
+        embeddings = embeddings.permute(
+            2, 0, 1).contiguous().float()  # [n, c, p] -> [p, n, c]
         labels = ddp_all_gather(labels)
         embeddings = ddp_all_gather(embeddings)
         # embeddings: [n, p, c], label: [n]
