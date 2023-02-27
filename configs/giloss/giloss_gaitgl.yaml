@@ -12,7 +12,7 @@ evaluator_cfg:
   enable_float16: false 
   restore_ckpt_strict: true
   restore_hint: 80000
-  save_name: GiLossGaitGL
+  save_name: GaitGL
   sampler:
     batch_size: 4
     sample_type: all_ordered
@@ -23,11 +23,11 @@ loss_cfg:
     margin: 0.2
     type: TripletLoss
     log_prefix: triplet
-  - loss_term_weight: 0.0
+  - loss_term_weight: 1.0
     margin: 0.2
     type: InfoLoss
     log_prefix: infonce
-  - loss_term_weight: 0.0
+  - loss_term_weight: 1.0
     scale: 1
     type: CrossEntropyLoss
     log_accuracy: true
@@ -35,7 +35,7 @@ loss_cfg:
     log_prefix: softmax
 
 model_cfg:
-  model: GiLossGaitGL
+  model: GaitGL
   channels: [32, 64, 128]
   class_num: 74
 
@@ -60,7 +60,7 @@ trainer_cfg:
   restore_ckpt_strict: true
   restore_hint: 0
   save_iter: 1000
-  save_name: GiLossGaitGL
+  save_name: GaitGL
   sync_BN: true
   total_iter: 80000
   sampler:

@@ -70,9 +70,10 @@ class LossAggregator(nn.Module):
 
             else:
                 if isinstance(v, dict):
-                    raise ValueError(
-                        "The key %s in -Trainng-Feat- should be stated in your loss_cfg as log_prefix."%k
-                    )
+                    pass
+                    # get_msg_mgr().log_warning(
+                    #     "The key %s in -Trainng-Feat- should be stated in your loss_cfg as log_prefix."%k
+                    # )
                 elif is_tensor(v):
                     _ = v.mean()
                     loss_info['scalar/%s' % k] = _
