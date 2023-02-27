@@ -22,6 +22,7 @@ from torch.cuda.amp import autocast
 from torch.cuda.amp import GradScaler
 from abc import ABCMeta
 from abc import abstractmethod
+from timm.scheduler import *
 
 from . import backbones
 from .loss_aggregator import LossAggregator
