@@ -18,7 +18,7 @@ evaluator_cfg:
     sample_type: all_ordered
     type: InferenceSampler
   transform:
-      type: BaseSilCuttingTransform
+      - type: BaseSilCuttingTransform
   metric: euc # cos
   cross_view_gallery: false
 
@@ -69,4 +69,4 @@ trainer_cfg:
     sample_type: fixed_unordered
     type: TripletSampler
   transform:
-      type: BaseSilCuttingTransform
+      - type: BaseSilCuttingTransform
