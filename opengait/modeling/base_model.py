@@ -10,6 +10,7 @@ BaseModel.run_train(model)
 BaseModel.run_test(model)
 """
 import torch
+import timm
 import numpy as np
 import os.path as osp
 import torch.nn as nn
@@ -225,10 +226,18 @@ class BaseModel(MetaModel, nn.Module):
 
     def get_scheduler(self, scheduler_cfg):
         self.msg_mgr.log_info(scheduler_cfg)
-        Scheduler = get_attr_from(
-            [optim.lr_scheduler], scheduler_cfg['scheduler'])
-        valid_arg = get_valid_args(Scheduler, scheduler_cfg, ['scheduler'])
-        scheduler = Scheduler(self.optimizer, **valid_arg)
+        
+        try:
+            Scheduler = get_attr_from(
+                [optim.lr_scheduler], scheduler_cfg['scheduler'])
+            valid_arg = get_valid_args(Scheduler, scheduler_cfg, ['scheduler'])
+            scheduler = Scheduler(self.optimizer, **valid_arg)
+        except:
+            Scheduler = getattr(timm.scheduler, scheduler_cfg['scheduler'])
+            valid_arg = {'t_initial': 0, 'lr_min': 5e-06, 'warmup_t': 4000, 'warmup_lr_init': 1e-06, 'k_decay': 1.0}
+            for k in valid_arg.keys():
+                valid_arg[k] = scheduler_cfg[k]
+            scheduler = Scheduler(self.optimizer, **valid_arg)
         return scheduler
 
     def save_ckpt(self, iteration):
