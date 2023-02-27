@@ -365,7 +365,10 @@ class BaseModel(MetaModel, nn.Module):
             self.optimizer.step()
 
         self.iteration += 1
-        self.scheduler.step()
+        try:
+            self.scheduler.step()
+        except:
+            self.scheduler.step(self.iteration)
         return True
 
     def inference(self, rank):

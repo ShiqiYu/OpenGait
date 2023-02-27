@@ -2,7 +2,7 @@
 data_cfg:
   dataset_name: CASIA-B
   dataset_root: your_path
-  dataset_partition: ./misc/partitions/CASIA-B_include_005.json
+  dataset_partition: ./datasets/CASIA-B/CASIA-B.json
   num_workers: 1
   remove_no_gallery: false
   test_dataset_name: CASIA-B
@@ -12,7 +12,7 @@ evaluator_cfg:
   enable_float16: false 
   restore_ckpt_strict: true
   restore_hint: 80000
-  save_name: GaitGL
+  save_name: GiLossGaitGL
   sampler:
     batch_size: 4
     sample_type: all_ordered
@@ -35,7 +35,7 @@ loss_cfg:
     log_prefix: softmax
 
 model_cfg:
-  model: GaitGL
+  model: GiLossGaitGL
   channels: [32, 64, 128]
   class_num: 74
 
@@ -60,7 +60,7 @@ trainer_cfg:
   restore_ckpt_strict: true
   restore_hint: 0
   save_iter: 1000
-  save_name: GaitGL
+  save_name: GiLossGaitGL
   sync_BN: true
   total_iter: 80000
   sampler:
