@@ -8,7 +8,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## What's New
-- **[Feb 2023]** Paper "[Generalized Inter-class Loss for Gait Recognition](https://arxiv.org/pdf/2211.06597.pdf)" is available now. And the code has been released.
+- **[Feb 2023]** Paper "[Generalized Inter-class Loss for Gait Recognition](https://arxiv.org/pdf/2210.06779.pdf)" is available now. And the code has been released.
 - **[Feb 2023]** [HID 2023 competition](https://hid2023.iapr-tc4.org/) is open, welcome to participate. Additionally, tutorial for the competition has been updated in [datasets/HID/](./datasets/HID).
 - [Dec 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
 - [Nov 2022] Paper "[OpenGait: Revisiting Gait Recognition Toward Better Practicality](https://arxiv.org/pdf/2211.06597.pdf)" is available now. And the code will be released as soon as possible.
