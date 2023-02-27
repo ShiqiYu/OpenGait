@@ -187,6 +187,7 @@ class GaitGL(BaseModel):
         retval = {
             'training_feat': {
                 'triplet': {'embeddings': embed, 'labels': labs},
+                'infonce': {'embeddings': embed, 'labels': labs},
                 'softmax': {'logits': logi, 'labels': labs}
             },
             'visual_summary': {
