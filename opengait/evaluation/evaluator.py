@@ -231,7 +231,7 @@ def evaluate_segmentation(data, dataset):
     return {"scalar/test_accuracy/mIOU": miou}
 
 
-def evaluate_Gait3D(data, conf, metric='euc'):
+def evaluate_Gait3D(data, dataset, metric='euc'):
     msg_mgr = get_msg_mgr()
 
     features, labels, cams, time_seqs = data['embeddings'], data['labels'], data['types'], data['views']
