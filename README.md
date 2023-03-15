@@ -38,7 +38,7 @@ Results and models are available in the [model zoo](docs/1.model_zoo.md).
 
 ## Authors:
 **Open Gait Team (OGT)**
-- [Chao Fan (樊超)](https://faculty.sustech.edu.cn/?p=128578&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12131100@mail.sustech.edu.cn
+- [Chao Fan (樊超)](https://chaofan996.github.io), 12131100@mail.sustech.edu.cn
 - [Chuanfu Shen (沈川福)](https://faculty.sustech.edu.cn/?p=95396&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 11950016@mail.sustech.edu.cn
 - [Junhao Liang (梁峻豪)](https://faculty.sustech.edu.cn/?p=95401&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12132342@mail.sustech.edu.cn
 
