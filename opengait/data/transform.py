@@ -179,22 +179,6 @@ class RandomAffine(object):
         
 # ******************************************
 
-
-def OpenGait(
-    cutting=None,
-    rhf_prob=0.5/3,
-    rr_prob=0.5/3,
-    rp_prob=0.5/3
-):
-    transform = T.Compose([
-        RandomPerspective(prob=rp_prob),
-        BaseSilCuttingTransform(cutting=cutting),
-        RandomHorizontalFlip(prob=rhf_prob),
-        RandomRotate(prob=rr_prob),
-    ])
-    return transform
-
-
 def Compose(trf_cfg):
     assert is_list(trf_cfg)
     transform = T.Compose([get_transform(cfg) for cfg in trf_cfg])
