@@ -8,7 +8,7 @@ Gait is one of the most promising biometrics to identify individuals at a long d
 
 ## CASIA-B*
 Since the silhouettes of CASIA-B were obtained by the outdated background subtraction, there exists much noise caused by the background and clothes of subjects. Hence, we re-annotate the
-silhouettes of CASIA-B and denote it as CASIA-B*. You can visit [this link](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp) to apply for CASIA-B*. More details about CASIA-B* can be found in [this link](../../datasets/CASIA-B*/README.md).
+silhouettes of CASIA-B and denote it as CASIA-B*. You can visit [this link](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp) to apply for CASIA-B*. More details about CASIA-B* can be found in [this link](../../datasets/CASIA-B/README.md).
 
 ## Performance
 |    Model   |  NM  |  BG  |  CL  | TTG-200 (cross-domain) |                  Configuration                 |

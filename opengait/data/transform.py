@@ -1,7 +1,6 @@
 import numpy as np
 import random
 import torchvision.transforms as T
-import numpy as np
 import cv2
 import math
 from data import transform as base_transform
