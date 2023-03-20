@@ -427,7 +427,8 @@ class BaseModel(MetaModel, nn.Module):
                     model.train()
                     if model.cfgs['trainer_cfg']['fix_BN']:
                         model.fix_BN()
-                    model.msg_mgr.write_to_tensorboard(result_dict)
+                    if result_dict:
+                        model.msg_mgr.write_to_tensorboard(result_dict)
                     model.msg_mgr.reset_time()
             if model.iteration >= model.engine_cfg['total_iter']:
                 break
