@@ -63,7 +63,7 @@ class RandomHorizontalFlip(object):
         if random.uniform(0, 1) >= self.prob:
             return seq
         else:
-            return seq[:, :, ::-1]
+            return seq[..., ::-1]
 
 
 class RandomErasing(object):
