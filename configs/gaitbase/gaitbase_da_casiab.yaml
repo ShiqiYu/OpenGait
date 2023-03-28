@@ -35,7 +35,7 @@ loss_cfg:
 model_cfg:
   model: Baseline
   backbone_cfg:
-  type: ResNet9
+    type: ResNet9
     block: BasicBlock
     channels: # Layers configuration for automatically model construction
       - 64
