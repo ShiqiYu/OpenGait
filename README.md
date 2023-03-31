@@ -13,7 +13,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## Our Publications
-- [CVPR 2023] LIDAR GAIT: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://arxiv.org/pdf/2211.10598), [*Dataset and Code*](https://lidargait.github.io).
+- [CVPR 2023] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://arxiv.org/pdf/2211.10598), [*Dataset and Code(Coming Soon)*](https://lidargait.github.io).
 - [CVPR 2023] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://arxiv.org/pdf/2211.06597.pdf), [*Code*](configs/gaitbase).
 - [ECCV 2022] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), [*Code*](configs/gaitedge/README.md).
 
