@@ -9,9 +9,8 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 0
+  restore_hint: 60000
   save_name: GaitBase_DA
-  #eval_func: GREW_submission
   sampler:
     batch_shuffle: false
     batch_size: 16
