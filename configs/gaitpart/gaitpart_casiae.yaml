@@ -1,0 +1,82 @@
+data_cfg:
+  dataset_name: CASIA-E
+  dataset_root: your_path
+  dataset_partition: ./datasets/CASIA-E/CASIA-E.json
+  num_workers: 4
+  remove_no_gallery: false
+  test_dataset_name: CASIA-E
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 120000
+  save_name: GaitPart
+  sampler:
+    batch_size: 4
+    sample_type: all_ordered
+    type: InferenceSampler
+  metric: euc # cos
+
+loss_cfg:
+  loss_term_weight: 1.0
+  margin: 0.2
+  type: TripletLoss
+  log_prefix: triplet
+
+model_cfg:
+  model: GaitPart
+  backbone_cfg:
+    in_channels: 1
+    layers_cfg:
+      - BC-32
+      - BC-32
+      - M
+      - BC-64
+      - BC-64
+      - M
+      - FC-128-3
+      - FC-128-3
+      - FC-256-3
+      - FC-256-3
+    type: Plain
+  SeparateFCs:
+    in_channels: 256
+    out_channels: 256
+    parts_num: 16
+  bin_num:
+    - 16
+
+optimizer_cfg:
+  lr: 0.0001
+  momentum: 0.9
+  solver: Adam
+  weight_decay: 0.0
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 100000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true
+  fix_BN: false
+  log_iter: 100
+  with_test: false
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 120000
+  save_name: GaitPart
+  sync_BN: false
+  total_iter: 120000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 8
+      - 32
+    frames_num_fixed: 30
+    frames_num_max: 50
+    frames_num_min: 25
+    frames_skip_num: 10
+    sample_type: fixed_ordered
+    type: TripletSampler
