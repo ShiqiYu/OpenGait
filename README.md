@@ -19,7 +19,7 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 - [ECCV 2022] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), [*Code*](configs/gaitedge/README.md).
 
 ## Highlighted features
-- **Mutiple Dataset supported**: OpenGait supports four popular gait datasets: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), and [GREW](https://www.grew-benchmark.org).
+- **Mutiple Dataset supported**: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), [GREW](https://www.grew-benchmark.org), [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark), and [CASIA-E](https://www.scidb.cn/en/detail?dataSetId=57be0e918db743279baf44a38d013a06).
 - **Multiple Models Support**: We reproduced several SOTA methods, and reached the same or even the better performance. 
 - **DDP Support**: The officially recommended [`Distributed Data Parallel (DDP)`](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) mode is used during both the training and testing phases.
 - **AMP Support**: The [`Auto Mixed Precision (AMP)`](https://pytorch.org/tutorials/recipes/recipes/amp_recipe.html?highlight=amp) option is available.
