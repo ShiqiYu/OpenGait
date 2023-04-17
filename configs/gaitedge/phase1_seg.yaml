@@ -1,4 +1,3 @@
-# Note  : *** the batch_size should be equal to the gpus number at the test phase!!! ***
 data_cfg:
   dataset_name: CASIA-B*
   dataset_root: your_path
@@ -11,9 +10,9 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 30000
+  restore_hint: 25000
   save_name: Segmentation
-  eval_func: mean_iou
+  eval_func: evaluate_segmentation
   sampler:
     batch_size: 4
     sample_type: all_ordered
