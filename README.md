@@ -3,6 +3,7 @@
 <div align="center"><img src="./assets/nm.gif" width = "100" height = "100" alt="nm" /><img src="./assets/bg.gif" width = "100" height = "100" alt="bg" /><img src="./assets/cl.gif" width = "100" height = "100" alt="cl" /></div>
 
 ------------------------------------------
+🎉🎉🎉 **[*OpenGait*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
 
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
@@ -14,9 +15,9 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 
 ## Our Publications
-- [CVPR 2023] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://arxiv.org/pdf/2211.10598), [*Dataset and Code(Coming Soon)*](https://lidargait.github.io).
-- [CVPR 2023] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://arxiv.org/pdf/2211.06597.pdf), [*Code*](configs/gaitbase).
-- [ECCV 2022] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), [*Code*](configs/gaitedge/README.md).
+- [**CVPR 2023**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://arxiv.org/pdf/2211.10598), [*Dataset and Code(Coming Soon)*](https://lidargait.github.io).
+- [**CVPR 2023 Highlight**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://arxiv.org/pdf/2211.06597.pdf), [*Code*](configs/gaitbase).
+- [**ECCV 2022**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), [*Code*](configs/gaitedge/README.md).
 
 ## Highlighted features
 - **Mutiple Dataset supported**: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), [GREW](https://www.grew-benchmark.org), [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark), and [CASIA-E](https://www.scidb.cn/en/detail?dataSetId=57be0e918db743279baf44a38d013a06).
