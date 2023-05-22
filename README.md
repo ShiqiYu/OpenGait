@@ -3,7 +3,7 @@
 <div align="center"><img src="./assets/nm.gif" width = "100" height = "100" alt="nm" /><img src="./assets/bg.gif" width = "100" height = "100" alt="bg" /><img src="./assets/cl.gif" width = "100" height = "100" alt="cl" /></div>
 
 ------------------------------------------
-🎉🎉🎉 **[*OpenGait*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
+🎉🎉🎉 **[*OpenGait*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
 
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
@@ -15,9 +15,9 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW).
 
 ## Our Publications
-- [**CVPR 2023**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://arxiv.org/pdf/2211.10598), [*Dataset and Code(Coming Soon)*](https://lidargait.github.io).
-- [**CVPR 2023 Highlight**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://arxiv.org/pdf/2211.06597.pdf), [*Code*](configs/gaitbase).
-- [**ECCV 2022**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), [*Code*](configs/gaitedge/README.md).
+- [**CVPR 2023**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_LidarGait_Benchmarking_3D_Gait_Recognition_With_Point_Clouds_CVPR_2023_paper.pdf), [*Dataset and Code(Coming Soon)*](https://lidargait.github.io).
+- [**CVPR 2023 Highlight**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf), [*Code*](configs/gaitbase).
+- [**ECCV 2022**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](), [*Code*](configs/gaitedge/README.md).
 
 ## A Real Gait Recognition System: All-in-One-Gait
 <div align="center">
@@ -64,13 +64,13 @@ Results and models are available in the [model zoo](docs/1.model_zoo.md).
 
 ## Citation
 ```
-@misc{fan2022opengait,
-      title={OpenGait: Revisiting Gait Recognition Toward Better Practicality}, 
-      author={Chao Fan and Junhao Liang and Chuanfu Shen and Saihui Hou and Yongzhen Huang and Shiqi Yu},
-      year={2022},
-      eprint={2211.06597},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{Fan_2023_CVPR,
+    author    = {Fan, Chao and Liang, Junhao and Shen, Chuanfu and Hou, Saihui and Huang, Yongzhen and Yu, Shiqi},
+    title     = {OpenGait: Revisiting Gait Recognition Towards Better Practicality},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {9707-9716}
 }
 ```
 
