@@ -8,16 +8,28 @@
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## What's New
-- **[Apr 2023]** [CASIA-E](datasets/CASIA-E/README.md) is supported by OpenGait.
+- **[May 2023]** A real gait recognition system [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) provided by [Dongyang Jin](https://github.com/jdyjjj) is avaliable.
+- [Apr 2023] [CASIA-E](datasets/CASIA-E/README.md) is supported by OpenGait.
 - [Feb 2023] [HID 2023 competition](https://hid2023.iapr-tc4.org/) is open, welcome to participate. Additionally, tutorial for the competition has been updated in [datasets/HID/](./datasets/HID).
 - [Dec 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW).
-
 
 ## Our Publications
 - [**CVPR 2023**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://arxiv.org/pdf/2211.10598), [*Dataset and Code(Coming Soon)*](https://lidargait.github.io).
 - [**CVPR 2023 Highlight**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://arxiv.org/pdf/2211.06597.pdf), [*Code*](configs/gaitbase).
 - [**ECCV 2022**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), [*Code*](configs/gaitedge/README.md).
+
+## A Real Gait Recognition System: All-in-One-Gait
+<div align="center">
+       <img src="./assets/gallery.gif"       width = "144" height = "256" alt="gallery" /> 
+       <img src="./assets/probe1-After.gif"  width = "455" height = "256" alt="probe1-After" />
+       <img src="./assets/probe2-After.gif"  width = "144" height = "256" alt="probe2-After" /> 
+</div>
+
+The workflow of [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) involves the processes of pedestrian tracking, segmentation and recognition.
+
+The participants shown in the left video are gallery subjects, and that of other two videos are probe subjects.
+The recognition results are represented by the color of the bounding boxes.
 
 ## Highlighted features
 - **Mutiple Dataset supported**: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), [GREW](https://www.grew-benchmark.org), [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark), and [CASIA-E](https://www.scidb.cn/en/detail?dataSetId=57be0e918db743279baf44a38d013a06).
