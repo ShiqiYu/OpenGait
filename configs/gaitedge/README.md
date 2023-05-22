@@ -37,10 +37,15 @@ Train recognition network (phase1_rec.yaml) and segmentation network (phase1_seg
   organization={IEEE}
 }
 
-@article{liang2022gaitedge,
-  title={GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality},
-  author={Liang, Junhao and Fan, Chao and Hou, Saihui and Shen, Chuanfu and Huang, Yongzhen and Yu, Shiqi},
-  journal={arXiv preprint arXiv:2203.03972},
-  year={2022}
+@InProceedings{liang2022gaitedge,
+author="Liang, Junhao
+and Fan, Chao
+and Hou, Saihui
+and Shen, Chuanfu
+and Huang, Yongzhen
+and Yu, Shiqi",
+title="GaitEdge: Beyond Plain End-to-End Gait Recognition for Better Practicality",
+booktitle="Computer Vision -- ECCV 2022",
+year="2022",
 }
 ```
