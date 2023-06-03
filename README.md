@@ -21,15 +21,11 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 
 ## A Real Gait Recognition System: All-in-One-Gait
 <div align="center">
-       <img src="./assets/gallery.gif"       width = "144" height = "256" alt="gallery" /> 
        <img src="./assets/probe1-After.gif"  width = "455" height = "256" alt="probe1-After" />
-       <img src="./assets/probe2-After.gif"  width = "144" height = "256" alt="probe2-After" /> 
 </div>
 
 The workflow of [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) involves the processes of pedestrian tracking, segmentation and recognition.
-
-The participants shown in the left video are gallery subjects, and that of other two videos are probe subjects.
-The recognition results are represented by the color of the bounding boxes.
+See [here](https://github.com/jdyjjj/All-in-One-Gait) for details.
 
 ## Highlighted features
 - **Mutiple Dataset supported**: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [HID](http://hid2022.iapr-tc4.org/), [GREW](https://www.grew-benchmark.org), [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark), and [CASIA-E](https://www.scidb.cn/en/detail?dataSetId=57be0e918db743279baf44a38d013a06).
