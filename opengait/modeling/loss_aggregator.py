@@ -3,9 +3,9 @@
 import torch
 import torch.nn as nn
 from . import losses
-from utils import is_dict, get_attr_from, get_valid_args, is_tensor, get_ddp_module
-from utils import Odict
-from utils import get_msg_mgr
+from opengait.utils import is_dict, get_attr_from, get_valid_args, is_tensor, get_ddp_module
+from opengait.utils import Odict
+from opengait.utils import get_msg_mgr
 
 
 class LossAggregator(nn.Module):
