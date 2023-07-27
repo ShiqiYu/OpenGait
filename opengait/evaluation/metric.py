@@ -163,9 +163,9 @@ def evaluate_many(distmat, q_pids, g_pids, q_camids, g_camids, max_rank=50):
     if num_g < max_rank:
         max_rank = num_g
         print("Note: number of gallery samples is quite small, got {}".format(num_g))
-    indices = np.argsort(distmat, axis=1)   # 对应位置变成从小到大的序号
+    indices = np.argsort(distmat, axis=1)   # Change the corresponding position to a sequence number from small to large
     matches = (g_pids[indices] == q_pids[:, np.newaxis]).astype(
-        np.int32)  # 根据indices调整顺序 g_pids[indices]
+        np.int32)  # Adjust the order based on indices g_pids[indices]
     # print(matches)
 
     # compute cmc curve for each query
