@@ -8,6 +8,34 @@ unzip -P password SUSTech1K-pkl.zip   | xargs -n1 tar xzvf
 ```
 password should be obtained by signing [agreement](https://lidargait.github.io/static/resources/SUSTech1KAgreement.pdf) and sending to email (shencf2019@mail.sustech.edu.cn)
 
+Then you will get SUSTech1K formatted as:
+```
+SUSTech1K-Released-pkl
+├── 0000                            # Identity
+│   ├── 00-nm                       # sequence_number - sequence_covariates
+│   │   ├── 000                     # viewpoint_angle
+│   │   │   ├── 00-000-LiDAR-PCDs.pkl                 # (10Hz) Point Clouds 
+│   │   │   ├── 01-000-LiDAR-PCDs_depths.pkl          # (10Hz) Projected Depths from Point Clouds
+│   │   │   ├── 02-000-LiDAR-PCDs_sils.pkl            # (10Hz) Projected Silhouettes from Point Clouds
+│   │   │   ├── 03-000-Camera-Pose.pkl                # (30Hz) Estimated Skeleton using ViTPose
+│   │   │   ├── 04-000-Camera-Ratios-HW.pkl           # (30Hz) (H,W) of Camera Images
+│   │   │   ├── 05-000-Camera-RGB_raw.pkl             # (30Hz) Raw Camera images (frames, 64, 64, 3) (if you want larger resolution, you can process SUSTech1K-Released-RAW by yourself using pretreatment_SUSTech1K.py 
+│   │   │   ├── 06-000-Camera-Sils_aligned.pkl        # (30Hz) Aligned silhouettes
+│   │   │   ├── 07-000-Camera-Sils_raw.pkl            # (30Hz) Estimated silhouettes without alignment
+│   │   │   ├── 08-sync-000-LiDAR-PCDs.pkl            # (10Hz synchronized to Camera) Point Clouds, 
+│   │   │   ├── 09-sync-000-LiDAR-PCDs_depths.pkl     # (10Hz synchronized to Camera) Projected Depths from Point Clouds
+│   │   │   ├── 10-sync-000-LiDAR-PCDs_sils.pkl       # (10Hz synchronized to Camera) Projected Silhouettes from Point Clouds
+│   │   │   ├── 11-sync-000-Camera-Pose.pkl           # (10Hz synchronized to LiDAR) Estimated Skeleton using ViTPose
+│   │   │   ├── 12-sync-000-Camera-Ratios-HW.pkl      # (10Hz synchronized to LiDAR) (H,W) of Camera Images
+│   │   │   ├── 13-sync-000-Camera-RGB_raw.pkl        # (10Hz synchronized to LiDAR) Raw Camera images (frames, 64, 64, 3)
+│   │   │   ├── 14-sync-000-Camera-Sils_aligned.pkl   # (10Hz synchronized to LiDAR) Aligned silhouettes
+│   │   │   └── 15-sync-000-Camera-Sils_raw.pkl       # (10Hz synchronized to LiDAR) Estimated silhouettes without alignment
+                ......
+            ......
+        ......
+    ......
+```
+
 ## Train the dataset
 Modify the `dataset_root` in `configs/lidargait/lidargait_sustech1k.yaml`, and then run this command:
 ```shell
