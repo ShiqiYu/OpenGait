@@ -131,19 +131,6 @@ def evaluate_rank(distmat, p_lbls, g_lbls, max_rank=50):
         # compute average precision
         # reference: https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Average_precision
         num_rel = raw_cmc.sum()
-        pos_idx = np.where(raw_cmc == 1)    # 返回坐标，此处raw_cmc为一维矩阵，所以返回相当于index
-        max_pos_idx = np.max(pos_idx)
-        inp = cmc[max_pos_idx] / (max_pos_idx + 1.0)
-        all_INP.append(inp)
-
-        cmc[cmc > 1] = 1
-
-        all_cmc.append(cmc[:max_rank])
-        num_valid_p += 1.
-
-        # compute average precision
-        # reference: https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Average_precision
-        num_rel = raw_cmc.sum()
         tmp_cmc = raw_cmc.cumsum()
         tmp_cmc = [x / (i + 1.) for i, x in enumerate(tmp_cmc)]
         tmp_cmc = np.asarray(tmp_cmc) * raw_cmc
