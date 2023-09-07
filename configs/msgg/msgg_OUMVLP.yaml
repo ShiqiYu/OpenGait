@@ -1,8 +1,6 @@
 data_cfg:
   dataset_name: OUMVLP
-  # dataset_root: /home/pengyunjie/data/oumvlp/pyramid_alpha_pose_pkl
-  # dataset_root: /home/jdy/OpenGaitPose/datasets/OUMVLP/alphapose_raw-pkl2
-  dataset_root: /home/jdy/data/jdy/pose/oumvlp_pose_data/alphapose_pkl
+  dataset_root: your_path
   dataset_partition: ./datasets/OUMVLP/OUMVLP.json
   num_workers: 1
   remove_no_gallery: false
@@ -12,14 +10,13 @@ evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
   restore_hint: 0
-  save_name: MSGG_0.3v0.2v0.1v1
+  save_name: MSGG_OUMVLP
   eval_func: evaluate_indoor_dataset
   sampler:
     batch_size: 8
     sample_type: all_ordered
     type: InferenceSampler
   transform:
-    # - type: NoOperation
     - type: MSGGTransform
       prob: alphapose
       # prob: coco
@@ -82,8 +79,7 @@ trainer_cfg:
   restore_ckpt_strict: true
   restore_hint: 0
   save_iter: 2000
-  save_name: MSGG_0.3v0.2v0.1v1
-  # save_name: MSGG_0.45v0.3v0.15v1
+  save_name: MSGG_OUMVLP
   sync_BN: true
   total_iter: 300000
   sampler:
@@ -100,4 +96,3 @@ trainer_cfg:
   transform:
     - type: MSGGTransform
       prob: alphapose
-    # - type: NoOperation

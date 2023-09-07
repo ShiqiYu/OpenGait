@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: GREW
-  dataset_root: /home/jdy/data/jdy/grew/grew_pose_pkl_17
+  dataset_root: your_path
   dataset_partition: ./datasets/GREW/GREW.json
   test_dataset_name: GREW
   num_workers: 8

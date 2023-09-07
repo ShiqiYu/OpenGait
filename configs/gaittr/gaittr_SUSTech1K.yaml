@@ -1,7 +1,6 @@
 data_cfg:
   dataset_name: SUSTech1K
-  # dataset_root: /lab01/yusq_lab/dataset/sustech-1k/SUSTech1K-Released-pkl
-  dataset_root: /data/SUSTech1K-Released-pkl/
+  dataset_root: your_path
   dataset_partition: ./datasets/SUSTech1K/SUSTech1K.json
   num_workers: 1
   data_in_use: [false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false]
@@ -55,7 +54,7 @@ scheduler_cfg:
   div_factor: 100
   final_div_factor: 1000.0
   total_steps: 40000
-  pct_start: 0.475 # 学习率上升部分的比例
+  pct_start: 0.475 
   scheduler: OneCycleLR
 
 trainer_cfg:

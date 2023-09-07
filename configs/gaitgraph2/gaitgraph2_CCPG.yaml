@@ -1,7 +1,6 @@
 data_cfg:
   dataset_name: CCPG
-  dataset_root: /lab01/yusq_lab/dataset/CCPG_Pose/pose_pkl
-  # dataset_root: /data3/Released/CCPG_Pose/pose_pkl
+  dataset_root: your_path
   dataset_partition: ./datasets/CCPG/CCPG.json
   test_dataset_name: CCPG
   num_workers: 8

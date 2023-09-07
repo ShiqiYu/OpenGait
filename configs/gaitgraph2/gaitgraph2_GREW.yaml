@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: GREW
-  dataset_root: /home/jdy/data/jdy/grew/grew_pose_pkl_17
+  dataset_root: your_path
   dataset_partition: ./datasets/GREW/GREW.json
   test_dataset_name: GREW
   num_workers: 8
@@ -20,7 +20,6 @@ evaluator_cfg:
     frames_skip_num: 0
   metric: cos
   eval_func: GREW_submission
-  #eval_func: evaluate_real_scene
   transform:
     - type: Compose
       trf_cfg:

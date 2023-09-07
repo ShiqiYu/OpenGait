@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: OUMVLP
-  dataset_root: /home/jdy/OpenGaitPose/datasets/OUMVLP/alphapose_raw-17-pkl2
+  dataset_root: your_path
   dataset_partition: ./datasets/OUMVLP/OUMVLP.json
   num_workers: 1
   remove_no_gallery: false
@@ -53,7 +53,7 @@ scheduler_cfg:
   div_factor: 100
   final_div_factor: 1000.0
   total_steps: 150000
-  pct_start: 0.475 # 学习率上升部分的比例
+  pct_start: 0.475 
   scheduler: OneCycleLR
 
 trainer_cfg:

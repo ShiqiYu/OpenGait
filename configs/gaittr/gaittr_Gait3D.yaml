@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: Gait3D
-  dataset_root: /home/jdy/data/jdy/pose/Gait3D_pose/Gait3D_pose_pkl
+  dataset_root: your_path
   dataset_partition: ./datasets/Gait3D/Gait3D.json
   test_dataset_name: Gait3D
   num_workers: 1
@@ -53,7 +53,7 @@ scheduler_cfg:
   div_factor: 100
   final_div_factor: 1000.0
   total_steps: 40000
-  pct_start: 0.475 # 学习率上升部分的比例
+  pct_start: 0.475 
   scheduler: OneCycleLR
 
 trainer_cfg:

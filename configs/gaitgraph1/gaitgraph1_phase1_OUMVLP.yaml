@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: OUMVLP
-  dataset_root: /home/jdy/OpenGaitPose/datasets/OUMVLP/alphapose_raw-pkl2
+  dataset_root: your_path
   dataset_partition: ./datasets/OUMVLP/OUMVLP.json
   test_dataset_name: OUMVLP
   num_workers: 8

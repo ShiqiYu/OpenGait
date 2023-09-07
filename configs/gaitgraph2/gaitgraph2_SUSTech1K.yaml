@@ -1,7 +1,6 @@
 data_cfg:
   dataset_name: SUSTech1K
-  # dataset_root: /data/SUSTech1K-Released-pkl/
-  dataset_root:  /data/SUSTech1K-Released-pkl/
+  dataset_root:  your_path
   dataset_partition: ./datasets/SUSTech1K/SUSTech1K.json
   test_dataset_name: SUSTech1K
   num_workers: 8

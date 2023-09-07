@@ -61,8 +61,7 @@ scheduler_cfg:
   max_lr: 0.01
   total_steps: 6000
   scheduler: OneCycleLR
-  div_factor: 25 # initial_lr = max_lr/div_factor Default: 25
-  # final_div_factor: 1 #min_lr = initial_lr/final_div_factor Default: 1e4
+  div_factor: 25 
 
 trainer_cfg:
   enable_float16: false

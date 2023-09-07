@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: Gait3D
-  dataset_root: /home/jdy/data/jdy/pose/Gait3D_pose/Gait3D_pose_pkl
+  dataset_root: your_path
   dataset_partition: ./datasets/Gait3D/Gait3D.json
   test_dataset_name: Gait3D
   num_workers: 8
