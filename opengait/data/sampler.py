@@ -49,7 +49,10 @@ class TripletSampler(tordata.sampler.Sampler):
         return len(self.dataset)
 
 
-def sync_random_sample_list(obj_list, k):
+def sync_random_sample_list(obj_list, k, common_choice=False):
+    if common_choice:
+        idx = random.choices(range(len(obj_list)), k=k) 
+        idx = torch.tensor(idx)
     if len(obj_list) < k:
         idx = random.choices(range(len(obj_list)), k=k)
         idx = torch.tensor(idx)
@@ -94,6 +97,40 @@ class InferenceSampler(tordata.sampler.Sampler):
 
     def __iter__(self):
         yield from self.idx_batch_this_rank
+
+    def __len__(self):
+        return len(self.dataset)
+
+
+class CommonSampler(tordata.sampler.Sampler):
+    def __init__(self,dataset,batch_size,batch_shuffle):
+
+        self.dataset = dataset
+        self.size = len(dataset)
+        self.batch_size = batch_size
+        if isinstance(self.batch_size,int)==False:
+            raise ValueError(
+                "batch_size shoude be (B) not {}".format(batch_size))
+        self.batch_shuffle = batch_shuffle
+        
+        self.world_size = dist.get_world_size()
+        if self.batch_size % self.world_size !=0:
+            raise ValueError("World size ({}) is not divisble by batch_size ({})".format(
+                self.world_size, batch_size))
+        self.rank = dist.get_rank() 
+    
+    def __iter__(self):
+        while True:
+            indices_list = list(range(self.size))
+            sample_indices = sync_random_sample_list(
+                    indices_list, self.batch_size, common_choice=True)
+            total_batch_size =  self.batch_size
+            total_size = int(math.ceil(total_batch_size /
+                                       self.world_size)) * self.world_size
+            sample_indices += sample_indices[:(
+                total_batch_size - len(sample_indices))]
+            sample_indices = sample_indices[self.rank:total_size:self.world_size]
+            yield sample_indices
 
     def __len__(self):
         return len(self.dataset)

@@ -2,7 +2,7 @@
 
 This module defines the abstract meta model class and base model class. In the base model,
  we define the basic model functions, like get_loader, build_network, and run_train, etc.
- The api of the base model is run_train and run_test, they are used in `opengait/main.py`.
+ The api of the base model is run_train and run_test, they are used in `fastposegait/main.py`.
 
 Typical usage:
 
@@ -33,6 +33,7 @@ from utils import get_valid_args, is_list, is_dict, np2var, ts2np, list2var, get
 from evaluation import evaluator as eval_functions
 from utils import NoOp
 from utils import get_msg_mgr
+from .backbones.resgcn import ResGCN_Module
 
 __all__ = ['BaseModel']
 
@@ -144,6 +145,7 @@ class BaseModel(MetaModel, nn.Module):
 
         self.build_network(cfgs['model_cfg'])
         self.init_parameters()
+        self.seq_trfs = get_transform(self.engine_cfg['transform'])
 
         self.msg_mgr.log_info(cfgs['data_cfg'])
         if training:
@@ -169,10 +171,6 @@ class BaseModel(MetaModel, nn.Module):
 
     def get_backbone(self, backbone_cfg):
         """Get the backbone of the model."""
-        if is_dict(backbone_cfg):
-            Backbone = get_attr_from([backbones], backbone_cfg['type'])
-            valid_args = get_valid_args(Backbone, backbone_cfg, ['type'])
-            return Backbone(**valid_args)
         if is_list(backbone_cfg):
             Backbone = nn.ModuleList([self.get_backbone(cfg)
                                       for cfg in backbone_cfg])
@@ -299,8 +297,7 @@ class BaseModel(MetaModel, nn.Module):
             tuple: training data including inputs, labels, and some meta data.
         """
         seqs_batch, labs_batch, typs_batch, vies_batch, seqL_batch = inputs
-        trf_cfgs = self.engine_cfg['transform']
-        seq_trfs = get_transform(trf_cfgs)
+        seq_trfs = self.seq_trfs
         if len(seqs_batch) != len(seq_trfs):
             raise ValueError(
                 "The number of types of input data and transform should be same. But got {} and {}".format(len(seqs_batch), len(seq_trfs)))
@@ -335,9 +332,6 @@ class BaseModel(MetaModel, nn.Module):
         """
 
         self.optimizer.zero_grad()
-        if loss_sum <= 1e-9:
-            self.msg_mgr.log_warning(
-                "Find the loss sum less than 1e-9 but the training process will continue!")
 
         if self.engine_cfg['enable_float16']:
             self.Scaler.scale(loss_sum).backward()
@@ -427,8 +421,7 @@ class BaseModel(MetaModel, nn.Module):
                     model.train()
                     if model.cfgs['trainer_cfg']['fix_BN']:
                         model.fix_BN()
-                    if result_dict:
-                        model.msg_mgr.write_to_tensorboard(result_dict)
+                    model.msg_mgr.write_to_tensorboard(result_dict)
                     model.msg_mgr.reset_time()
             if model.iteration >= model.engine_cfg['total_iter']:
                 break

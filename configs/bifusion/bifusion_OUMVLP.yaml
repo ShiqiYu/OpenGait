@@ -1,0 +1,129 @@
+data_cfg:
+  dataset_name: OUMVLP
+  dataset_root: /home/jdy/data/jdy/oumvlp/oumvlp-merge-64-pkl
+  dataset_partition: ./datasets/OUMVLP/OUMVLP.json
+  num_workers: 1
+  remove_no_gallery: false
+  test_dataset_name: OUMVLP
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 10000
+  save_name: bifusion_gaitpart_msgg
+  sampler:
+    batch_size: 8
+    sample_type: all_ordered
+    type: InferenceSampler
+  transform:
+    - type: BaseSilCuttingTransform
+    - type: NoOperation
+  metric: euc # cos
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet_sil
+  - loss_term_weight: 0.1
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet_ske
+  - loss_term_weight: 1.0
+    scale: 1
+    type: CrossEntropyLoss
+    log_accuracy: true
+    label_smooth: false
+    log_prefix: softmax_ske
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet_fuse
+
+model_cfg:
+  model: BimodalFusion
+  fuse_lr: 0.1
+  sil_ske_lr: 0.0001
+  sil_cfg:
+    model: GaitPart
+    backbone_cfg:
+      in_channels: 1
+      layers_cfg:
+        - BC-32
+        - BC-32
+        - M
+        - BC-64
+        - BC-64
+        - M
+        - FC-128-3
+        - FC-128-3
+        - FC-256-3
+        - FC-256-3
+      type: Plain
+    SeparateFCs:
+      in_channels: 256
+      out_channels: 256
+      parts_num: 16
+    bin_num:
+      - 16
+    pretrain_ckpt_path: ./output/OUMVLP/GaitPart/GaitPart/checkpoints/GaitPart-250000.pt
+  ske_cfg:
+    model: MultiScaleGaitGraph
+    in_channels:
+      - 3
+      - 16
+      - 32
+      - 64
+      - 128
+    out_channels: 128
+    graph_cfg:
+      layout: 'body_12'
+      strategy: 'gait_temporal'
+    temporal_kernel_size: 9
+    num_id: 5153
+    pretrain_ckpt_path: ./output/OUMVLP/MultiScaleGaitGraph/MSGG_0.3v0.2v0.1v1/checkpoints/MSGG_0.3v0.2v0.1v1-300000.pt
+  fuse_cfg:
+    ske_dropout: 0.65
+    ske_reduce_dim: 32
+    out_channels: 128
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 4000
+    - 8000
+    - 12000
+    - 16000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: false
+  log_iter: 100
+  with_test: false
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 4000
+  save_name: bifusion_gaitpart_msgg
+  sync_BN: true
+  total_iter: 20000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 32
+      - 16
+    frames_num_fixed: 30
+    frames_num_max: 50
+    frames_num_min: 18
+    frames_skip_num: 0
+    sample_type: fixed_ordered
+    type: TripletSampler
+  transform:
+    - type: BaseSilCuttingTransform
+    - type: MSGGTransform
+      prob: alphapose

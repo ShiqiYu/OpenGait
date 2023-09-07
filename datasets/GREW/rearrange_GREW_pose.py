@@ -20,10 +20,6 @@ def rearrange_train(train_path: Path, output_path: Path) -> None:
                 src = os.path.join(train_path, sid.name, sub_seq.name)
                 dst = os.path.join(output_path, sid.name+'train', '00', sub_seq.name)
                 os.makedirs(dst,exist_ok=True)
-                if subfile not in os.listdir(dst) and subfile.endswith('.png'):
-                    sils_subfile = 'sils_'+subfile
-                    os.symlink(os.path.join(src, subfile),
-                               os.path.join(dst, sils_subfile))
                 if subfile not in os.listdir(dst) and subfile.endswith('_2d_pose.txt'):
                     pose_subfile = 'pose_'+subfile
                     os.symlink(os.path.join(src, subfile),
@@ -46,10 +42,6 @@ def rearrange_test(test_path: Path, output_path: Path) -> None:
                 src = os.path.join(gallery, sid.name, sub_seq.name)
                 dst = os.path.join(output_path, sid.name, '%02d'%cnt, sub_seq.name)
                 os.makedirs(dst,exist_ok=True)
-                if subfile not in os.listdir(dst) and subfile.endswith('.png'):
-                    sils_subfile = 'sils_'+subfile
-                    os.symlink(os.path.join(src, subfile),
-                               os.path.join(dst, sils_subfile))
                 if subfile not in os.listdir(dst) and subfile.endswith('_2d_pose.txt'):
                     pose_subfile = 'pose_'+subfile
                     os.symlink(os.path.join(src, subfile),
@@ -64,10 +56,6 @@ def rearrange_test(test_path: Path, output_path: Path) -> None:
             src = os.path.join(probe, sub_seq.name)
             dst = os.path.join(output_path, 'probe', '03', sub_seq.name)
             os.makedirs(dst,exist_ok=True)
-            if subfile not in os.listdir(dst) and subfile.endswith('.png'):
-                sils_subfile = 'sils_'+subfile
-                os.symlink(os.path.join(src, subfile),
-                            os.path.join(dst, sils_subfile))
             if subfile not in os.listdir(dst) and subfile.endswith('_2d_pose.txt'):
                 pose_subfile = 'pose_'+subfile
                 os.symlink(os.path.join(src, subfile),
@@ -102,5 +90,3 @@ if __name__ == '__main__':
     input_path = Path(args.input_path).resolve()
     output_path = Path(args.output_path).resolve()
     rearrange_GREW(input_path, output_path)
-
-# /home/jdy/data/jdy/grew/grew
