@@ -2,7 +2,7 @@
 
 This module defines the abstract meta model class and base model class. In the base model,
  we define the basic model functions, like get_loader, build_network, and run_train, etc.
- The api of the base model is run_train and run_test, they are used in `fastposegait/main.py`.
+ The api of the base model is run_train and run_test, they are used in `opengait/main.py`.
 
 Typical usage:
 
