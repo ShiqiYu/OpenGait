@@ -33,7 +33,6 @@ from utils import get_valid_args, is_list, is_dict, np2var, ts2np, list2var, get
 from evaluation import evaluator as eval_functions
 from utils import NoOp
 from utils import get_msg_mgr
-from .backbones.resgcn import ResGCN_Module
 
 __all__ = ['BaseModel']
 
@@ -171,6 +170,10 @@ class BaseModel(MetaModel, nn.Module):
 
     def get_backbone(self, backbone_cfg):
         """Get the backbone of the model."""
+        if is_dict(backbone_cfg):
+            Backbone = get_attr_from([backbones], backbone_cfg['type'])
+            valid_args = get_valid_args(Backbone, backbone_cfg, ['type'])
+            return Backbone(**valid_args)
         if is_list(backbone_cfg):
             Backbone = nn.ModuleList([self.get_backbone(cfg)
                                       for cfg in backbone_cfg])
@@ -332,6 +335,9 @@ class BaseModel(MetaModel, nn.Module):
         """
 
         self.optimizer.zero_grad()
+        if loss_sum <= 1e-9:
+            self.msg_mgr.log_warning(
+                "Find the loss sum less than 1e-9 but the training process will continue!")
 
         if self.engine_cfg['enable_float16']:
             self.Scaler.scale(loss_sum).backward()
@@ -421,7 +427,8 @@ class BaseModel(MetaModel, nn.Module):
                     model.train()
                     if model.cfgs['trainer_cfg']['fix_BN']:
                         model.fix_BN()
-                    model.msg_mgr.write_to_tensorboard(result_dict)
+                    if result_dict:
+                        model.msg_mgr.write_to_tensorboard(result_dict)
                     model.msg_mgr.reset_time()
             if model.iteration >= model.engine_cfg['total_iter']:
                 break
