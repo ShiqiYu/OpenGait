@@ -8,4 +8,3 @@ from .common import MergeCfgsDict
 from .common import get_attr_from
 from .common import NoOp
 from .msg_manager import get_msg_mgr
-from .graph import Graph
