@@ -255,6 +255,10 @@ def RmBN2dAffine(model):
             m.bias.requires_grad = False
 
 
+'''
+Modifed from https://github.com/BNU-IVC/FastPoseGait/blob/main/fastposegait/modeling/components/units
+'''
+
 class Graph():
     """
     # Thanks to YAN Sijie for the released code on Github (https://github.com/yysijie/st-gcn)

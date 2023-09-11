@@ -7,6 +7,7 @@ class ResGCN_Module(nn.Module):
         ResGCN_Module
         Arxiv: https://arxiv.org/abs/2010.09978
         Github: https://github.com/Thomas-yx/ResGCNv1
+                https://github.com/BNU-IVC/FastPoseGait
     """
     def __init__(self, in_channels, out_channels, block, A, stride=1, kernel_size=[9,2],reduction=4, get_res=False,is_main=False):
         super(ResGCN_Module, self).__init__()

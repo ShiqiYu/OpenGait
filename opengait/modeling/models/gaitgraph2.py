@@ -7,7 +7,11 @@ import numpy as np
 
 
 class GaitGraph2(BaseModel):
-
+    """
+        GaitGraph2: Towards a Deeper Understanding of Skeleton-based Gait Recognition
+        Paper:    https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper
+        Github:   https://github.com/tteepe/GaitGraph2
+    """
     def build_network(self, model_cfg):
          
         self.joint_format = model_cfg['joint_format']

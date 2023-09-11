@@ -1,3 +1,7 @@
+'''
+Modifed fromhttps://github.com/BNU-IVC/FastPoseGait/blob/main/fastposegait/modeling/losses/supconloss_Lp.py
+'''
+
 from .base import BaseLoss, gather_and_scale_wrapper
 from pytorch_metric_learning import losses, distances
 

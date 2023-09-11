@@ -5,7 +5,11 @@ from ..modules import Graph
 import torch.nn.functional as F
 
 class GaitGraph1(BaseModel):
-
+    """
+        GaitGraph1: Gaitgraph: Graph Convolutional Network for Skeleton-Based Gait Recognition
+        Paper:    https://ieeexplore.ieee.org/document/9506717
+        Github:   https://github.com/tteepe/GaitGraph
+    """
     def build_network(self, model_cfg):
          
         self.joint_format = model_cfg['joint_format']

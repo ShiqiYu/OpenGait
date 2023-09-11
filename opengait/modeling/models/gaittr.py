@@ -204,6 +204,11 @@ class TCN_ST(nn.Module):
 
 
 class GaitTR(BaseModel):
+    https://arxiv.org/abs/2204.03873
+    """
+        GaitTR: Spatial Transformer Network on Skeleton-based Gait Recognition
+        Arxiv : https://arxiv.org/abs/2204.03873.pdf
+    """
     def build_network(self, model_cfg):
 
         in_c = model_cfg['in_channels']

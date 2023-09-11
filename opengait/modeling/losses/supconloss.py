@@ -1,3 +1,7 @@
+'''
+Modifed fromhttps://github.com/BNU-IVC/FastPoseGait/blob/main/fastposegait/modeling/losses/supconloss.py
+'''
+
 import torch.nn as nn
 import torch
 from .base import BaseLoss, gather_and_scale_wrapper
