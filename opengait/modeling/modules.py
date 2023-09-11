@@ -207,6 +207,7 @@ class GaitAlign(nn.Module):
            Out aligned_sils: [n, c, H, W]
         """
         n, c, h, w = feature_map.size()
+        # w_h_ratio = w_h_ratio.repeat(1, 1) # [n, 1]
         w_h_ratio = w_h_ratio.view(-1, 1)  # [n, 1]
 
         h_sum = binary_mask.sum(-1)  # [n, c, h]
