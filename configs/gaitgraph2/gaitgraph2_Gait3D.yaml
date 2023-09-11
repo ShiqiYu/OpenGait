@@ -9,7 +9,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
-  restore_hint: 11
+  restore_hint: 2000
   save_name: GaitGraph2
   sampler:
     batch_size: 256 

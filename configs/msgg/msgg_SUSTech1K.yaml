@@ -9,7 +9,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
-  restore_hint: 0
+  restore_hint: 300000
   save_name: MSGG_SUSTech1K
   eval_func: evaluate_indoor_dataset
   sampler:

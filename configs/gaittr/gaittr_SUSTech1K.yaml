@@ -11,7 +11,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
-  restore_hint: 7
+  restore_hint: 40000
   save_name: GaitTR-SUSTech1k
   eval_func: evaluate_indoor_dataset
   sampler:

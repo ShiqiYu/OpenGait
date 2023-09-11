@@ -10,7 +10,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
-  restore_hint: 48
+  restore_hint: 150000
   save_name: GaitTR
   eval_func: GREW_submission
   sampler:

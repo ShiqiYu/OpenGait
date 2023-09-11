@@ -10,7 +10,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
-  restore_hint: 7
+  restore_hint: 40000
   save_name: GaitTR
   eval_func: evaluate_Gait3D
   sampler:
