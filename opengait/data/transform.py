@@ -435,7 +435,7 @@ class MSGGTransform():
     def __init__(self, joint_format="coco"):
         if joint_format == "coco": #17
             self.mask=[6,8,14,12,7,13,5,10,16,11,9,15]
-        else: #18
+        elif joint_format in ['alphapose', 'openpose']: #18
             self.mask=[2,3,9,8,6,12,5,4,10,11,7,13]
         else:
             raise ValueError("Invalid joint_format.")
