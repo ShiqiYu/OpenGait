@@ -302,6 +302,9 @@ class InversePosesPre(object):
             self.invers_arr = [0, 2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15]
         elif joint_format in ['alphapose', 'openpose']:
             self.invers_arr = [0, 1, 5, 6, 7, 2, 3, 4, 11, 12, 13, 8, 9, 10, 15, 14, 17, 16]
+        else:
+            raise ValueError("Invalid joint_format.")
+            
 
     def __call__(self, data):
         for i in range(len(data)):
@@ -335,7 +338,8 @@ class GaitTR_MultiInput(object):
             self.connect_joint = np.array([5,0,0,1,2,0,0,5,6,7,8,5,6,11,12,13,14])
         elif joint_format in ['alphapose', 'openpose']:
             self.connect_joint = np.array([1,1,1,2,3,1,5,6,2,8,9,5,11,12,0,0,14,15])
-
+        else:
+            raise ValueError("Invalid joint_format.")
 
     def __call__(self, data):
         # (C, T, V) -> (I, C * 2, T, V)
@@ -372,6 +376,8 @@ class GaitGraph_MultiInput(object):
             self.connect_joint = np.array([5,0,0,1,2,0,0,5,6,7,8,5,6,11,12,13,14])
         elif joint_format in ['alphapose', 'openpose']:
             self.connect_joint = np.array([1,1,1,2,3,1,5,6,2,8,9,5,11,12,0,0,14,15])
+        else:
+            raise ValueError("Invalid joint_format.")
 
     def __call__(self, data):
         T, V, C = data.shape
@@ -426,11 +432,14 @@ class TwoView(object):
 
 
 class MSGGTransform():
-    def __init__(self, prob="coco"):
-        if prob == "coco": #17
+    def __init__(self, joint_format="coco"):
+        if joint_format == "coco": #17
             self.mask=[6,8,14,12,7,13,5,10,16,11,9,15]
         else: #18
             self.mask=[2,3,9,8,6,12,5,4,10,11,7,13]
+        else:
+            raise ValueError("Invalid joint_format.")
+        
     def __call__(self, x):
         result=x[...,self.mask,:].copy()
         return result

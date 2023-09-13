@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from ..modules import Temporal_Basic_Block, Temporal_Bottleneck_Block, Spatial_Basic_Block, Spatial_Bottleneck_Block
+from ..modules import TemporalBasicBlock, TemporalBottleneckBlock, SpatialBasicBlock, SpatialBottleneckBlock
 
 class ResGCN_Module(nn.Module):
     """
@@ -41,11 +41,11 @@ class ResGCN_Module(nn.Module):
             )
         
         if block in ['Basic','initial']:
-            spatial_block = Spatial_Basic_Block
-            temporal_block = Temporal_Basic_Block
+            spatial_block = SpatialBasicBlock
+            temporal_block = TemporalBasicBlock
         if block == 'Bottleneck':
-            spatial_block = Spatial_Bottleneck_Block
-            temporal_block = Temporal_Bottleneck_Block
+            spatial_block = SpatialBottleneckBlock
+            temporal_block = TemporalBottleneckBlock
         self.scn = spatial_block(in_channels, out_channels, max_graph_distance, block_res,reduction)
         if in_channels == out_channels and is_main:
             tcn_stride =True
