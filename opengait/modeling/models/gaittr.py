@@ -204,7 +204,6 @@ class TCN_ST(nn.Module):
 
 
 class GaitTR(BaseModel):
-    https://arxiv.org/abs/2204.03873
     """
         GaitTR: Spatial Transformer Network on Skeleton-based Gait Recognition
         Arxiv : https://arxiv.org/abs/2204.03873.pdf
