@@ -24,15 +24,24 @@ ls *.tgz | xargs -n1 tar xzvf
 
 After unpacking these compressed files, run this command:
 
-Step2 : To rearrange directory of GREW dataset, turning to id-type-view structure, Run 
+Step2-1 : To rearrange directory of GREW dataset(for silhouette), turning to id-type-view structure, Run 
 ```
 python datasets/GREW/rearrange_GREW.py --input_path Path_of_GREW-raw --output_path Path_of_GREW-rearranged
 ```  
+Step2-2 : To rearrange directory of GREW dataset(for pose), turning to id-type-view structure, Run 
+```
+python datasets/GREW/rearrange_GREW_pose.py --input_path Path_of_GREW-raw --output_path Path_of_GREW-pose-rearranged
+```  
 
-Step3: Transforming images to pickle file, run 
+Step3-1: Transforming images to pickle file, run 
 ```
 python datasets/pretreatment.py --input_path Path_of_GREW-rearranged --output_path Path_of_GREW-pkl --dataset GREW
 ```
+Step3-2: Transforming pose txts to pickle file, run 
+```
+python datasets/pretreatment.py --input_path Path_of_GREW-pose-rearranged --output_path Path_of_GREW-pose-pkl --pose --dataset GREW
+```
+
 Then you will see the structure like:
 
 - Processed

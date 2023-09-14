@@ -2,6 +2,8 @@ import os
 import os.path as osp
 import numpy as np
 import pdb
+import argparse
+import pickle
 
 ORG_KEYPOINTS = {
     'nose'          :0,
@@ -62,19 +64,31 @@ if __name__ == '__main__':
             view_list = sorted(os.listdir(osp.join(data_path, _id, _type)))
             for _view in view_list:
                 seq_info = [_id, _type, _view]
+                seq_info_str = '-'.join(seq_info)
                 seq_dir = osp.join(data_path, *seq_info)
                 des_dir = osp.join(des_path, *seq_info)
                 if osp.exists(des_dir) is False:
                     os.makedirs(des_dir)
 
                 keypoints_list = os.listdir(seq_dir)
-                
-                for _keypoints in keypoints_list:
-                    keypoints_data = np.load(open(osp.join(seq_dir, _keypoints), 'rb'))
+                pkl_name = "{}.pkl".format(_view)
+                seq_path = osp.join(seq_dir, pkl_name)
+                save_path = osp.join(des_dir, pkl_name)
+                seq_path_exists = osp.exists(seq_path)
+
+                if seq_path_exists is False:
+                    print("seq:{} input:{}. ".format(seq_info_str, seq_path_exists))
+                    continue
+                with open(seq_path, 'rb') as f: 
+                    keypoints_data = pickle.load(f)
+                to_pickle = []
+                for keypoint in keypoints_data:
                     mapped_keypoints = np.zeros((12, 3))
                     for i in range(mapped_keypoints.shape[0]):
-                        mapped_keypoints[i] = keypoints_data[index_mapping[i]]
-                    save_path = osp.join(des_dir, _keypoints)
-                    np.save(save_path, mapped_keypoints)
+                        mapped_keypoints[i] = keypoint[index_mapping[i]]
+                    to_pickle.append(mapped_keypoints)
+                keypoints = np.stack(to_pickle)
+                pickle.dump(keypoints, open(save_path, 'wb'))  
+                    
             print("FINISHED: " + "-".join(seq_info))
                 
