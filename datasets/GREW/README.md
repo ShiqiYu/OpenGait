@@ -30,7 +30,7 @@ python datasets/GREW/rearrange_GREW.py --input_path Path_of_GREW-raw --output_pa
 ```  
 Step2-2 : To rearrange directory of GREW dataset(for pose), turning to id-type-view structure, Run 
 ```
-python datasets/GREW/rearrange_GREW_pose.py --input_path Path_of_GREW-raw --output_path Path_of_GREW-pose-rearranged
+python datasets/GREW/rearrange_GREW_pose.py --input_path Path_of_GREW-pose --output_path Path_of_GREW-pose-rearranged
 ```  
 
 Step3-1: Transforming images to pickle file, run 
