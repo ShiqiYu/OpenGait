@@ -332,7 +332,7 @@ class JointNoise(object):
         return data + np.repeat(noise[np.newaxis, ...], data.shape[0], axis=0)
 
 
-class GaitTR_MultiInput(object):
+class GaitTRMultiInput(object):
     def __init__(self, joint_format='coco',):
         if joint_format == 'coco':
             self.connect_joint = np.array([5,0,0,1,2,0,0,5,6,7,8,5,6,11,12,13,14])
@@ -369,7 +369,7 @@ class GaitTR_MultiInput(object):
         return data_new
 
 
-class GaitGraph_MultiInput(object):
+class GaitGraphMultiInput(object):
     def __init__(self, center=0, joint_format='coco'):
         self.center = center
         if joint_format == 'coco':

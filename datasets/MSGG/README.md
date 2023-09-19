@@ -1,5 +1,5 @@
 # Datasets for MSGG
-MSGG needs to convert the pose keypoints format of coco17 into the input format of Pyramid keypoints.
+MSGG needs to convert the pose key format of other datasets(such as CASIA-B, GREW, Gait3D,) from coco17 to the input format of Pyramid keys.
 
 ## Data Pretreatment
 ```python

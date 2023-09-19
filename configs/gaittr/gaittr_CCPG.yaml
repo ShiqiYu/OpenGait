@@ -21,7 +21,7 @@ evaluator_cfg:
   transform:
     - type: Compose
       trf_cfg:
-        - type: GaitTR_MultiInput
+        - type: GaitTRMultiInput
           joint_format: alphapose
         - type: SkeletonInput
 loss_cfg:
@@ -86,6 +86,6 @@ trainer_cfg:
           probability: 0.1
         - type: JointNoise
           std: 0.3
-        - type: GaitTR_MultiInput
+        - type: GaitTRMultiInput
           joint_format: alphapose
         - type: SkeletonInput

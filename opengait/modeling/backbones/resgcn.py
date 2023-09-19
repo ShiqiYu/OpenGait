@@ -2,15 +2,15 @@ import torch
 import torch.nn as nn
 from ..modules import TemporalBasicBlock, TemporalBottleneckBlock, SpatialBasicBlock, SpatialBottleneckBlock
 
-class ResGCN_Module(nn.Module):
+class ResGCNModule(nn.Module):
     """
-        ResGCN_Module
+        ResGCNModule
         Arxiv: https://arxiv.org/abs/2010.09978
         Github: https://github.com/Thomas-yx/ResGCNv1
                 https://github.com/BNU-IVC/FastPoseGait
     """
     def __init__(self, in_channels, out_channels, block, A, stride=1, kernel_size=[9,2],reduction=4, get_res=False,is_main=False):
-        super(ResGCN_Module, self).__init__()
+        super(ResGCNModule, self).__init__()
 
         if not len(kernel_size) == 2:
             logging.info('')
@@ -72,9 +72,9 @@ class ResGCN_Input_Branch(nn.Module):
         module_list = []
         for i in range(len(input_branch)-1):
             if i==0:
-                module_list.append(ResGCN_Module(input_branch[i],input_branch[i+1],'initial',A, reduction=reduction))
+                module_list.append(ResGCNModule(input_branch[i],input_branch[i+1],'initial',A, reduction=reduction))
             else:
-                module_list.append(ResGCN_Module(input_branch[i],input_branch[i+1],block,A,reduction=reduction))
+                module_list.append(ResGCNModule(input_branch[i],input_branch[i+1],block,A,reduction=reduction))
         
 
         self.bn = nn.BatchNorm2d(input_branch[0])
@@ -109,9 +109,9 @@ class ResGCN(nn.Module):
             else:
                 stride = 2
             if i ==0:
-                main_stream_list.append(ResGCN_Module(main_stream[i]*input_num,main_stream[i+1],block,graph,stride=1,reduction = reduction,get_res=True,is_main=True))
+                main_stream_list.append(ResGCNModule(main_stream[i]*input_num,main_stream[i+1],block,graph,stride=1,reduction = reduction,get_res=True,is_main=True))
             else:
-                main_stream_list.append(ResGCN_Module(main_stream[i],main_stream[i+1],block,graph,stride = stride, reduction = reduction,is_main=True))
+                main_stream_list.append(ResGCNModule(main_stream[i],main_stream[i+1],block,graph,stride = stride, reduction = reduction,is_main=True))
         self.backbone = nn.ModuleList(main_stream_list)
         self.global_pooling = nn.AdaptiveAvgPool2d(1)
         self.fcn = nn.Linear(256, num_class)

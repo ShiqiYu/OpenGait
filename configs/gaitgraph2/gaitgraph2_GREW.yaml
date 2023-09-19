@@ -24,7 +24,7 @@ evaluator_cfg:
     - type: Compose
       trf_cfg:
         - type: NormalizeEmpty
-        - type: GaitGraph_MultiInput
+        - type: GaitGraphMultiInput
       
 
 loss_cfg:
@@ -102,4 +102,4 @@ trainer_cfg:
           random_r:
                     - 4
                     - 1
-        - type: GaitGraph_MultiInput
+        - type: GaitGraphMultiInput

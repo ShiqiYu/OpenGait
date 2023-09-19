@@ -24,7 +24,7 @@ evaluator_cfg:
     - type: Compose
       trf_cfg:
         - type: NormalizeEmpty
-        - type: GaitGraph_MultiInput
+        - type: GaitGraphMultiInput
           joint_format: alphapose
       
 
@@ -104,5 +104,5 @@ trainer_cfg:
           random_r:
             - 3
             - 1
-        - type: GaitGraph_MultiInput
+        - type: GaitGraphMultiInput
           joint_format: alphapose
