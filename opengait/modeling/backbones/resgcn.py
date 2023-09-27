@@ -58,14 +58,14 @@ class ResGCNModule(nn.Module):
         A = A.cuda(x.get_device())
         return self.tcn(self.scn(x, A*self.edge), self.residual(x))
 
-class ResGCN_Input_Branch(nn.Module):
+class ResGCNInputBranch(nn.Module):
     """
         ResGCNInputBranch_Module
         Arxiv: https://arxiv.org/abs/2010.09978
         Github: https://github.com/Thomas-yx/ResGCNv1
     """
     def __init__(self, input_branch, block, A, input_num , reduction = 4):
-        super(ResGCN_Input_Branch, self).__init__()
+        super(ResGCNInputBranch, self).__init__()
 
         self.register_buffer('A', A)
 
@@ -98,7 +98,7 @@ class ResGCN(nn.Module):
         super(ResGCN, self).__init__()
         self.graph = graph
         self.head= nn.ModuleList(
-            ResGCN_Input_Branch(input_branch, block, graph, input_num ,reduction)
+            ResGCNInputBranch(input_branch, block, graph, input_num ,reduction)
             for _ in range(input_num)
         )
         

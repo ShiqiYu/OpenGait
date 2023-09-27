@@ -200,6 +200,9 @@ def get_transform(trf_cfg=None):
 
 # **************** For pose ****************
 class RandomSelectSequence(object):
+    """
+    Randomly select different subsequences
+    """
     def __init__(self, sequence_length=10):
         self.sequence_length = sequence_length
 
@@ -214,6 +217,9 @@ class RandomSelectSequence(object):
 
 
 class SelectSequenceCenter(object):
+    """
+    Select center subsequence
+    """
     def __init__(self, sequence_length=10):
         self.sequence_length = sequence_length
 
@@ -228,7 +234,10 @@ class SelectSequenceCenter(object):
 
 
 class MirrorPoses(object):
-    def __init__(self, probability=0.5):
+    """
+    Performing Mirror Operations
+    """
+    def __init__(self, prob=0.5):
         self.probability = probability
 
     def __call__(self, data):
