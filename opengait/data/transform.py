@@ -236,10 +236,10 @@ class MirrorPoses(object):
     Performing Mirror Operations
     """
     def __init__(self, prob=0.5):
-        self.probability = probability
+        self.prob = prob
 
     def __call__(self, data):
-        if np.random.random() <= self.probability:
+        if np.random.random() <= self.prob:
             center = np.mean(data[:, :, 0], axis=1, keepdims=True)
             data[:, :, 0] = center - data[:, :, 0] + center
 
