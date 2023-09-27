@@ -1,0 +1,98 @@
+data_cfg:
+  dataset_name: CASIA-B
+  dataset_root: your_path
+  dataset_partition: ./datasets/CASIA-B/CASIA-B.json
+  test_dataset_name: CASIA-B
+  num_workers: 8
+  remove_no_gallery: false
+  frame_threshold: 60
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 6000
+  save_name: GaitGraph1_phase1
+  sampler:
+    batch_size: 256
+    frames_num_fixed: 60
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered
+    frames_skip_num: 0
+  metric: euc
+  eval_func: evaluate_indoor_dataset
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: GaitGraph1Input
+
+loss_cfg:
+  - loss_term_weight: 1
+    temperature: 0.01
+    type:  SupConLoss_Re
+    log_prefix: SupConLoss
+
+model_cfg:
+  model: GaitGraph1
+  joint_format: coco
+  input_num: 1
+  reduction: 8
+  block: Bottleneck # Basic, initial
+  input_branch:
+    - 3
+    - 64
+    - 64
+    - 32
+  main_stream:
+    - 32
+    - 128
+    - 128
+    - 256
+    - 256
+  num_class: 128
+  tta: true
+
+optimizer_cfg:
+  lr: 0.01
+  solver: Adam
+  weight_decay: 0.00001
+
+scheduler_cfg:
+  max_lr: 0.01
+  total_steps: 6000
+  scheduler: OneCycleLR
+  div_factor: 25 
+
+trainer_cfg:
+  enable_float16: false
+  log_iter: 1000
+  with_test: true
+  restore_ckpt_strict: false
+  restore_hint: 0
+  save_iter: 1000
+  save_name: GaitGraph1_phase1
+  sync_BN: true
+  total_iter: 6000
+  sampler:
+    batch_shuffle: true
+    frames_num_fixed: 100
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered #Repeat sample
+    frames_skip_num: 0
+    batch_size: 128
+    type: CommonSampler
+  transform:
+    - type: TwoView
+      trf_cfg:
+        - type: InversePosesPre
+          probability: 0.1
+        - type: FlipSequence
+          probability: 0.5
+        - type: RandomSelectSequence
+          sequence_length: 60
+        - type: PointNoise
+          std: 0.05
+        - type: JointNoise
+          std: 0.2
+        - type: GaitGraph1Input

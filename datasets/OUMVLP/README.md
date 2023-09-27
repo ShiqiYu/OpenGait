@@ -35,14 +35,26 @@ python datasets/OUMVLP/extractor.py --input_path Path_of_OUMVLP-base --output_pa
             ......
         ......
     ```
-Step3 : To rearrange directory of OUMVLP dataset, turning to id-type-view structure, Run 
+Step3-1 : To rearrange directory of OUMVLP dataset(for silhouette), turning to id-type-view structure, Run 
 ```
 python datasets/OUMVLP/rearrange_OUMVLP.py --input_path Path_of_OUMVLP-raw --output_path Path_of_OUMVLP-rearranged
 ```  
+Step3-2 : To rearrange directory of OUMVLP dataset(for pose), turning to id-type-view structure, Run 
+```
+python datasets/OUMVLP/rearrange_OUMVLP_pose.py --input_path Path_of_OUMVLP-pose --output_path Path_of_OUMVLP-pose-rearranged
+```  
 
-Step4: Transforming images to pickle file, run 
+Step4-1: Transforming images to pickle file, run 
 ```
 python datasets/pretreatment.py --input_path Path_of_OUMVLP-rearranged --output_path Path_of_OUMVLP-pkl
+```
+Step4-2: Transforming pose txts to pickle file, run 
+```
+python datasets/pretreatment.py --input_path Path_of_GREW-pose-rearranged --output_path Path_of_GREW-pose-pkl --pose --dataset GREW
+```
+gernerate the 17 Number of Pose Points Format from 18 Number of Pose Points
+```
+python datasets/OUMVLP/rearrange_OUMVLP_pose.py --input_path Path_of_OUMVLP-pose18 --output_path Path_of_OUMVLP-pose17
 ```
 
 - Processed

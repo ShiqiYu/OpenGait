@@ -1,0 +1,92 @@
+data_cfg:
+  dataset_name: OUMVLP
+  dataset_root: your_path
+  dataset_partition: ./datasets/OUMVLP/OUMVLP.json
+  num_workers: 1
+  remove_no_gallery: false
+  test_dataset_name: OUMVLP
+  frame_threshold: 0
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 150000
+  save_name: GaitTR
+  eval_func: evaluate_indoor_dataset
+  sampler:
+    batch_size: 4 #should same to num_gpus
+    sample_type: all_ordered
+    type: InferenceSampler
+  metric: euc # cos
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: GaitTRMultiInput
+          joint_format: alphapose
+        - type: SkeletonInput
+
+loss_cfg:
+  type: TripletLoss
+  margin: 0.3
+  log_prefix: triplet
+
+model_cfg:
+  model: GaitTR
+  in_channels:
+    - 10
+    - 64
+    - 64
+    - 128
+    - 256
+  num_class: 256
+  joint_format: alphapose
+
+
+optimizer_cfg:
+  lr: 0.001
+  solver: Adam
+  weight_decay: 0.00002
+
+scheduler_cfg:
+  three_phase: True
+  max_lr: 0.001
+  div_factor: 100
+  final_div_factor: 1000.0
+  total_steps: 150000
+  pct_start: 0.475 
+  scheduler: OneCycleLR
+
+trainer_cfg:
+  enable_float16: false #not use
+  log_iter: 100
+  with_test: true
+  restore_ckpt_strict: false
+  restore_hint: 0
+  save_iter: 5000
+  save_name: GaitTR
+  sync_BN: true
+  total_iter: 150000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 32
+      - 16
+    frames_num_fixed: 60
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered #Repeat sample
+    frames_skip_num: 0 
+    type: TripletSampler
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: PointNoise
+          std: 0.3
+        - type: InversePosesPre
+          joint_format: alphapose
+          probability: 0.1
+        - type: JointNoise
+          std: 0.3
+        - type: GaitTRMultiInput
+          joint_format: alphapose
+        - type: SkeletonInput

@@ -1,0 +1,103 @@
+data_cfg:
+  dataset_name: CCPG
+  dataset_root: your_path
+  dataset_partition: ./datasets/CCPG/CCPG.json
+  test_dataset_name: CCPG
+  num_workers: 8
+  remove_no_gallery: false
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 2000
+  save_name: GaitGraph2_CCPG
+  sampler:
+    batch_size: 256 
+    frames_num_fixed: 30
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered
+    frames_skip_num: 0
+  metric: cos
+  eval_func: evaluate_CCPG
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: NormalizeEmpty
+        - type: GaitGraphMultiInput
+          joint_format: alphapose
+      
+
+loss_cfg:
+  - loss_term_weight: 1
+    temperature: 0.01
+    type:  SupConLoss_Lp
+    log_prefix: SupConLoss
+
+model_cfg:
+  model: GaitGraph2
+  joint_format: alphapose
+  input_num: 3
+  reduction: 4
+  block: Bottleneck # Basic, initial
+  input_branch:
+    - 5
+    - 64
+    - 32
+  main_stream:
+    - 32
+    - 128
+    - 256
+  num_class: 128
+  tta: true
+
+optimizer_cfg:
+  lr: 0.005
+  solver: Adam
+  weight_decay: 0.00001
+
+scheduler_cfg:
+  three_phase: True
+  max_lr: 0.005
+  total_steps: 2000
+  scheduler: OneCycleLR
+
+trainer_cfg:
+  enable_float16: false 
+  log_iter: 20
+  with_test: true
+  restore_ckpt_strict: false
+  restore_hint: 0
+  save_iter: 200
+  save_name: GaitGraph2
+  sync_BN: true
+  total_iter:  2000
+  sampler:
+    batch_shuffle: true
+    frames_num_fixed: 60
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered #Repeat sample
+    frames_skip_num: 0
+    batch_size: 768
+    type: CommonSampler
+
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: NormalizeEmpty
+        - type: FlipSequence
+          probability: 0.5
+        - type: InversePosesPre
+          probability: 0.1
+          joint_format: alphapose
+        - type:  JointNoise
+          std: 0.1
+        - type: PointNoise
+          std: 0.05
+        - type: RandomMove
+          random_r:
+            - 3
+            - 1
+        - type: GaitGraphMultiInput
+          joint_format: alphapose

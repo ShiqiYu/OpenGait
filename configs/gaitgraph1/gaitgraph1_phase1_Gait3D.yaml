@@ -1,0 +1,100 @@
+data_cfg:
+  dataset_name: Gait3D
+  dataset_root: your_path
+  dataset_partition: ./datasets/Gait3D/Gait3D.json
+  test_dataset_name: Gait3D
+  num_workers: 8
+  remove_no_gallery: false
+  frame_threshold: 24
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 20000
+  save_name: GaitGraph1_phase1
+  sampler:
+    batch_size: 256
+    frames_num_fixed: 130
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered
+    frames_skip_num: 0
+  metric: euc
+  eval_func: evaluate_Gait3D
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: SelectSequenceCenter
+          sequence_length: 24
+        - type: GaitGraph1Input
+
+loss_cfg:
+  - loss_term_weight: 1
+    temperature: 0.01
+    type:  SupConLoss_Re
+    log_prefix: SupConLoss
+
+model_cfg:
+  model: GaitGraph1
+  joint_format: coco
+  input_num: 1
+  reduction: 8
+  block: Bottleneck # Basic, initial
+  input_branch:
+    - 3
+    - 64
+    - 64
+    - 32
+  main_stream:
+    - 32
+    - 128
+    - 128
+    - 256
+    - 256
+  num_class: 128
+  tta: true
+
+optimizer_cfg:
+  lr: 0.01
+  solver: Adam
+  weight_decay: 0.00001
+
+scheduler_cfg:
+  max_lr: 0.01
+  total_steps: 20000
+  scheduler: OneCycleLR
+
+trainer_cfg:
+  enable_float16: false
+  log_iter: 100
+  with_test: true
+  restore_ckpt_strict: false
+  restore_hint: 0
+  save_iter: 500
+  save_name: GaitGraph1_phase1
+  sync_BN: true
+  total_iter: 20000
+  sampler:
+    batch_shuffle: true
+    frames_num_fixed: 130
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered #Repeat sample
+    frames_skip_num: 0
+    batch_size: 128
+    type: CommonSampler
+  transform:
+    - type: TwoView
+      trf_cfg:
+        - type: MirrorPoses
+          probability: 0.5
+        - type: FlipSequence
+          probability: 0.5
+        - type: RandomSelectSequence
+          sequence_length: 16
+        - type: PointNoise
+          std: 0.05
+        - type: JointNoise
+          std: 0.1
+        - type: GaitGraph1Input
+

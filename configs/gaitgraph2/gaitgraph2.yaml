@@ -1,0 +1,97 @@
+data_cfg:
+  dataset_name: CASIA-B
+  dataset_root: your_path
+  dataset_partition: ./datasets/CASIA-B/CASIA-B.json
+  test_dataset_name: CASIA-B
+  num_workers: 8
+  remove_no_gallery: false
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 500
+  save_name: GaitGraph2
+  sampler:
+    batch_size: 256 
+    frames_num_fixed: 60
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered
+    frames_skip_num: 0
+  metric: cos
+  eval_func: evaluate_indoor_dataset
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: NormalizeEmpty
+        - type: GaitGraphMultiInput
+
+loss_cfg:
+  - loss_term_weight: 1
+    temperature: 0.01
+    type:  SupConLoss_Lp
+    log_prefix: SupConLoss
+
+model_cfg:
+  model: GaitGraph2
+  joint_format: coco
+  input_num: 3
+  reduction: 8
+  block: Bottleneck # Basic, initial
+  input_branch:
+    - 5
+    - 64
+    - 32
+  main_stream:
+    - 32
+    - 128
+    - 256
+  num_class: 128
+  tta: true
+
+optimizer_cfg:
+  lr: 0.005 #0.005
+  solver: AdamW
+  weight_decay: 0.00001
+
+scheduler_cfg:
+  max_lr: 0.005
+  total_steps: 500
+  scheduler: OneCycleLR
+
+trainer_cfg:
+  enable_float16: false
+  log_iter: 100
+  with_test: true
+  restore_ckpt_strict: false
+  restore_hint: 0
+  save_iter: 100
+  save_name: GaitGraph2
+  sync_BN: true
+  total_iter: 500
+  sampler:
+    batch_shuffle: true
+    frames_num_fixed: 60
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_ordered #Repeat sample
+    frames_skip_num: 0
+    batch_size: 768
+    type: CommonSampler
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: NormalizeEmpty
+        - type: FlipSequence
+          probability: 0.5
+        - type: InversePosesPre
+          probability: 0.1
+        - type:  JointNoise
+          std: 0.25
+        - type: PointNoise
+          std: 0.05
+        - type: RandomMove
+          random_r:
+                    - 4
+                    - 1
+        - type: GaitGraphMultiInput
