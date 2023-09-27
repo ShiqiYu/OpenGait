@@ -210,8 +210,7 @@ class RandomSelectSequence(object):
         try:
             start = np.random.randint(0, data.shape[0] - self.sequence_length)
         except ValueError:
-            print(data.shape[0])
-            raise ValueError
+            raise ValueError("The sequence length of data is too short, which does not meet the requirements.")
         end = start + self.sequence_length
         return data[start:end]
 
@@ -227,8 +226,7 @@ class SelectSequenceCenter(object):
         try:
             start = int((data.shape[0]/2) - (self.sequence_length / 2))
         except ValueError:
-            print(data.shape[0])
-            raise ValueError
+            raise ValueError("The sequence length of data is too short, which does not meet the requirements.")
         end = start + self.sequence_length
         return data[start:end]
 
