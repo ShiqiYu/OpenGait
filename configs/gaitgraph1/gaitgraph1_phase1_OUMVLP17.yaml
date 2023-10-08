@@ -26,7 +26,7 @@ evaluator_cfg:
       trf_cfg:
         - type: SelectSequenceCenter
           sequence_length: 17
-        - type: SkeletonInput
+        - type: GaitGraph1Input
 
 loss_cfg:
   - loss_term_weight: 1
