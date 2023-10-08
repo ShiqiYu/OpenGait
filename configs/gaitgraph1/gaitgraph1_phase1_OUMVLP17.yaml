@@ -11,7 +11,7 @@ evaluator_cfg:
   enable_float16: false
   restore_ckpt_strict: true
   restore_hint: 150000
-  save_name: GaitGraph1_phase1
+  save_name: GaitGraph1_phase1_17
   sampler:
     batch_size: 256
     frames_num_fixed: 25
@@ -71,7 +71,7 @@ trainer_cfg:
   restore_ckpt_strict: false
   restore_hint: 0
   save_iter: 10000
-  save_name: GaitGraph1_phase1
+  save_name: GaitGraph1_phase1_17
   sync_BN: true
   total_iter: 150000
   sampler:
