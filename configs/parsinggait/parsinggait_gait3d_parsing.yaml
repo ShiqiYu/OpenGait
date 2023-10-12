@@ -1,7 +1,7 @@
 data_cfg:
   dataset_name: Gait3D-Parsing
   dataset_root: your_path
-  dataset_partition: ./datasets/Gait3D-Parsing/Gait3D.json
+  dataset_partition: ./datasets/Gait3D/Gait3D.json # Uses the same Gait3D.json as Gait3D dataset
   # data_in_use: [true, false]
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it

@@ -4,7 +4,7 @@ This is the pre-processing instructions for the Gait3D-Parsing dataset. The orig
 https://github.com/Gait3D/Gait3D-Benchmark#data-preparation
 ## Data Pretreatment
 ```python
-python datasets/pretreatment_gps.py -i 'Gait3D/2D_Parsings' -o 'Gait3D-pars-64-64-pkl' -r 64 -p
+python datasets/Gait3D-Parsing/pretreatment_gps.py -i 'Gait3D/2D_Parsings' -o 'Gait3D-pars-64-64-pkl' -r 64 -p
 ```
 
 ## Train
