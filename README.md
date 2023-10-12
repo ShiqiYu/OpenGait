@@ -10,7 +10,7 @@
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## What's New
-- **[Oct 2023]** [Pose-based gait recognition](https://github.com/BNU-IVC/FastPoseGait) is supported in [OpenGait/opengait/modeling/models](https://github.com/ShiqiYu/OpenGait/tree/master/opengait/modeling/models).
+- **[Oct 2023]** [Pose-based gait recognition](https://github.com/BNU-IVC/FastPoseGait) is supported in [OpenGait/opengait/modeling/models](./opengait/modeling/models). The relevant model zoo is [here](./docs/1.1.skeleton_model_zoo.md).
 - **[July 2023]** [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG).
 - **[July 2023]** [SUSTech1K](https://lidargait.github.io) is released and supported in [datasets/SUSTech1K](./datasets/SUSTech1K).
 - [May 2023] A real gait recognition system [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) provided by [Dongyang Jin](https://github.com/jdyjjj) is avaliable.
