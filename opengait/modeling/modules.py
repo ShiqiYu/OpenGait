@@ -351,9 +351,7 @@ class Graph():
 
         else:
             num_node, neighbor_link, connect_joint, parts = 0, [], [], []
-            logging.info('')
-            logging.error('Error: Do NOT exist this dataset: {}!'.format(self.dataset))
-            raise ValueError()
+            raise ValueError('Error: Do NOT exist this dataset: {}!'.format(self.dataset))
         self_link = [(i, i) for i in range(num_node)]
         edge = self_link + neighbor_link
         return num_node, edge, connect_joint, parts
