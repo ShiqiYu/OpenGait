@@ -10,6 +10,7 @@
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## What's New
+- **[Oct 2023]** [Pose-based gait recognition](https://github.com/BNU-IVC/FastPoseGait) is supported in [OpenGait/opengait/modeling/models](https://github.com/ShiqiYu/OpenGait/tree/master/opengait/modeling/models).
 - **[July 2023]** [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG).
 - **[July 2023]** [SUSTech1K](https://lidargait.github.io) is released and supported in [datasets/SUSTech1K](./datasets/SUSTech1K).
 - [May 2023] A real gait recognition system [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) provided by [Dongyang Jin](https://github.com/jdyjjj) is avaliable.
@@ -62,7 +63,10 @@ Results and models are available in the [model zoo](docs/1.model_zoo.md).
 - GaitGL: [Beibei Lin (林贝贝)](https://scholar.google.com/citations?user=KyvHam4AAAAJ&hl=en&oi=ao)
 - GREW: [GREW TEAM](https://www.grew-benchmark.org)
 
+- FastPoseGait Team: [FastPoseGait Team](https://github.com/BNU-IVC/FastPoseGait)
+
 ## Citation
+
 ```
 @InProceedings{Fan_2023_CVPR,
     author    = {Fan, Chao and Liang, Junhao and Shen, Chuanfu and Hou, Saihui and Huang, Yongzhen and Yu, Shiqi},
