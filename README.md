@@ -49,9 +49,12 @@ Please see [0.get_started.md](docs/0.get_started.md). We also provide the follow
 - [Advanced usages](docs/5.advanced_usages.md) 
 
 ## Model Zoo
-Results and models of appearance-based gait recognition are available in the [model zoo](docs/1.model_zoo.md).
 
-Results and models of  Pose-based gait recognition are available [here](./docs/1.1.skeleton_model_zoo.md).
+[![Hugging Face Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-ffab41)](https://huggingface.co/opengait/OpenGait/)
+
+Results of appearance-based gait recognition are available [here](docs/1.model_zoo.md).
+
+Results of pose-based gait recognition are available [here](./docs/1.1.skeleton_model_zoo.md).
 
 
 ## Authors:
