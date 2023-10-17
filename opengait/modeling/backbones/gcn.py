@@ -2,8 +2,6 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from torch.nn.parameter import Parameter
-from torch.nn.modules.module import Module
-
 import math
 
 
@@ -19,7 +17,7 @@ class Normalize(nn.Module):
         return out
 
 
-class GraphConvolution(Module):
+class GraphConvolution(nn.Module):
     """
     Simple GCN layer, similar to https://arxiv.org/abs/1609.02907
     """
