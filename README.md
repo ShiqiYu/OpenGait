@@ -10,6 +10,7 @@
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## What's New
+- **[Oct 2023]** [Pose-based gait recognition](https://github.com/BNU-IVC/FastPoseGait) is supported in [OpenGait/opengait/modeling/models](./opengait/modeling/models).
 - **[July 2023]** [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG).
 - **[July 2023]** [SUSTech1K](https://lidargait.github.io) is released and supported in [datasets/SUSTech1K](./datasets/SUSTech1K).
 - [May 2023] A real gait recognition system [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) provided by [Dongyang Jin](https://github.com/jdyjjj) is avaliable.
@@ -48,11 +49,17 @@ Please see [0.get_started.md](docs/0.get_started.md). We also provide the follow
 - [Advanced usages](docs/5.advanced_usages.md) 
 
 ## Model Zoo
-Results and models are available in the [model zoo](docs/1.model_zoo.md).
+
+[![Hugging Face Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-ffab41)](https://huggingface.co/opengait/OpenGait/)
+
+Results of appearance-based gait recognition are available [here](docs/1.model_zoo.md).
+
+Results of pose-based gait recognition are available [here](./docs/1.1.skeleton_model_zoo.md).
 
 
 ## Authors:
 **Open Gait Team (OGT)**
+
 - [Chao Fan (樊超)](https://chaofan996.github.io), 12131100@mail.sustech.edu.cn
 - [Chuanfu Shen (沈川福)](https://chuanfushen.github.io), 11950016@mail.sustech.edu.cn
 - [Junhao Liang (梁峻豪)](https://faculty.sustech.edu.cn/?p=95401&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12132342@mail.sustech.edu.cn
@@ -62,7 +69,10 @@ Results and models are available in the [model zoo](docs/1.model_zoo.md).
 - GaitGL: [Beibei Lin (林贝贝)](https://scholar.google.com/citations?user=KyvHam4AAAAJ&hl=en&oi=ao)
 - GREW: [GREW TEAM](https://www.grew-benchmark.org)
 
+- FastPoseGait Team: [FastPoseGait Team](https://github.com/BNU-IVC/FastPoseGait)
+
 ## Citation
+
 ```
 @InProceedings{Fan_2023_CVPR,
     author    = {Fan, Chao and Liang, Junhao and Shen, Chuanfu and Hou, Saihui and Huang, Yongzhen and Yu, Shiqi},
