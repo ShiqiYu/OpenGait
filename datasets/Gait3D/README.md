@@ -5,7 +5,7 @@ https://github.com/Gait3D/Gait3D-Benchmark#data-preparation
 ## Data Pretreatment
 ```python
 python datasets/pretreatment.py --input_path 'Gait3D/2D_Silhouettes' --output_path 'Gait3D-sils-64-64-pkl'
-python datasets/pretreatment_smpl.py --input_path 'Gait3D/3D_SMPLs' --output_path 'Gait3D-smpls-pkl'
+python datasets/Gait3D/pretreatment_smpl.py --input_path 'Gait3D/3D_SMPLs' --output_path 'Gait3D-smpls-pkl'
 
 (optional) python datasets/pretreatment.py --input_path 'Gait3D/2D_Silhouettes' --img_size 128 --output_path 'Gait3D-sils-128-128-pkl'
 

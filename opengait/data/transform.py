@@ -25,6 +25,23 @@ class BaseSilTransform():
         return x / self.divsor
 
 
+class BaseParsingCuttingTransform():
+    def __init__(self, divsor=255.0, cutting=None):
+        self.divsor = divsor
+        self.cutting = cutting
+
+    def __call__(self, x):
+        if self.cutting is not None:
+            cutting = self.cutting
+        else:
+            cutting = int(x.shape[-1] // 64) * 10
+        x = x[..., cutting:-cutting]
+        if x.max() == 255 or x.max() == 255.:
+            return x / self.divsor
+        else:
+            return x / 1.0
+
+
 class BaseSilCuttingTransform():
     def __init__(self, divsor=255.0, cutting=None):
         self.divsor = divsor

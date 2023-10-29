@@ -1,0 +1,97 @@
+data_cfg:
+  dataset_name: Gait3D-Parsing
+  dataset_root: your_path
+  dataset_partition: ./datasets/Gait3D/Gait3D.json # Uses the same Gait3D.json as Gait3D dataset
+  num_workers: 1
+  cache: false
+  remove_no_gallery: false
+  test_dataset_name: Gait3D-Parsing
+
+evaluator_cfg:
+  enable_distributed: true
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 180000
+  save_name: GLN_P1
+  eval_func: evaluate_Gait3D
+  metric: cos
+  sampler:
+    batch_size: 8
+    sample_type: all_ordered
+    type: InferenceSampler
+  transform:
+    - type: BaseParsingCuttingTransform
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  # - loss_term_weight: 0.1
+  #   scale: 1
+  #   type: CrossEntropyLoss
+  #   log_prefix: softmax
+
+model_cfg:
+  model: GLN
+  class_num: 3000
+  lateral_dim : 256
+  hidden_dim : 256
+  dropout : 0.9
+  in_channels:
+    - 1
+    - 32
+    - 64
+    - 128
+  SeparateFCs:
+    in_channels: 256
+    out_channels: 256
+    parts_num: 93
+  bin_num:
+    - 16
+    - 8
+    - 4
+    - 2
+    - 1
+  Lateral_pretraining: true
+
+optimizer_cfg:
+  lr: 0.001
+  momentum: 0.9
+  solver: Adam
+  weight_decay: 0.0005
+  # lr: 0.0001
+  # momentum: 0.9
+  # solver: Adam
+  # weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 30000
+    - 90000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true
+  fix_layers: false
+  with_test: false
+  log_iter: 100
+  optimizer_reset: false
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 30000
+  save_name: GLN_P1
+  sync_BN: true
+  total_iter: 180000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 32
+      - 4
+    frames_num_fixed: 30
+    frames_skip_num: 0
+    sample_type: fixed_ordered
+    type: TripletSampler
+  transform:
+    - type: BaseParsingCuttingTransform
