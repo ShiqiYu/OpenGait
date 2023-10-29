@@ -83,4 +83,4 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 The result will be generated in your working directory, you must rename and compress it as the requirements before submitting.
 
 ## Evaluation locally
-While the original grew treat both seq_01 and seq_02 as gallery, but there is no ground truth for probe. Therefore, it is nessesary to upload the submission file on grew competitation. We seperate test set to: seq_01 as gallery, seq_02 as probe. Then you can modify `eval_func` in the `./config/baseline/baseline_GREW.yaml` to `identification_real_scene`, you can obtain result localy like setting of OUMVLP. 
+While the original grew treat both seq_01 and seq_02 as gallery, but there is no ground truth for probe. Therefore, it is nessesary to upload the submission file on grew competitation. We seperate test set to: seq_01 as gallery, seq_02 as probe. Then you can modify `eval_func` in the `./config/baseline/baseline_GREW.yaml` to `evaluate_real_scene`, you can obtain result localy like setting of OUMVLP. 
