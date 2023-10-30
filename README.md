@@ -72,6 +72,8 @@ Results of pose-based gait recognition are available [here](./docs/1.1.skeleton_
 
 - FastPoseGait Team: [FastPoseGait Team](https://github.com/BNU-IVC/FastPoseGait)
 
+- Gait3D Team: [Gait3D Team](https://gait3d.github.io/)
+
 ## Citation
 
 ```
