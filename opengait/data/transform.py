@@ -35,7 +35,8 @@ class BaseParsingCuttingTransform():
             cutting = self.cutting
         else:
             cutting = int(x.shape[-1] // 64) * 10
-        x = x[..., cutting:-cutting]
+        if cutting != 0: 
+            x = x[..., cutting:-cutting]
         if x.max() == 255 or x.max() == 255.:
             return x / self.divsor
         else:
@@ -52,7 +53,8 @@ class BaseSilCuttingTransform():
             cutting = self.cutting
         else:
             cutting = int(x.shape[-1] // 64) * 10
-        x = x[..., cutting:-cutting]
+        if cutting != 0: 
+            x = x[..., cutting:-cutting]
         return x / self.divsor
 
 
@@ -214,8 +216,115 @@ def get_transform(trf_cfg=None):
         return transform
     raise "Error type for -Transform-Cfg-"
 
+# **************** For GaitSSB ****************
+# Fan, et al: Learning Gait Representation from Massive Unlabelled Walking Videos: A Benchmark, T-PAMI2023
 
-# **************** For pose ****************
+class RandomPartDilate():
+    def __init__(self, prob=0.5, top_range=(12, 16), bot_range=(36, 40)):
+        self.prob = prob
+        self.top_range = top_range
+        self.bot_range = bot_range
+        self.modes_and_kernels = {
+            'RECT': [[5, 3], [5, 5], [3, 5]],
+            'CROSS': [[3, 3], [3, 5], [5, 3]],
+            'ELLIPSE': [[3, 3], [3, 5], [5, 3]]}
+        self.modes = list(self.modes_and_kernels.keys())
+
+    def __call__(self, seq):
+        '''
+            Using the image dialte and affine transformation to simulate the clorhing change cases.
+        Input:
+            seq: a sequence of silhouette frames, [s, h, w]
+        Output:
+            seq: a sequence of agumented frames, [s, h, w]
+        '''
+        if random.uniform(0, 1) >= self.prob:
+                return seq
+        else:
+            mode = random.choice(self.modes)
+            kernel_size = random.choice(self.modes_and_kernels[mode])
+            top = random.randint(self.top_range[0], self.top_range[1])
+            bot = random.randint(self.bot_range[0], self.bot_range[1])
+
+            seq = seq.transpose(1, 2, 0) # [s, h, w] -> [h, w, s]
+            _seq_ = seq.copy()
+            _seq_ = _seq_[top:bot, ...]
+            _seq_ = self.dilate(_seq_, kernel_size=kernel_size, mode=mode)
+            seq[top:bot, ...] = _seq_
+            seq = seq.transpose(2, 0, 1) # [h, w, s] -> [s, h, w]
+            return seq
+
+    def dilate(self, img, kernel_size=[3, 3], mode='RECT'):
+        '''
+            MORPH_RECT, MORPH_CROSS, ELLIPSE
+        Input:
+            img: [h, w]
+        Output:
+            img: [h, w]
+        '''
+        assert mode in ['RECT', 'CROSS', 'ELLIPSE']
+        kernel = cv2.getStructuringElement(getattr(cv2, 'MORPH_'+mode), kernel_size)
+        dst = cv2.dilate(img, kernel)
+        return dst
+
+class RandomPartBlur():
+    def __init__(self, prob=0.5, top_range=(9, 20), bot_range=(29, 40), per_frame=False):
+        self.prob = prob
+        self.top_range = top_range
+        self.bot_range = bot_range
+        self.per_frame = per_frame
+
+    def __call__(self, seq):
+        '''
+        Input:
+            seq: a sequence of silhouette frames, [s, h, w]
+        Output:
+            seq: a sequence of agumented frames, [s, h, w]
+        '''
+        if not self.per_frame:
+            if random.uniform(0, 1) >= self.prob:
+                return seq
+            else:
+                top = random.randint(self.top_range[0], self.top_range[1])
+                bot = random.randint(self.bot_range[0], self.bot_range[1])
+
+                seq = seq.transpose(1, 2, 0) # [s, h, w] -> [h, w, s]
+                _seq_ = seq.copy()
+                _seq_ = _seq_[top:bot, ...]
+                _seq_ = cv2.GaussianBlur(_seq_, ksize=(3, 3), sigmaX=0)
+                _seq_ = (_seq_ > 0.2).astype(np.float)
+                seq[top:bot, ...] = _seq_
+                seq = seq.transpose(2, 0, 1) # [h, w, s] -> [s, h, w]
+
+            return seq
+        else:
+            self.per_frame = False
+            frame_num = seq.shape[0]
+            ret = [self.__call__(seq[k][np.newaxis, ...]) for k in range(frame_num)]
+            self.per_frame = True
+            return np.concatenate(ret, 0)
+
+def DA4GaitSSB(
+    cutting = None,
+    ra_prob = 0.2,
+    rp_prob = 0.2,
+    rhf_prob = 0.5,
+    rpd_prob = 0.2,
+    rpb_prob = 0.2,
+    top_range = (9, 20),
+    bot_range = (39, 50),
+):
+    transform = T.Compose([
+            RandomAffine(prob=ra_prob),
+            RandomPerspective(prob=rp_prob),
+            BaseSilCuttingTransform(cutting=cutting),
+            RandomHorizontalFlip(prob=rhf_prob),
+            RandomPartDilate(prob=rpd_prob, top_range=top_range, bot_range=bot_range),
+            RandomPartBlur(prob=rpb_prob, top_range=top_range, bot_range=bot_range),
+    ])
+    return transform
+
+# **************** For pose-based methods ****************
 class RandomSelectSequence(object):
     """
     Randomly select different subsequences
