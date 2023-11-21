@@ -46,6 +46,7 @@ scheduler_cfg:
   scheduler: MultiStepLR
 
 trainer_cfg:
+  find_unused_parameters: false
   enable_float16: true
   with_test: false
   fix_BN: false
