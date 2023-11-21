@@ -1,15 +1,17 @@
 data_cfg:
   dataset_name: GaitLU-1M
-  dataset_root: /your/path/to/GaitLU-1M
-  dataset_partition: ./datasets/GaitLU-1M/GaitLU-1M.json
+  dataset_root: your_path
+  dataset_partition: ./datasets/GREW/GREW.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: GREW
 
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
   restore_hint: 150000
   save_name: GaitSSB_Pretrain
+  eval_func: GREW_submission
   sampler:
     batch_shuffle: false
     batch_size: 16
@@ -17,7 +19,7 @@ evaluator_cfg:
     frames_all_limit: 720 # limit the number of sampled frames to prevent out of memory
   metric: euc # cos
   transform:
-    - type: BaseSilTransform
+    - type: BaseSilCuttingTransform
 
 loss_cfg:
   - loss_term_weight: 1.0
