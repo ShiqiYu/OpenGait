@@ -55,7 +55,8 @@ If you use this dataset in your research, please cite the following paper:
   volume={45},
   number={12},
   pages={14920-14937},
-  doi={10.1109/TPAMI.2023.3312419}}
+  doi={10.1109/TPAMI.2023.3312419}
+}
 ```
 If you think OpenGait is useful, please cite the following paper:
 ```
