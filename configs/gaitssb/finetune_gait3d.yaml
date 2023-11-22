@@ -1,0 +1,95 @@
+data_cfg:
+  dataset_name: Gait3D
+  dataset_root: your_path
+  dataset_partition: ./datasets/Gait3D/Gait3D.json
+  num_workers: 1
+  remove_no_gallery: false # Remove probe if no gallery for it
+
+evaluator_cfg:
+  enable_float16: true
+  restore_ckpt_strict: true
+  restore_hint: 12000
+  save_name: GaitSSB_Finetune
+  eval_func: evaluate_Gait3D
+  sampler:
+    batch_shuffle: false
+    batch_size: 4
+    sample_type: all_ordered # all indicates whole sequence used to test, while ordered means input sequence by its natural order; Other options:   fixed_unordered
+    frames_all_limit: 720 # limit the number of sampled frames to prevent out of memory
+  metric: euc # cos
+  transform:
+    - type: BaseSilTransform
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.3
+    type: TripletLoss
+    log_prefix: triplet
+
+model_cfg:
+  model: GaitSSB_Finetune
+  backbone_cfg:
+    type: ResNet9
+    block: BasicBlock
+    channels: # Layers configuration for automatically model construction
+      - 64
+      - 128
+      - 256
+      - 512
+    layers:
+      - 1
+      - 1
+      - 1
+      - 1
+    strides:
+      - 1
+      - 2
+      - 2
+      - 1
+    maxpool: false
+  parts_num: 31
+  backbone_lr: 
+    - 0. 
+    - 0.001
+    - 0.001
+    - 0.001
+  projector_lr: 0.01
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones: # Learning Rate Reduction at each milestones
+    - 6000
+    - 8000
+    - 10000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  find_unused_parameters: true
+  enable_float16: true # half_percesion float for memory reduction and speedup
+  fix_BN: true
+  with_test: false
+  log_iter: 100
+  optimizer_reset: true
+  restore_ckpt_strict: false
+  restore_hint: ./output/GaitLU-1M/GaitSSB_Pretrain/GaitSSB_Pretrain/checkpoints/GaitSSB_Pretrain-150000.pt
+  save_iter: 2000
+  save_name: GaitSSB_Finetune
+  sync_BN: true
+  total_iter: 12000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 64  # TripletSampler, batch_size[0] indicates Number of Identity
+      - 4 # batch_size[1] indicates Samples sequqnce for each Identity
+    frames_num_fixed: 30 # fixed frames number for training
+    sample_type: fixed_unordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    frames_skip_num: 4
+    type: TripletSampler
+  transform:
+    - type: BaseSilTransform

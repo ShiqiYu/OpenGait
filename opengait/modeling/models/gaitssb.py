@@ -140,3 +140,141 @@ class GaitSSB_Pretrain(BaseModel):
         rank   = torch.distributed.get_rank()
         labels = torch.arange(rank*n, (rank+1)*n, dtype=torch.long).cuda()
         return logits, labels
+
+import torch.optim as optim
+import numpy as np
+from utils import get_valid_args, list2var
+
+class no_grad(torch.no_grad):
+    def __init__(self, enable=True):
+        super(no_grad, self).__init__()
+        self.enable = enable
+
+    def __enter__(self):
+        if self.enable:
+            super().__enter__()
+        else:
+            pass
+
+    def __exit__(self, *args):
+        if self.enable:
+            super().__exit__(*args)
+        else:
+            pass
+
+class GaitSSB_Finetune(BaseModel):
+    def __init__(self, cfgs, training=True):
+        super(GaitSSB_Finetune, self).__init__(cfgs, training=training)
+
+    def build_network(self, model_cfg):
+        self.p = model_cfg['parts_num']
+        self.Backbone = self.get_backbone(model_cfg['backbone_cfg'])
+        self.Backbone = SetBlockWrapper(self.Backbone)
+
+        self.TP = PackSequenceWrapper(torch.max)
+        self.HPP = HorizontalPoolingPyramid([16, 8, 4, 2, 1])
+
+        out_channels = model_cfg['backbone_cfg']['channels'][-1]
+        hidden_dim = out_channels
+        self.projector = nn.Sequential(SeparateFCs(self.p, out_channels, hidden_dim), 
+                                ParallelBN1d(self.p, hidden_dim), 
+                                nn.ReLU(inplace=True), 
+                                SeparateFCs(self.p, hidden_dim, out_channels), 
+                                ParallelBN1d(self.p, out_channels))
+
+        self.backbone_lr  = model_cfg['backbone_lr']
+        self.projector_lr = model_cfg['projector_lr']
+
+        self.head0 = SeparateFCs(self.p, out_channels, out_channels, norm=True)
+
+    def get_optimizer(self, optimizer_cfg):
+        optimizer = getattr(optim, optimizer_cfg['solver'])
+        valid_arg = get_valid_args(optimizer, optimizer_cfg, ['solver'])
+
+        ft_param_list  = []
+        self.fix_layer = []
+        for i, ft_lr in enumerate(self.backbone_lr):
+            if ft_lr != 0:
+                ft_param_list.append({
+                    'params': getattr(self.Backbone.forward_block, 'layer%d'%(i+1)).parameters(), 
+                    'lr': ft_lr, 
+                })
+            else:
+                self.fix_layer.append('layer%d'%(i+1))
+
+        ft_param_list.append({
+            'params': self.projector.parameters(), 
+            'lr': self.projector_lr, 
+        })
+
+        ft_param_list.append({
+            'params': self.head0.parameters(), 
+            'lr': valid_arg['lr']
+        })
+
+        optimizer = optimizer(ft_param_list, **valid_arg)
+
+        return optimizer
+
+    def encoder(self, inputs):
+        sils, seqL = inputs
+        n = sils.size(0)
+        sils = rearrange(sils, 'n c s h w -> (n s) c h w')
+
+        if not self.training:
+            self.fix_layer = ['layer1', 'layer2', 'layer3', 'layer4']
+
+        with no_grad(): 
+            outs = self.Backbone.forward_block.conv1(sils)
+            outs = self.Backbone.forward_block.bn1(outs)
+            outs = self.Backbone.forward_block.relu(outs)
+
+        with no_grad('layer1' in self.fix_layer):
+            outs = self.Backbone.forward_block.layer1(outs)
+
+        with no_grad('layer2' in self.fix_layer):
+            outs = self.Backbone.forward_block.layer2(outs)
+
+        with no_grad('layer3' in self.fix_layer):
+            outs = self.Backbone.forward_block.layer3(outs)
+
+        with no_grad('layer4' in self.fix_layer):
+            outs = self.Backbone.forward_block.layer4(outs)
+
+        outs = rearrange(outs, '(n s) c h w -> n c s h w', n=n)
+        outs = self.TP(outs, seqL, options={"dim": 2})[0] # [n, c, h, w]
+
+        feat = self.HPP(outs) # [n, c, p], Horizontal Pooling, HP
+        return feat
+
+    def forward(self, inputs):
+        if self.training:
+            self.maintain_non_zero_learning_rate()
+
+        sils, labs, typs, vies, seqL = inputs
+        sils = sils[0].unsqueeze(1)
+        feat = self.encoder([sils, seqL]) # [n, c, p]
+
+        feat = self.projector(feat) # [n, c, p]
+        feat = F.normalize(feat, dim=1)
+
+        embed = self.head0(feat) # [n, c, p]
+
+        retval = {
+            'training_feat': {
+                'triplet': {'embeddings': embed, 'labels': labs}
+            },
+            'visual_summary': {
+                'image/sils': rearrange(sils, 'n c s h w -> (n s) c h w')
+            },
+            'inference_feat': {
+                'embeddings': embed
+            }
+        }
+        return retval
+
+    def maintain_non_zero_learning_rate(self):
+        if self.iteration % 1000 == 0:
+            for param_group in self.optimizer.param_groups:
+                if param_group['lr'] < 1e-4:
+                    param_group['lr'] = 1e-4
