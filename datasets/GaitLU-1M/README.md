@@ -6,14 +6,23 @@ GaitLU-1M is extracted from public videos shot around the world, making it cover
 
 This great diversity and scale offer an excellent chance to learn general gait representation in a self-supervised manner.
 
-## Download (Coming soon)
-Download the dataset from [Baidu Yun]() or [OneDrive]() and decompress the file by following command:
-```shell
-unzip -P password GaitLU-1M.zip | xargs -n1 tar xzvf
-```
-To obtain the password, you should sign the [Release Agreement](./Release_Agreement.pdf) and [Ethical Requirement](./Ethical_Requirements.pdf) and send the signed documents to the administrator(12131100@mail.sustech.edu.cn). 
+## Download
+### Step1: 
+Download the dataset from [Baidu Yun](https://pan.baidu.com/s/1aexoZY-deZFXSuyfOOjwJg) (code: 4rat) or [OneDrive](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/noahshen_connect_hku_hk/EvFZrNKeV7VCgJKCaLay7T8Bv7TW5PHIcXWzv0XyFPliIA?e=9ZHkx9).
 
-Then you can get GaitLU-1M formatted as: 
+There are 6 sub-zip files and you can aggregate them by:
+```shell
+zip -F GaitLU_Anno_part.zip --out GaitLU_Anno.zip
+``` 
+
+### Step2: 
+Then, you can decompress the file by:
+```shell
+unzip -P password GaitLU_Anno.zip -d <output_folder>
+```
+To obtain the password, you should sign the [Release Agreement](./Release_Agreement.pdf) and [Ethical Requirement](./Ethical_Requirements.pdf) and send the signed documents to our administrator (12131100@mail.sustech.edu.cn). 
+
+Finally, you can get GaitLU-1M formatted as: 
 ```
 silhouette_cut_pkl
 ├── 000                           # Random number
@@ -27,12 +36,12 @@ silhouette_cut_pkl
 ```
 
 
-## Usage (Coming soon)
+## Usage
 For the training phase, you should modify the `dataset_root` in `configs/gaitssb/pretrain.yaml` and run the following command:
 ```shell
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs configs/gaitssb/pretrain.yaml --phase train --log_to_file
 ```
-The officially provided pretrained checkpoint can be found [here](). 
+The officially provided pretrained checkpoint can be found [here]() (Coming soon). 
 
 Then you can evaluate the pretrained model on labelled gait datasets by runing: 
 ```shell
@@ -60,12 +69,12 @@ If you use this dataset in your research, please cite the following paper:
 ```
 If you think OpenGait is useful, please cite the following paper:
 ```
-@misc{fan2022opengait,
-      title={OpenGait: Revisiting Gait Recognition Toward Better Practicality}, 
-      author={Chao Fan and Junhao Liang and Chuanfu Shen and Saihui Hou and Yongzhen Huang and Shiqi Yu},
-      year={2022},
-      eprint={2211.06597},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{Fan_2023_CVPR,
+    author    = {Fan, Chao and Liang, Junhao and Shen, Chuanfu and Hou, Saihui and Huang, Yongzhen and Yu, Shiqi},
+    title     = {OpenGait: Revisiting Gait Recognition Towards Better Practicality},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {9707-9716}
 }
 ```

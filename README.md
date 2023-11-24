@@ -3,24 +3,26 @@
 <div align="center"><img src="./assets/nm.gif" width = "100" height = "100" alt="nm" /><img src="./assets/bg.gif" width = "100" height = "100" alt="bg" /><img src="./assets/cl.gif" width = "100" height = "100" alt="cl" /></div>
 
 ------------------------------------------
+<!-- 📣📣📣 **[*GaitLU-1M*](https://ieeexplore.ieee.org/document/10242019) relseased, pls checking the [tutorial](datasets/GaitLU-1M/README.md).** 📣📣📣
 📣📣📣 **[*SUSTech1K*](https://lidargait.github.io) relseased, pls checking the [tutorial](datasets/SUSTech1K/README.md).** 📣📣📣
 
-🎉🎉🎉 **[*OpenGait*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
+🎉🎉🎉 **[*OpenGait*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉 -->
 
 OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## What's New
+- **[Nov 2023]** The first million-level unlabeled gait dataset, i.e., [GaitLU-1M](https://ieeexplore.ieee.org/document/10242019), is released and supported in [datasets/GaitLU-1M](datasets/GaitLU-1M/README.md).
 - **[Oct 2023]** Several representative pose-based methods are supported in [opengait/modeling/models](./opengait/modeling/models). This feature is mainly inherited from [FastPoseGait](https://github.com/BNU-IVC/FastPoseGait). Many thanks to the contributors😊.
 - **[July 2023]** [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG).
 - **[July 2023]** [SUSTech1K](https://lidargait.github.io) is released and supported in [datasets/SUSTech1K](./datasets/SUSTech1K).
 - [May 2023] A real gait recognition system [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) provided by [Dongyang Jin](https://github.com/jdyjjj) is available.
-- [Apr 2023] [CASIA-E](datasets/CASIA-E/README.md) is supported by OpenGait.
+<!-- - [Apr 2023] [CASIA-E](datasets/CASIA-E/README.md) is supported by OpenGait.
 - [Feb 2023] [HID 2023 competition](https://hid2023.iapr-tc4.org/) is open, welcome to participate. Additionally, the tutorial for the competition has been updated in [datasets/HID/](./datasets/HID).
 - [Dec 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
-- [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW).
+- [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Publications
-- [**TPAMI 2023**] Learning Gait Representation from Massive Unlabelled Walking Videos: A Benchmark, [*Paper*](https://ieeexplore.ieee.org/document/10242019), [*Dataset*](https://github.com/ChaoFan996/GaitSSB)(Coming soon), and [*Code*](opengait/modeling/models/gaitssb.py).
+- [**TPAMI 2023**] Learning Gait Representation from Massive Unlabelled Walking Videos: A Benchmark, [*Paper*](https://ieeexplore.ieee.org/document/10242019), [*Dataset*](datasets/GaitLU-1M/README.md), and [*Code*](opengait/modeling/models/gaitssb.py).
 - [**CVPR 2023**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_LidarGait_Benchmarking_3D_Gait_Recognition_With_Point_Clouds_CVPR_2023_paper.pdf), [*Dataset*](https://lidargait.github.io) and [*Code*](datasets/SUSTech1K/README.md).
 - [**CVPR 2023 Highlight**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf), [*Code*](configs/gaitbase).
 - [**ECCV 2022**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](), [*Code*](configs/gaitedge/README.md).
@@ -34,7 +36,7 @@ The workflow of [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) inv
 See [here](https://github.com/jdyjjj/All-in-One-Gait) for details.
 
 ## Highlighted features
-- **Mutiple Dataset supported**: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [SUSTech1K](https://lidargait.github.io), [HID](http://hid2022.iapr-tc4.org/), [GREW](https://www.grew-benchmark.org), [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark), [CCPG](https://openaccess.thecvf.com/content/CVPR2023/papers/Li_An_In-Depth_Exploration_of_Person_Re-Identification_and_Gait_Recognition_in_CVPR_2023_paper.pdf), and [CASIA-E](https://www.scidb.cn/en/detail?dataSetId=57be0e918db743279baf44a38d013a06).
+- **Multiple Dataset supported**: [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp), [OUMVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html), [SUSTech1K](https://lidargait.github.io), [HID](http://hid2022.iapr-tc4.org/), [GREW](https://www.grew-benchmark.org), [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark), [CCPG](https://openaccess.thecvf.com/content/CVPR2023/papers/Li_An_In-Depth_Exploration_of_Person_Re-Identification_and_Gait_Recognition_in_CVPR_2023_paper.pdf), [CASIA-E](https://www.scidb.cn/en/detail?dataSetId=57be0e918db743279baf44a38d013a06), and [GaitLU-1M](https://ieeexplore.ieee.org/document/10242019).
 - **Multiple Models Support**: We reproduced several SOTA methods and reached the same or even better performance. 
 - **DDP Support**: The officially recommended [`Distributed Data Parallel (DDP)`](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) mode is used during both the training and testing phases.
 - **AMP Support**: The [`Auto Mixed Precision (AMP)`](https://pytorch.org/tutorials/recipes/recipes/amp_recipe.html?highlight=amp) option is available.
