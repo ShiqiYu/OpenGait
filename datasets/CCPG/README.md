@@ -5,7 +5,7 @@ A Cloth-Changing Benchmark for Person re-identification and Gait Recognition (CC
 The original dataset can be found [here](https://github.com/BNU-IVC/CCPG). The original dataset is not publicly available. You need to request access to the dataset in order to download it.
 ## Data Pretreatment
 ```python
-python datasets/CCPG/organize_ccpg.py --sil_path 'CCPG/CCPG_D_MASK_FACE_SHOE' --rgb_path 'CCPG/CCPG_G_SIL' --output_path 'CCPG/CCPG-end2end-pkl'
+python datasets/CCPG/organize_ccpg.py --sil_path 'CCPG/CCPG_G_SIL' --rgb_path 'CCPG/CCPG_D_MASK_FACE_SHOE' --output_path 'CCPG/CCPG-end2end-pkl'
 ```
 
 ## Train
