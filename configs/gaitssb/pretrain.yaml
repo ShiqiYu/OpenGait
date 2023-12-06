@@ -89,4 +89,4 @@ trainer_cfg:
     type: BilateralSampler
   transform:
     - type: DA4GaitSSB
-      cutting: 10
+      cutting: 0
