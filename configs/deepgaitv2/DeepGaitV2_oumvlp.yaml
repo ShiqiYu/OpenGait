@@ -1,0 +1,95 @@
+data_cfg:
+  dataset_name: OUMVLP
+  dataset_root: your_path
+  dataset_partition: ./datasets/OUMVLP/OUMVLP.json
+  num_workers: 1
+  remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: OUMVLP
+
+evaluator_cfg:
+  enable_float16: true
+  restore_ckpt_strict: true
+  restore_hint: 120000
+  save_name: DeepGaitV2
+  sampler:
+    batch_shuffle: false
+    batch_size: 4
+    sample_type: all_ordered # all indicates whole sequence used to test, while ordered means input sequence by its natural order; Other options:   fixed_unordered
+    frames_all_limit: 720 # limit the number of sampled frames to prevent out of memory
+  metric: euc # cos
+  transform:
+    - type: BaseSilCuttingTransform
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weight: 1.0
+    scale: 16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+    log_accuracy: true
+
+model_cfg:
+  model: DeepGaitV2
+  Backbone:
+    in_channels: 1
+    mode: p3d
+    layers: 
+      - 1
+      - 1
+      - 1
+      - 1
+    channels: 
+      - 64
+      - 128
+      - 256
+      - 512
+  SeparateBNNecks:
+    class_num: 5153
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones: # Learning Rate Reduction at each milestones
+    - 60000
+    - 80000
+    - 100000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true # half_percesion float for memory reduction and speedup
+  fix_BN: false
+  log_iter: 100
+  with_test: false
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 30000
+  save_name: DeepGaitV2
+  sync_BN: true
+  total_iter: 120000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 32 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 8 #                 batch_size[1] indicates Samples sequqnce for each Identity
+    frames_num_fixed: 30 # fixed frames number for training
+    frames_skip_num: 4
+    sample_type: fixed_ordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    type: TripletSampler
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: RandomPerspective
+          prob: 0.2
+        - type: BaseSilCuttingTransform
+        - type: RandomHorizontalFlip
+          prob: 0.2
+        - type: RandomRotate
+          prob: 0.2
