@@ -82,7 +82,8 @@ trainer_cfg:
       - 8 # TripletSampler, batch_size[0] indicates Number of Identity
       - 8 #                 batch_size[1] indicates Samples sequqnce for each Identity
     frames_num_fixed: 10 # fixed frames number for training
-    sample_type: fixed_unordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    frames_skip_num: 4
+    sample_type: fixed_ordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
     type: TripletSampler
   transform:
     - type: Compose
