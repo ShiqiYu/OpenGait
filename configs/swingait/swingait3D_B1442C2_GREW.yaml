@@ -70,7 +70,7 @@ trainer_cfg:
   with_test: false
   optimizer_reset: True
   restore_ckpt_strict: false
-  restore_hint: /home/jdy/fanchao/OpenGait_230719/output/GREW/DeepGaitV2/DeepGaitV2_B1441_C2_P3D/checkpoints/DeepGaitV2_B1441_C2_P3D-180000.pt
+  restore_hint: ./output/GREW/DeepGaitV2/DeepGaitV2_B1441_C2_P3D/checkpoints/DeepGaitV2_B1441_C2_P3D-180000.pt
   save_iter: 20000
   save_name: SwinGait3D_B1442_C2
   sync_BN: true
