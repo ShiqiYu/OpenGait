@@ -132,15 +132,19 @@ class RandomRotate(object):
         if random.uniform(0, 1) >= self.prob:
             return seq
         else:
-            _, dh, dw = seq.shape
+            dh, dw = seq.shape[-2:]
             # rotation
             degree = random.uniform(-self.degree, self.degree)
             M1 = cv2.getRotationMatrix2D((dh // 2, dw // 2), degree, 1)
             # affine
+            if len(seq.shape) == 4:
+                seq = seq.transpose(0, 2, 3, 1)
             seq = [cv2.warpAffine(_[0, ...], M1, (dw, dh))
-                   for _ in np.split(seq, seq.shape[0], axis=0)]
+                for _ in np.split(seq, seq.shape[0], axis=0)]
             seq = np.concatenate([np.array(_)[np.newaxis, ...]
                                  for _ in seq], 0)
+            if len(seq.shape) == 4:
+                seq = seq.transpose(0, 3, 1, 2)
             return seq
 
 
@@ -152,7 +156,7 @@ class RandomPerspective(object):
         if random.uniform(0, 1) >= self.prob:
             return seq
         else:
-            _, h, w = seq.shape
+            h, w = seq.shape[-2:]
             cutting = int(w // 44) * 10
             x_left = list(range(0, cutting))
             x_right = list(range(w - cutting, w))
@@ -164,10 +168,14 @@ class RandomPerspective(object):
             canvasPoints = np.float32([[0, 0], [w, 0], [w, h], [0, h]])
             perspectiveMatrix = cv2.getPerspectiveTransform(
                 np.array(srcPoints), np.array(canvasPoints))
+            if len(seq.shape) == 4:
+                seq = seq.transpose(0, 2, 3, 1)
             seq = [cv2.warpPerspective(_[0, ...], perspectiveMatrix, (w, h))
                    for _ in np.split(seq, seq.shape[0], axis=0)]
             seq = np.concatenate([np.array(_)[np.newaxis, ...]
                                  for _ in seq], 0)
+            if len(seq.shape) == 4:
+                seq = seq.transpose(0, 3, 1, 2)
             return seq
 
 
@@ -180,7 +188,7 @@ class RandomAffine(object):
         if random.uniform(0, 1) >= self.prob:
             return seq
         else:
-            _, dh, dw = seq.shape
+            dh, dw = seq.shape[-2:]
             # rotation
             max_shift = int(dh // 64 * 10)
             shift_range = list(range(0, max_shift))
@@ -190,10 +198,14 @@ class RandomAffine(object):
                               dh-random.choice(shift_range), random.choice(shift_range)], [random.choice(shift_range), dw-random.choice(shift_range)]])
             M1 = cv2.getAffineTransform(pts1, pts2)
             # affine
+            if len(seq.shape) == 4:
+                seq = seq.transpose(0, 2, 3, 1)
             seq = [cv2.warpAffine(_[0, ...], M1, (dw, dh))
                    for _ in np.split(seq, seq.shape[0], axis=0)]
             seq = np.concatenate([np.array(_)[np.newaxis, ...]
                                  for _ in seq], 0)
+            if len(seq.shape) == 4:
+                seq = seq.transpose(0, 3, 1, 2)
             return seq
         
 # ******************************************

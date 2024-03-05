@@ -1,0 +1,25 @@
+coco18tococo17_args:
+  transfer_to_coco17: False # OU-MVLP and CCPG is True, Other is False
+
+padkeypoints_args:
+  pad_method: knn # knn or simple
+  use_conf: True # Indicates whether confidence scores.
+
+norm_args:
+  pose_format: coco # coco or openpose-x where 'x' can be either 18 or 25, indicating the number of keypoints used by the OpenPose model
+  use_conf: ${padkeypoints_args.use_conf}
+  heatmap_image_height: 128 # Sets the height (in pixels) for the heatmap images that will be normlization
+
+heatmap_generator_args:
+  sigma: 8.0 # The standard deviation of the Gaussian kernel used to generate the heatmaps
+  use_score: ${padkeypoints_args.use_conf}
+  img_h: ${norm_args.heatmap_image_height}
+  img_w: ${norm_args.heatmap_image_height}
+  with_limb: null # this auto set in the code
+  with_kp: null # this auto set in the code
+
+align_args:
+  align: True # Indicates whether the images will be aligned
+  final_img_size: 64 # Sets the size (in pixels) for the final images
+  offset: 0
+  heatmap_image_size: ${norm_args.heatmap_image_height}
