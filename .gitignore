@@ -145,7 +145,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-output/*
-
-GREW_result/*
