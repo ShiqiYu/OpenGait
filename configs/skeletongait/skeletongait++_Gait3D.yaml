@@ -10,7 +10,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 60000
+  restore_hint: /home/jdy/fanchao/OpenGait_230701/output/Gait3D/DeepGaitV2_P3D_GaitMap_MM_FeatureLevel/DeepGaitV2_P3D_GaitMap_B4C2_Sigma-8.0_Hot_False_Align-True_OpenGaitDA-True_MM_FeatureLevel_AttentionFusion/checkpoints/DeepGaitV2_P3D_GaitMap_B4C2_Sigma-8.0_Hot_False_Align-True_OpenGaitDA-True_MM_FeatureLevel_AttentionFusion-60000.pt
   save_name: SkeletonGaitPP # LowLevel
   eval_func: evaluate_Gait3D
   sampler:
@@ -73,7 +73,7 @@ trainer_cfg:
   sampler:
     batch_shuffle: true
     batch_size:
-      - 4 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 32 # TripletSampler, batch_size[0] indicates Number of Identity
       - 4  #                 batch_size[1] indicates Samples sequqnce for each Identity
     frames_num_fixed: 30 # fixed frames number for training
     frames_skip_num: 4

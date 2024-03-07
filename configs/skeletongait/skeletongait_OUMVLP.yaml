@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: OUMVLP
-  dataset_root: your_path
+  dataset_root: /data3/gait_heatmap_data/OUMVLP/OUMVLP_sigma_8.0_/pkl
   dataset_partition: ./datasets/OUMVLP/OUMVLP.json
   num_workers: 1
   data_in_use: [True, False] # heatmap, sil
@@ -10,7 +10,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 120000
+  restore_hint: /home/jdy/fanchao/OpenGait_230701/output/OUMVLP/DeepGaitV2_P3D_GaitMap/DeepGaitV2_P3D_GaitMap_B4C2_Sigma-8.0_Hot_False_Align-True/checkpoints/DeepGaitV2_P3D_GaitMap_B4C2_Sigma-8.0_Hot_False_Align-True-120000.pt
   save_name: SkeletonGait
   sampler:
     batch_shuffle: false

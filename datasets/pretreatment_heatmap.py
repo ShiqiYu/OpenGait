@@ -647,8 +647,8 @@ class TransferDataset(Dataset):
             os.makedirs(save_path_img, exist_ok=True)
             # save_heatemapimg_index = random.choice(list(range(heatmap_img.shape[0])))
             for save_heatemapimg_index in range(heatmap_img.shape[0]):
-                cv2.imwrite(os.path.join(save_path_img, f'pose_{save_heatemapimg_index}.jpg'), heatmap_img[save_heatemapimg_index, 0])
-                cv2.imwrite(os.path.join(save_path_img, f'bone_{save_heatemapimg_index}.jpg'), heatmap_img[save_heatemapimg_index, 1])
+                cv2.imwrite(os.path.join(save_path_img, f'bone_{save_heatemapimg_index}.jpg'), heatmap_img[save_heatemapimg_index, 0])
+                cv2.imwrite(os.path.join(save_path_img, f'pose_{save_heatemapimg_index}.jpg'), heatmap_img[save_heatemapimg_index, 1])
 
         pickle.dump(heatmap_img, open(os.path.join(save_path_pkl, tmp_split[-1]), 'wb'))
         return None

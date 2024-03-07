@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: SUSTech1K
-  dataset_root: your_path
+  dataset_root: /data3/gait_heatmap_data/SUSTech1K/SUSTech1K_sigma_8.0_/pkl
   dataset_partition: ./datasets/SUSTech1K/SUSTech1K.json
   num_workers: 4
   data_in_use: [True, False] # heatmap, sil
@@ -10,7 +10,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: 50000
+  restore_hint: /home/jdy/fanchao/OpenGait_230701/output/SUSTech1K/DeepGaitV2_P3D_GaitMap/DeepGaitV2_P3D_GaitMap_B1C2_Sigma-8.0_Hot_False_Align-True_OpenGaitDA-True/checkpoints/DeepGaitV2_P3D_GaitMap_B1C2_Sigma-8.0_Hot_False_Align-True_OpenGaitDA-True-50000.pt
   save_name: SkeletonGait
   eval_func: evaluate_indoor_dataset #evaluate_Gait3D
   sampler:

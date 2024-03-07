@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: Gait3D
-  dataset_root: /data3/gait_heatmap_data/Gait3D/heatmap_sil
+  dataset_root: your_path
   dataset_partition: ./datasets/Gait3D/Gait3D.json
   num_workers: 1
   data_in_use: [True, False] # heatmap, sil
@@ -78,7 +78,7 @@ trainer_cfg:
   sampler:
     batch_shuffle: true
     batch_size:
-      - 4 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 32 # TripletSampler, batch_size[0] indicates Number of Identity
       - 4  #                 batch_size[1] indicates Samples sequqnce for each Identity
     frames_num_fixed: 30 # fixed frames number for training
     frames_skip_num: 4
