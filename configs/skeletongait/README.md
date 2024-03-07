@@ -1,6 +1,6 @@
 # SkeletonGait: Gait Recognition Using Skeleton Maps
 
-This [paper](https://arxiv.org/abs/2311.13444) has been accepted by AAAI 2023.
+This [paper](https://arxiv.org/abs/2311.13444) has been accepted by AAAI 2024.
 
 ## Step 1: Generating Heatmap
 Leveraging the power of Distributed Data Parallel (DDP), we've streamlined the heatmap generation process. Below is the script to initiate the generation:
