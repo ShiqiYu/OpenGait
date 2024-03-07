@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: Gait3D
-  dataset_root: /data3/gait_heatmap_data/Gait3D/heatmap_sil
+  dataset_root: your_path
   dataset_partition: ./datasets/Gait3D/Gait3D.json
   num_workers: 1
   data_in_use: [True, True] # heatmap, sil
@@ -10,7 +10,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
-  restore_hint: /home/jdy/fanchao/OpenGait_230701/output/Gait3D/DeepGaitV2_P3D_GaitMap_MM_FeatureLevel/DeepGaitV2_P3D_GaitMap_B4C2_Sigma-8.0_Hot_False_Align-True_OpenGaitDA-True_MM_FeatureLevel_AttentionFusion/checkpoints/DeepGaitV2_P3D_GaitMap_B4C2_Sigma-8.0_Hot_False_Align-True_OpenGaitDA-True_MM_FeatureLevel_AttentionFusion-60000.pt
+  restore_hint: 60000
   save_name: SkeletonGaitPP # LowLevel
   eval_func: evaluate_Gait3D
   sampler:
