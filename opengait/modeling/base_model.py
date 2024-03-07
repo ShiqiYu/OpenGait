@@ -156,7 +156,7 @@ class BaseModel(MetaModel, nn.Module):
             self.evaluator_trfs = get_transform(
                 cfgs['evaluator_cfg']['transform'])
 
-        self.device = torch.distributed.get_rank()
+        self.device = torch.distributed.get_rank() % torch.cuda.device_count()
         torch.cuda.set_device(self.device)
         self.to(device=torch.device(
             "cuda", self.device))
