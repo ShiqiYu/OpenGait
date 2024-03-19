@@ -9,6 +9,8 @@ from utils import config_loader, get_ddp_module, init_seeds, params_count, get_m
 parser = argparse.ArgumentParser(description='Main program for opengait.')
 parser.add_argument('--local_rank', type=int, default=0,
                     help="passed by torch.distributed.launch module")
+parser.add_argument('--local-rank', type=int, default=0,
+                    help="passed by torch.distributed.launch module, for pytorch >=2.0")
 parser.add_argument('--cfgs', type=str,
                     default='config/default.yaml', help="path of config file")
 parser.add_argument('--phase', default='train',
