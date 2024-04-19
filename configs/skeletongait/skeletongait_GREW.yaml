@@ -70,7 +70,7 @@ trainer_cfg:
   fix_BN: false
   log_iter: 100
   restore_ckpt_strict: true
-  restore_hint: 90000
+  restore_hint: 0
   save_iter: 30000
   save_name: SkeletonGait
   sync_BN: true
