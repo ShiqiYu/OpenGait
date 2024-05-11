@@ -11,8 +11,7 @@ data_cfg:
 evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: True
-  # restore_hint: 40000
-  restore_hint: /home/ydq/workspace/HID/Release/BigGait_MSU/output/CCPG/BigGait__Dinov2_Gaitbase/BigGait__Dinov2_Gaitbase_Frame30/checkpoints/BigGait__Dinov2_Gaitbase_Frame30-40000.pt
+  restore_hint: 40000
   save_name: BigGait__Dinov2_Gaitbase_Frame30
   eval_func: evaluate_CCPG
   sampler:
@@ -38,8 +37,7 @@ loss_cfg:
 
 model_cfg:
   model: BigGait__Dinov2_Gaitbase
-  pretrained_dinov2: /home/ydq/workspace/HID/Release/BigGait_MSU/pretrained_LVMs/dinov2_vits14_pretrain.pth                   # pretrain DINOv2
-  # pretrained_dinov2: pretrained_LVMs/dinov2_vits14_pretrain.pth                   # pretrain DINOv2
+  pretrained_dinov2: pretrained_LVMs/dinov2_vits14_pretrain.pth                   # pretrain DINOv2
   pretrained_mask_branch: None
   # pretrained_mask_branch: pretrained_LVMs/MaskBranch_vits14.pt                # load pretrain Mask_Branch
   image_size: 224                                                               # 448x224
