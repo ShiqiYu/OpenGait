@@ -19,7 +19,7 @@ from kornia import morphology as morph
 import random
 
 # import GaitBase & DINOv2_small
-from .BigGait_utils.GaitBase import Baseline
+from .BigGait_utils.BigGait_GaitBase import Baseline
 from .BigGait_utils.DINOv2 import vit_small
 from .BigGait_utils.save_img import save_image, pca_image
 

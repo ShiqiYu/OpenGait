@@ -12,6 +12,8 @@ OpenGait is a flexible and extensible gait recognition project provided by the [
 The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accepted by CVPR2023 as a highlight paper. 
 
 ## What's New
+- **[May 2024]** 
+The code of Large Vison Model based method [BigGait](https://arxiv.org/pdf/2402.19122) is available at [here](opengait/modeling/models/BigGait.py).
 - **[Apr 2024]** 
 Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, SkeletonGait++, and SwinGait will be released on [Hugging Face](https://huggingface.co/opengait/OpenGait). Additionally, previously released checkpoints will also be gradually made available on it.
 - **[Mar 2024]** [Chao](https://chaofan996.github.io) gives a talk about 'Progress in Gait Recognition'. The [video](https://event.baai.ac.cn/activities/768) and [slides](https://github.com/ChaoFan996/ChaoFan996.github.io/blob/main/240315-Progress%20in%20Gait%20Recognition.pdf) are both available😊
