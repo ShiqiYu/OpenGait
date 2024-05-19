@@ -44,11 +44,11 @@ def job(src, id):
                 ratios.append(ratio)
                 aligned_img = np.transpose(cv2.cvtColor(resize_with_padding(img, (256, 128)), cv2.COLOR_BGR2RGB), (2, 0, 1))
                 aligned_imgs.append(aligned_img)
-                if len(aligned_imgs) > 0:
-                    output_path = os.path.join(DST, id, ty, vi)
-                    os.makedirs(output_path, exist_ok=True)
-                    pickle.dump(np.asarray(aligned_imgs), open(os.path.join(output_path, vi+"-aligned-rgbs.pkl"), "wb"))
-                    pickle.dump(np.asarray(ratios), open(os.path.join(output_path, vi+"-ratios.pkl"), "wb"))
+            if len(aligned_imgs) > 0:
+                output_path = os.path.join(DST, id, ty, vi)
+                os.makedirs(output_path, exist_ok=True)
+                pickle.dump(np.asarray(aligned_imgs), open(os.path.join(output_path, vi+"-aligned-rgbs.pkl"), "wb"))
+                pickle.dump(np.asarray(ratios), open(os.path.join(output_path, vi+"-ratios.pkl"), "wb"))
             print('Successfully saved: ' + DST + '/' + id + '/' + ty +  '/' + vi)
                     
 if __name__ == '__main__':
