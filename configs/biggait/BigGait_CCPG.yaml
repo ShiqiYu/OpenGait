@@ -1,8 +1,8 @@
 data_cfg:
   dataset_name: CCPG
   # TODO
-  dataset_root: /4GPU/data/CCPG/Released/CCPG-ratio-pkl/
-  dataset_partition: datasets/CCPG/CCPG.json
+  dataset_root: your_path
+  dataset_partition: ./datasets/CCPG/CCPG.json
   data_in_use: [True, True] # images / real_ratios
   num_workers: 8
   remove_no_gallery: false # Remove probe if no gallery for it
@@ -37,9 +37,9 @@ loss_cfg:
 
 model_cfg:
   model: BigGait__Dinov2_Gaitbase
-  pretrained_dinov2: pretrained_LVMs/dinov2_vits14_pretrain.pth                   # DINOv2 Download Link: https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth
+  pretrained_dinov2: ./pretrained_LVMs/dinov2_vits14_pretrain.pth                   # DINOv2 Download Link: https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth
   pretrained_mask_branch: None
-  # pretrained_mask_branch: pretrained_LVMs/MaskBranch_vits14.pt                # load pretrain Mask_Branch
+  # pretrained_mask_branch: ./pretrained_LVMs/MaskBranch_vits14.pt                # load pretrain Mask_Branch
   image_size: 224                                                               # 448x224
   sils_size: 32                                                                 # 64x32
 
