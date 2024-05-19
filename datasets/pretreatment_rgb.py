@@ -9,8 +9,8 @@ import numpy as np
 import cv2
 from tqdm import tqdm
 
-SRC_0 = '../SUSTech1K-Released-2023_mask/'
-DST_0 = '../SUSTech1K-Released-2023_mask_256128pkl/'
+SRC_0 = 'rgb_input_path'
+DST_0 = 'rgb_pkl_output_path'
 
 SRC = SRC_0             # Path_of_RGB_rearranged
 DST = DST_0             # Path_of_RGB_256128pkl_PadResized
