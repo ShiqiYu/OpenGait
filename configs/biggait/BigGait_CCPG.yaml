@@ -38,8 +38,7 @@ loss_cfg:
 model_cfg:
   model: BigGait__Dinov2_Gaitbase
   pretrained_dinov2: ./pretrained_LVMs/dinov2_vits14_pretrain.pth                   # DINOv2 Download Link: https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth
-  pretrained_mask_branch: None
-  # pretrained_mask_branch: ./pretrained_LVMs/MaskBranch_vits14.pt                # load pretrain Mask_Branch
+  pretrained_mask_branch: ./pretrained_LVMs/MaskBranch_vits14.pt                # pretrained_mask_branch: None or MaskBranch Download Link: https://drive.google.com/drive/folders/1zrWPUsrbCpwxoLgfom3d2irgxkBqtXqc?usp=sharing
   image_size: 224                                                               # 448x224
   sils_size: 32                                                                 # 64x32
 
