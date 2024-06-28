@@ -4,7 +4,7 @@ data_cfg:
   dataset_partition: ./datasets/Scoliosis1K/Scoliosis1K_***.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
-  test_dataset_name: Scoliosis
+  test_dataset_name: Scoliosis1K
 
 evaluator_cfg:
   enable_float16: true
