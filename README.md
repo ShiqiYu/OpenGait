@@ -13,7 +13,7 @@ The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/
 
 ## What's New
 - **[Jun 2024]** 
-The code of [ScoNet](https://arxiv.org/pdf/2311.13444.pdf) is released [here](opengait/modeling/models/sconet.py), and you can refer to [readme](configs/sconet) for details.
+The code of [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is released [here](opengait/modeling/models/sconet.py), and you can refer to [readme](configs/sconet) for details.
 - **[May 2024]** 
 The code of Large Vision Model based method [BigGait](https://arxiv.org/pdf/2402.19122) is available at [here](opengait/modeling/models/BigGait.py). [CCPG's checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Apr 2024]** 
