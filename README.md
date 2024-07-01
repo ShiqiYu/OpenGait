@@ -8,12 +8,12 @@
 
 🎉🎉🎉 **[*OpenGait*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉 -->
 
-OpenGait is a flexible and extensible gait recognition project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai). 
+OpenGait is a flexible and extensible gait analysis project provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) and supported in part by [WATRIX.AI](http://www.watrix.ai). 
 The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accepted by CVPR2023 as a highlight paper. 
 
 ## What's New
-- **[Jun 2024]** 
-The code of [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is released [here](opengait/modeling/models/sconet.py), and you can refer to [readme](configs/sconet) for details.
+- **[Jun 2024]**
+The first large-scale scoliosis screening benchmark [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is accepted to MICCAI2024🎉 Congratulations to [Zirui](https://faculty.sustech.edu.cn/?cat=2&tagid=yusq&orderby=date&iscss=1&snapid=1&go=1) and [Junhao](https://faculty.sustech.edu.cn/?cat=2&tagid=yusq&orderby=date&iscss=1&snapid=1&go=1)! The code is released [here](opengait/modeling/models/sconet.py), and you can refer to [readme](configs/sconet) for details.
 - **[May 2024]** 
 The code of Large Vision Model based method [BigGait](https://arxiv.org/pdf/2402.19122) is available at [here](opengait/modeling/models/BigGait.py). [CCPG's checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Apr 2024]** 
@@ -22,10 +22,10 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - **[Mar 2024]** The code of [SkeletonGait++](https://arxiv.org/pdf/2311.13444.pdf) is released [here](opengait/modeling/models/skeletongait%2B%2B.py), and you can refer to [readme](configs/skeletongait) for details.
 - **[Mar 2024]** [BigGait](https://arxiv.org/pdf/2402.19122.pdf) has been accepted to CVPR2024🎉 Congratulations to [Dingqiang](https://faculty.sustech.edu.cn/?p=161709&tagid=yusq&cat=2&iscss=1&snapid=1&go=1&orderby=date)! This is his FIRST paper!
 - **[Jan 2024]** The code of transfomer-based [SwinGait](https://arxiv.org/pdf/2303.03301.pdf) is available at [here](opengait/modeling/models/swingait.py).
-- **[Dec 2023]** A new state-of-the-art baseline, i.e., [DeepGaitV2](https://arxiv.org/pdf/2303.03301.pdf), is available at [here](opengait/modeling/models/deepgaitv2.py)! 
+- [Dec 2023] A new state-of-the-art baseline, i.e., [DeepGaitV2](https://arxiv.org/pdf/2303.03301.pdf), is available at [here](opengait/modeling/models/deepgaitv2.py)! 
 - [Nov 2023] The first million-level unlabeled gait dataset, i.e., [GaitLU-1M](https://ieeexplore.ieee.org/document/10242019), is released and supported in [datasets/GaitLU-1M](datasets/GaitLU-1M/README.md).
-- [Oct 2023] Several representative pose-based methods are supported in [opengait/modeling/models](./opengait/modeling/models). This feature is mainly inherited from [FastPoseGait](https://github.com/BNU-IVC/FastPoseGait). Many thanks to the contributors😊.
-<!-- - [July 2023] [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG). -->
+<!--- [Oct 2023] Several representative pose-based methods are supported in [opengait/modeling/models](./opengait/modeling/models). This feature is mainly inherited from [FastPoseGait](https://github.com/BNU-IVC/FastPoseGait). Many thanks to the contributors😊.
+ - [July 2023] [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG). -->
 <!-- - - - [July 2023] [SUSTech1K](https://lidargait.github.io) is released and supported in [datasets/SUSTech1K](./datasets/SUSTech1K).
 [May 2023] A real gait recognition system [All-in-One-Gait](https://github.com/jdyjjj/All-in-One-Gait) provided by [Dongyang Jin](https://github.com/jdyjjj) is available.
 [Apr 2023] [CASIA-E](datasets/CASIA-E/README.md) is supported by OpenGait.
@@ -78,11 +78,12 @@ Results of pose-based gait recognition are available [here](./docs/1.1.skeleton_
 
 
 ## Authors:
-**OpenGait Team (OGT)**
 
 - [Chao Fan (樊超)](https://chaofan996.github.io), 12131100@mail.sustech.edu.cn
 - [Chuanfu Shen (沈川福)](https://chuanfushen.github.io), 11950016@mail.sustech.edu.cn
 - [Junhao Liang (梁峻豪)](https://faculty.sustech.edu.cn/?p=95401&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12132342@mail.sustech.edu.cn
+
+Now OpenGait is mainly maintained by [Dongyang Jin(金东阳)](https://faculty.sustech.edu.cn/?cat=2&tagid=yusq&orderby=date&iscss=1&snapid=1&go=1), 12332451@mail.sustech.edu.cn
 
 ## Acknowledgement
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
