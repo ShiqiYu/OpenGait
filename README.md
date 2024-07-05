@@ -13,7 +13,7 @@ The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/
 
 ## What's New
 - **[Jun 2024]** 
-The first large-scale gait-based scoliosis screening benchmark [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is accepted to MICCAI2024🎉 Congratulations to [Zirui](https://github.com/zhouzi180)! This is his FIRST paper! The code is released [here](opengait/modeling/models/sconet.py), and you can refer to [readme](configs/sconet) for details.
+The first large-scale gait-based scoliosis screening benchmark [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is accepted to MICCAI2024🎉 Congratulations to [Zirui](https://zhouzi180.github.io)! This is his FIRST paper! The code is released [here](opengait/modeling/models/sconet.py), and you can refer to [project homepage](https://zhouzi180.github.io/Scoliosis1K/) for details.
 - **[May 2024]** 
 The code of Large Vision Model based method [BigGait](https://arxiv.org/pdf/2402.19122) is available at [here](opengait/modeling/models/BigGait.py). [CCPG's checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Apr 2024]** 
