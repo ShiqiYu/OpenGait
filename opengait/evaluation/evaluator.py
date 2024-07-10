@@ -425,7 +425,7 @@ def evaluate_scoliosis(data, dataset, metric='euc'):
     class_id = np.array(class_id)
 
     # Update class_id with integer labels based on status
-    class_id_int = np.array([1 if status == 'positive' else 2 if status == 'critical' else 0 for status in class_id])
+    class_id_int = np.array([1 if status == 'positive' else 2 if status == 'neutral' else 0 for status in class_id])
     print('class_id=', class_id_int)
 
     features = np.array(feature)

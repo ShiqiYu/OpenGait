@@ -18,7 +18,7 @@ class ScoNet(BaseModel):
     def forward(self, inputs):
         ipts, labs, class_id, _, seqL = inputs
 
-        class_id_int = np.array([1 if status == 'positive' else 2 if status == 'critical' else 0 for status in class_id])
+        class_id_int = np.array([1 if status == 'positive' else 2 if status == 'neutral' else 0 for status in class_id])
         class_id = torch.tensor(class_id_int).cuda()
 
         sils = ipts[0]
