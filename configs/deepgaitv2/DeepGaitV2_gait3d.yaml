@@ -19,7 +19,7 @@ evaluator_cfg:
     frames_all_limit: 720 # limit the number of sampled frames to prevent out of memory
   metric: euc # cos
   transform:
-    - type: BaseSilTransform
+    - type: BaseSilCuttingTransform
 
 loss_cfg:
   - loss_term_weight: 1.0
