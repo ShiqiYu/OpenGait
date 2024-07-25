@@ -113,21 +113,22 @@ def download_file_and_uncompress(url,
 
         if delete_file:
             os.remove(savepath)
-
     return rootpath
 
 
 if __name__ == "__main__":
-    urls = [
-        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.0/pretrained_casiab_model.zip",
-        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_oumvlp_model.zip",
-        "https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_grew_model.zip"]
+    urls = ["https://github.com/ShiqiYu/OpenGait/releases/download/v2.0/pretrained_casiab_gaitbase.zip",
+            "https://github.com/ShiqiYu/OpenGait/releases/download/v2.0/pretrained_oumvlp_gaitbase.zip",
+            "https://github.com/ShiqiYu/OpenGait/releases/download/v2.0/pretrained_grew_gaitbase.zip",
+            "https://github.com/ShiqiYu/OpenGait/releases/download/v2.0/pretrain_gait3d_gaitbase.zip",
+            "https://github.com/ShiqiYu/OpenGait/releases/download/v2.0/pretrained_CASIA-E_gaitbase_gaitpart_gaitset.zip"]
     for url in urls:
-        download_file_and_uncompress(
-            url=url, extrapath='output')
+        print(download_file_and_uncompress(
+            url=url, extrapath='output'))
     gaitgl_grew = ['https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_grew_gaitgl.zip',
                    'https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_grew_gaitgl_bnneck.zip']
     for gaitgl in gaitgl_grew:
         download_file_and_uncompress(
                 url=gaitgl, extrapath='output/GREW/GaitGL')
+    os.system("mv output/* ../output; rm -r output")
     print("Pretrained model download success!")
