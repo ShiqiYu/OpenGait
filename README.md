@@ -83,7 +83,7 @@ Results of pose-based gait recognition are available [here](./docs/1.1.skeleton_
 - [Chuanfu Shen (沈川福)](https://chuanfushen.github.io), 11950016@mail.sustech.edu.cn
 - [Junhao Liang (梁峻豪)](https://faculty.sustech.edu.cn/?p=95401&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12132342@mail.sustech.edu.cn
 
-Now OpenGait is mainly maintained by [Dongyang Jin (金东阳)](https://github.com/jdyjjj), 11911221@mail.sustech.edu.cn
+Now OpenGait is mainly maintained by [Dongyang Jin (金冬阳)](https://github.com/jdyjjj), 11911221@mail.sustech.edu.cn
 
 ## Acknowledgement
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
