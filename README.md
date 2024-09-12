@@ -69,12 +69,12 @@ Please see [0.get_started.md](docs/0.get_started.md). We also provide the follow
 - [Advanced usages](docs/5.advanced_usages.md) 
 
 ## Model Zoo
+✨✨✨You can find all the checkpoint files at [![Hugging Face Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-ffab41)](https://huggingface.co/opengait/OpenGait/)✨✨✨!
 
-[![Hugging Face Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-ffab41)](https://huggingface.co/opengait/OpenGait/)
 
-Results of appearance-based gait recognition are available [here](docs/1.model_zoo.md).
+The result list of appearance-based gait recognition is available [here](docs/1.model_zoo.md).
 
-Results of pose-based gait recognition are available [here](./docs/1.1.skeleton_model_zoo.md).
+The result list of pose-based gait recognition is available [here](./docs/1.1.skeleton_model_zoo.md).
 
 
 ## Authors:
