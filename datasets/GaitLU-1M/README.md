@@ -8,7 +8,8 @@ This great diversity and scale offer an excellent chance to learn general gait r
 
 ## Download
 ### Step1: 
-Download the dataset from [Baidu Yun](https://pan.baidu.com/s/1aexoZY-deZFXSuyfOOjwJg) (code: 4rat) or [OneDrive](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/noahshen_connect_hku_hk/EvFZrNKeV7VCgJKCaLay7T8Bv7TW5PHIcXWzv0XyFPliIA?e=9ZHkx9).
+Download the dataset from [Baidu Yun](https://pan.baidu.com/s/1aexoZY-deZFXSuyfOOjwJg) (code: 4rat) or 
+[Google Drive](https://drive.google.com/drive/folders/12tVpohZ6J6u42kOKR6S2p5m07QKr_Dt-).
 
 There are 6 sub-zip files and you can aggregate them by:
 ```shell
