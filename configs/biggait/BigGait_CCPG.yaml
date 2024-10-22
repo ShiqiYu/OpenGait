@@ -1,7 +1,7 @@
 data_cfg:
   dataset_name: CCPG
   # TODO
-  dataset_root: your_path
+  dataset_root: your_path # use datasets/pretreatment_rgb.py for data preprocessing!
   dataset_partition: ./datasets/CCPG/CCPG.json
   data_in_use: [True, True] # images / real_ratios
   num_workers: 8
