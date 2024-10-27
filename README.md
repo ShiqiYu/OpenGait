@@ -80,7 +80,7 @@ The result list of pose-based gait recognition is available [here](./docs/1.1.sk
 ## Authors:
 
 - [Chao Fan (樊超)](https://chaofan996.github.io), 12131100@mail.sustech.edu.cn
-- [Chuanfu Shen (沈川福)](https://chuanfushen.github.io), 11950016@mail.sustech.edu.cn
+- [Chuanfu Shen (沈川福)](https://scholar.google.com/citations?user=jKJt7rsAAAAJ&hl=en&oi=ao), 11950016@mail.sustech.edu.cn
 - [Junhao Liang (梁峻豪)](https://faculty.sustech.edu.cn/?p=95401&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12132342@mail.sustech.edu.cn
 
 Now OpenGait is mainly maintained by [Dongyang Jin (金冬阳)](https://github.com/jdyjjj), 11911221@mail.sustech.edu.cn
@@ -88,7 +88,7 @@ Now OpenGait is mainly maintained by [Dongyang Jin (金冬阳)](https://github.c
 ## Acknowledgement
 - GLN: [Saihui Hou (侯赛辉)](http://home.ustc.edu.cn/~saihui/index_english.html)
 - GaitGL: [Beibei Lin (林贝贝)](https://scholar.google.com/citations?user=KyvHam4AAAAJ&hl=en&oi=ao)
-- GREW: [GREW TEAM](https://www.grew-benchmark.org)
+- GREW: [GREW TEAM](https://github.com/XiandaGuo/GREW-Benchmark)
 
 - FastPoseGait Team: [FastPoseGait Team](https://github.com/BNU-IVC/FastPoseGait)
 
