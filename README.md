@@ -12,6 +12,7 @@ OpenGait is a flexible and extensible gait analysis project provided by the [Shi
 The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accepted by CVPR2023 as a highlight paper. 
 
 ## What's New
+- **[Dec 2024]** The  multimodal [MultiGait++](https://arxiv.org/pdf/2412.11495) has been accepted to AAAI2025🎉 Congratulations to [Dongyang](https://scholar.google.com.hk/citations?user=1xA5KxAAAAAJ)! This is his FIRST paper!
 - **[Jun 2024]** 
 The first large-scale gait-based scoliosis screening benchmark [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is accepted to MICCAI2024🎉 Congratulations to [Zirui](https://zhouzi180.github.io)! This is his FIRST paper! The code is released [here](opengait/modeling/models/sconet.py), and you can refer to [project homepage](https://zhouzi180.github.io/Scoliosis1K/) for details.
 - **[May 2024]** 
@@ -21,8 +22,8 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - **[Mar 2024]** [Chao](https://chaofan996.github.io) gives a talk about 'Progress in Gait Recognition'. The [video](https://event.baai.ac.cn/activities/768) and [slides](https://github.com/ChaoFan996/ChaoFan996.github.io/blob/main/240315-Progress%20in%20Gait%20Recognition.pdf) are both available😊
 - **[Mar 2024]** The code of [SkeletonGait++](https://arxiv.org/pdf/2311.13444.pdf) is released [here](opengait/modeling/models/skeletongait%2B%2B.py), and you can refer to [readme](configs/skeletongait) for details.
 - **[Mar 2024]** [BigGait](https://arxiv.org/pdf/2402.19122.pdf) has been accepted to CVPR2024🎉 Congratulations to [Dingqiang](https://bugjudger.github.io)! This is his FIRST paper!
-- **[Jan 2024]** The code of transfomer-based [SwinGait](https://arxiv.org/pdf/2303.03301.pdf) is available at [here](opengait/modeling/models/swingait.py).
-- [Dec 2023] A new state-of-the-art baseline, i.e., [DeepGaitV2](https://arxiv.org/pdf/2303.03301.pdf), is available at [here](opengait/modeling/models/deepgaitv2.py)! 
+- [Jan 2024] The code of transfomer-based [SwinGait](https://arxiv.org/pdf/2303.03301.pdf) is available at [here](opengait/modeling/models/swingait.py).
+<!--- [Dec 2023] A new state-of-the-art baseline, i.e., [DeepGaitV2](https://arxiv.org/pdf/2303.03301.pdf), is available at [here](opengait/modeling/models/deepgaitv2.py)! -->
 <!-- - [Nov 2023] The first million-level unlabeled gait dataset, i.e., [GaitLU-1M](https://ieeexplore.ieee.org/document/10242019), is released and supported in [datasets/GaitLU-1M](datasets/GaitLU-1M/README.md).
 - [Oct 2023] Several representative pose-based methods are supported in [opengait/modeling/models](./opengait/modeling/models). This feature is mainly inherited from [FastPoseGait](https://github.com/BNU-IVC/FastPoseGait). Many thanks to the contributors😊.
  - [July 2023] [CCPG](https://github.com/BNU-IVC/CCPG) is supported in [datasets/CCPG](./datasets/CCPG). -->
@@ -34,15 +35,16 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Publications
-- [**MICCAI'24**] Gait Patterns as Biomarkers: A Video-Based Approach for Classifying Scoliosis, [*Paper*](https://arxiv.org/pdf/2407.05726), [*Dataset*](https://zhouzi180.github.io/Scoliosis1K), and [*Code*](opengait/modeling/models/sconet.py).
-- [**CVPR'24**] BigGait: Learning Gait Representation You Want by Large Vision Models. [*Paper*](https://arxiv.org/pdf/2402.19122.pdf), and [*Code*](opengait/modeling/models/BigGait.py). 
-- [**AAAI'24**] SkeletonGait++: Gait Recognition Using Skeleton Maps. [*Paper*](https://arxiv.org/pdf/2311.13444.pdf), and [*Code*](opengait/modeling/models/skeletongait%2B%2B.py).
-- [**AAAI'24**] Cross-Covariate Gait Recognition: A Benchmark. [*Paper*](https://arxiv.org/pdf/2312.14404.pdf), [*Dataset*](https://github.com/ShinanZou/CCGR), and [*Code*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/deepgaitv2.py).
-- [**Arxiv'23**] Exploring Deep Models for Practical Gait Recognition. [*Paper*](https://arxiv.org/pdf/2303.03301.pdf), [*DeepGaitV2*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/deepgaitv2.py), and [*SwinGait*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/swingait.py).
-- [**PAMI'23**] Learning Gait Representation from Massive Unlabelled Walking Videos: A Benchmark, [*Paper*](https://ieeexplore.ieee.org/document/10242019), [*Dataset*](datasets/GaitLU-1M/README.md), and [*Code*](opengait/modeling/models/gaitssb.py).
-- [**CVPR'23**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_LidarGait_Benchmarking_3D_Gait_Recognition_With_Point_Clouds_CVPR_2023_paper.pdf), [*Dataset*](https://lidargait.github.io) and [*Code*](datasets/SUSTech1K/README.md).
-- [**CVPR'23**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Highlight Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf), and [*Code*](configs/gaitbase).
-- [**ECCV'22**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](), and [*Code*](configs/gaitedge/README.md).
+- [**AAAI'25**] Exploring More from Multiple Gait Modalities for Human Identification, [*Paper*](https://arxiv.org/pdf/2412.11495) and *MultiGait++ Code* (Coming soon).
+- [**MICCAI'24**] Gait Patterns as Biomarkers: A Video-Based Approach for Classifying Scoliosis, [*Paper*](https://arxiv.org/pdf/2407.05726), [*Dataset*](https://zhouzi180.github.io/Scoliosis1K), and [*ScoNet Code*](opengait/modeling/models/sconet.py).
+- [**CVPR'24**] BigGait: Learning Gait Representation You Want by Large Vision Models. [*Paper*](https://arxiv.org/pdf/2402.19122.pdf), and [*BigGait Code*](opengait/modeling/models/BigGait.py). 
+- [**AAAI'24**] SkeletonGait++: Gait Recognition Using Skeleton Maps. [*Paper*](https://arxiv.org/pdf/2311.13444.pdf), and [*SkeletonGait++ Code*](opengait/modeling/models/skeletongait%2B%2B.py).
+- [**AAAI'24**] Cross-Covariate Gait Recognition: A Benchmark. [*Paper*](https://arxiv.org/pdf/2312.14404.pdf), [*CCGR Dataset*](https://github.com/ShinanZou/CCGR), and [*ParsingGait Code*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/deepgaitv2.py).
+- [**Arxiv'23**] Exploring Deep Models for Practical Gait Recognition. [*Paper*](https://arxiv.org/pdf/2303.03301.pdf), [*DeepGaitV2 Code*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/deepgaitv2.py), and [*SwinGait Code*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/swingait.py).
+- [**PAMI'23**] Learning Gait Representation from Massive Unlabelled Walking Videos: A Benchmark, [*Paper*](https://ieeexplore.ieee.org/document/10242019), [*GaitLU-1M Dataset*](datasets/GaitLU-1M/README.md), and [*GaitSSB Code*](opengait/modeling/models/gaitssb.py).
+- [**CVPR'23**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_LidarGait_Benchmarking_3D_Gait_Recognition_With_Point_Clouds_CVPR_2023_paper.pdf), [*SUSTech1K Dataset*](https://lidargait.github.io) and [*LidarGait Code*](datasets/SUSTech1K/README.md).
+- [**CVPR'23**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Highlight Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf), and [*GaitBase Code*](configs/gaitbase).
+- [**ECCV'22**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), and [*GaitEdge Code*](configs/gaitedge/README.md).
 
 ## A Real Gait Recognition System: All-in-One-Gait
 <div align="center">
