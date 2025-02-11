@@ -12,6 +12,7 @@ OpenGait is a flexible and extensible gait analysis project provided by the [Shi
 The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accepted by CVPR2023 as a highlight paper. 
 
 ## What's New
+- **[Feb 2025]** Chao successfully defended his Ph.D. thesis in Oct. 2024🎉🎉🎉 You can access the full text in [*Chao's Thesis in English*](https://www.researchgate.net/publication/388768400_Gait_Representation_Learning_and_Recognition?_sg%5B0%5D=qaGVpS8gKWPyR7olHoFd4bCs40AZdJzaM96P3TSnxrpiP9zCIUTxzeEq8YhQOlE4WemB7iMF2fHvcJFAYHTlJhTIB2J6faVa5s-xcQVj.4112nauMM4MWUNSyUa9eMeF0MEeplptpFOgb5kSgIk3lMcfPK6TdPX1bW1y_bKSdbwXuBf29GloRsVwBdexhug&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHJvZmlsZSIsInByZXZpb3VzUGFnZSI6InByb2ZpbGUiLCJwb3NpdGlvbiI6InBhZ2VDb250ZW50In19) or [*樊超的学位论文（中文版）*](https://www.researchgate.net/publication/388768605_butaitezhengxuexiyushibiesuanfayanjiu). 
 - **[Dec 2024]** The  multimodal [MultiGait++](https://arxiv.org/pdf/2412.11495) has been accepted to AAAI2025🎉 Congratulations to [Dongyang](https://scholar.google.com.hk/citations?user=1xA5KxAAAAAJ)! This is his FIRST paper!
 - **[Jun 2024]** 
 The first large-scale gait-based scoliosis screening benchmark [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is accepted to MICCAI2024🎉 Congratulations to [Zirui](https://zhouzi180.github.io)! This is his FIRST paper! The code is released [here](opengait/modeling/models/sconet.py), and you can refer to [project homepage](https://zhouzi180.github.io/Scoliosis1K/) for details.
@@ -35,8 +36,8 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Publications
-- [**TBIOM'24**] A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets, and Challenges, [*Survey Paper*](https://arxiv.org/pdf/2206.13732).
 - [**AAAI'25**] Exploring More from Multiple Gait Modalities for Human Identification, [*Paper*](https://arxiv.org/pdf/2412.11495) and *MultiGait++ Code* (Coming soon).
+- [**TBIOM'24**] A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets, and Challenges, [*Survey Paper*](https://arxiv.org/pdf/2206.13732).
 - [**MICCAI'24**] Gait Patterns as Biomarkers: A Video-Based Approach for Classifying Scoliosis, [*Paper*](https://arxiv.org/pdf/2407.05726), [*Dataset*](https://zhouzi180.github.io/Scoliosis1K), and [*ScoNet Code*](opengait/modeling/models/sconet.py).
 - [**CVPR'24**] BigGait: Learning Gait Representation You Want by Large Vision Models. [*Paper*](https://arxiv.org/pdf/2402.19122.pdf), and [*BigGait Code*](opengait/modeling/models/BigGait.py). 
 - [**AAAI'24**] SkeletonGait++: Gait Recognition Using Skeleton Maps. [*Paper*](https://arxiv.org/pdf/2311.13444.pdf), and [*SkeletonGait++ Code*](opengait/modeling/models/skeletongait%2B%2B.py).
