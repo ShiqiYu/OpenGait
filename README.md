@@ -35,7 +35,8 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Dec 2022] Dataset [Gait3D](https://github.com/Gait3D/Gait3D-Benchmark) is supported in [datasets/Gait3D](./datasets/Gait3D).
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
-## Our Publications
+## Our Works
+- [**Chao's Thesis**] Gait Representation Learning and Recognition, [Chinese Original](https://www.researchgate.net/publication/388768605_butaitezhengxuexiyushibiesuanfayanjiu) and [English Translation](https://www.academia.edu/127496287/Gait_Representation_Learning_and_Recognition). 
 - [**AAAI'25**] Exploring More from Multiple Gait Modalities for Human Identification, [*Paper*](https://arxiv.org/pdf/2412.11495) and *MultiGait++ Code* (Coming soon).
 - [**TBIOM'24**] A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets, and Challenges, [*Survey Paper*](https://arxiv.org/pdf/2206.13732).
 - [**MICCAI'24**] Gait Patterns as Biomarkers: A Video-Based Approach for Classifying Scoliosis, [*Paper*](https://arxiv.org/pdf/2407.05726), [*Dataset*](https://zhouzi180.github.io/Scoliosis1K), and [*ScoNet Code*](opengait/modeling/models/sconet.py).
