@@ -6,7 +6,7 @@ This is the official support for [Human Identification at a Distance (HID)](http
 For HID 2025, we will not provide a training set.  In this competition, you can use any dataset, such as CASIA-B, OUMVLP, CASIA-E, and/or their own dataset, to train your model. In this tutorial, we will use the model trained on previous HID competition training set as the baseline model.
 
 ### Download the test set
-Download the test gallery and probe from the [link](https://hid2025.iapr-tc4.org/#:~:text=Dataset%EF%BC%88New%20for%20HID%202025%EF%BC%89).
+Download the test gallery and probe from the [link](https://hid.iapr-tc4.org/).
 You should decompress these two file by following command:
 ```
 mkdir hid_2025
@@ -23,7 +23,7 @@ mv hid_2025/probe_phase2 hid_2025/probe
 ```
 
 ### Download the pretrained model
-Download the [pretrained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip) and place it in `output` after unzipping.
+Download the [pretrained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip) from the official website and place it in `output` after unzipping.
 ```
 wget https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip
 unzip pretrained_hid_model.zip -d output/
@@ -56,7 +56,7 @@ Modify the `dataset_root` in `configs/baseline/baseline_hid.yaml`, and then run 
 ```shell
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs configs/baseline/baseline_hid.yaml --phase train
 ```
-You can also download the [trained model](https://github.com/ShiqiYu/OpenGait/releases/download/v1.1/pretrained_hid_model.zip) and place it in `output` after unzipping.
+If you trained a model, place it in `output` after unzipping.
 
 ### Get the submission file
 ```shell
