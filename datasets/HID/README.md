@@ -37,7 +37,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 The result will be generated in `HID_result/current_time.csv`.
 
 ## Submit the result
-Rename the csv file to `submission.csv`, then zip it and upload to [official submission link](https://codalab.lisn.upsaclay.fr/competitions/10568#participate).
+Rename the csv file to `submission.csv`, then zip it and upload to [official submission link](https://codalab.lisn.upsaclay.fr/competitions/21845).
 
 ---
 
