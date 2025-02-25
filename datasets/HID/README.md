@@ -38,7 +38,6 @@ The result will be generated in `HID_result/current_time.csv`.
 
 ## Submit the result
 Rename the csv file to `submission.csv`, then zip it and upload to [official submission link](https://codalab.lisn.upsaclay.fr/competitions/10568#participate).
-Normally, you should get a score of **48.3** in phase 1.
 
 ---
 
