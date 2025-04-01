@@ -30,9 +30,9 @@ unzip pretrained_hid_model.zip -d output/
 ```
 
 ## Generate the result
-Modify the `dataset_root` in `configs/baseline/baseline_hid.yaml`, and then run this command:
+Modify the `dataset_root` in `configs/gaitbase/gaitbase_hid.yaml`, and then run this command:
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs configs/baseline/baseline_hid.yaml --phase test
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 opengait/main.py --cfgs configs/gaitbase/gaitbase_hid.yaml --phase test
 ```
 The result will be generated in `HID_result/current_time.csv`.
 
