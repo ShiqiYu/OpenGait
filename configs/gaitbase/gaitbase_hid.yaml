@@ -58,7 +58,7 @@ model_cfg:
     out_channels: 256
     parts_num: 16
   SeparateBNNecks:
-    class_num: 500
+    class_num: 500 # you need to change
     in_channels: 256
     parts_num: 16
   bin_num:
