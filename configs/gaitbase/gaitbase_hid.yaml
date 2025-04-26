@@ -34,35 +34,34 @@ loss_cfg:
 model_cfg:
   model: Baseline
   backbone_cfg:
-    type: ResNet9
-    block: BasicBlock
-    channels: # Layers configuration for automatically model construction
-      - 64
-      - 128
-      - 256
-      - 512
-    layers:
-      - 1
-      - 1
-      - 1
-      - 1
-    strides:
-      - 1
-      - 2
-      - 2
-      - 1
-    maxpool: false
+    in_channels: 1
+    layers_cfg: # Layers configuration for automatically model construction
+      - BC-64
+      - BC-64
+      - M
+      - BC-128
+      - BC-128
+      - M
+      - BC-256
+      - BC-256
+      - M
+      - BC-512
+      - BC-512
+    type: Plain
   SeparateFCs:
     in_channels: 512
     out_channels: 256
-    parts_num: 16
+    parts_num: 31
   SeparateBNNecks:
-    class_num: 500 # you need to change
+    class_num: 500
     in_channels: 256
-    parts_num: 16
+    parts_num: 31
   bin_num:
     - 16
-
+    - 8
+    - 4
+    - 2
+    - 1
 
 optimizer_cfg:
   lr: 0.1
