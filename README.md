@@ -12,6 +12,7 @@ OpenGait is a flexible and extensible gait analysis project provided by the [Shi
 The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf) has been accepted by CVPR2023 as a highlight paper. 
 
 ## What's New
+- **[Feb 2025]** The diffusion-based [DenoisingGait](https://arxiv.org/pdf/2505.18582) has been accepted to CVPR2025🎉 Congratulations to [Dongyang](https://scholar.google.com.hk/citations?user=1xA5KxAAAAAJ)! This is his SECOND paper!
 - **[Feb 2025]** Chao successfully defended his Ph.D. thesis in Oct. 2024🎉🎉🎉 You can access the full text in [*Chao's Thesis in English*](https://www.researchgate.net/publication/388768400_Gait_Representation_Learning_and_Recognition?_sg%5B0%5D=qaGVpS8gKWPyR7olHoFd4bCs40AZdJzaM96P3TSnxrpiP9zCIUTxzeEq8YhQOlE4WemB7iMF2fHvcJFAYHTlJhTIB2J6faVa5s-xcQVj.4112nauMM4MWUNSyUa9eMeF0MEeplptpFOgb5kSgIk3lMcfPK6TdPX1bW1y_bKSdbwXuBf29GloRsVwBdexhug&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHJvZmlsZSIsInByZXZpb3VzUGFnZSI6InByb2ZpbGUiLCJwb3NpdGlvbiI6InBhZ2VDb250ZW50In19) or [*樊超的学位论文（中文版）*](https://www.researchgate.net/publication/388768605_butaitezhengxuexiyushibiesuanfayanjiu). 
 - **[Dec 2024]** The  multimodal [MultiGait++](https://arxiv.org/pdf/2412.11495) has been accepted to AAAI2025🎉 Congratulations to [Dongyang](https://scholar.google.com.hk/citations?user=1xA5KxAAAAAJ)! This is his FIRST paper!
 - **[Jun 2024]** 
@@ -36,7 +37,7 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Works
-- [**CVPR'25**] On Denoising Walking Videos for Gait Recognition. [*Paper*](https://arxiv.org/pdf/2505.18582).
+- [**CVPR'25**] On Denoising Walking Videos for Gait Recognition. [*Paper*](https://arxiv.org/pdf/2505.18582) and [*DenoisingGait Code* (coming soon)]
 - [**Chao's Thesis**] Gait Representation Learning and Recognition, [Chinese Original](https://www.researchgate.net/publication/388768605_butaitezhengxuexiyushibiesuanfayanjiu) and [English Translation](https://www.academia.edu/127496287/Gait_Representation_Learning_and_Recognition). 
 - [**AAAI'25**] Exploring More from Multiple Gait Modalities for Human Identification, [*Paper*](https://arxiv.org/pdf/2412.11495) and [*MultiGait++ Code*](opengait/modeling/models/multigait++.py).
 - [**TBIOM'24**] A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets, and Challenges, [*Survey Paper*](https://arxiv.org/pdf/2206.13732).
