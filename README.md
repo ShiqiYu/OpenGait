@@ -115,6 +115,17 @@ Now OpenGait is mainly maintained by [Dongyang Jin (金冬阳)](https://github.c
     year      = {2023},
     pages     = {9707-9716}
 }
+
+@ARTICLE{fan2025opengait,
+  author={Fan, Chao and Hou, Saihui and Liang, Junhao and Shen, Chuanfu and Ma, Jingzhe and Jin, Dongyang and Huang, Yongzhen and Yu, Shiqi},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={OpenGait: A Comprehensive Benchmark Study for Gait Recognition Towards Better Practicality}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-18},
+  doi={10.1109/TPAMI.2025.3576283}
+}
 ```
 
 **Note:**
