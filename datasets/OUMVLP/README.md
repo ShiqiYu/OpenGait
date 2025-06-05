@@ -50,7 +50,7 @@ python datasets/pretreatment.py --input_path Path_of_OUMVLP-rearranged --output_
 ```
 Step4-2: Transforming pose txts to pickle file, run 
 ```
-python datasets/pretreatment.py --input_path Path_of_GREW-pose-rearranged --output_path Path_of_GREW-pose-pkl --pose --dataset GREW
+python datasets/pretreatment.py --input_path Path_of_OUMVLP-pose-rearranged --output_path Path_of_OUMVLP-pose-pkl --pose --dataset OUMVLP --oumvlp_rearrange_silu_path Path_of_OUMVLP-rearranged-silu-dataset
 ```
 gernerate the 17 Number of Pose Points Format from 18 Number of Pose Points
 ```
