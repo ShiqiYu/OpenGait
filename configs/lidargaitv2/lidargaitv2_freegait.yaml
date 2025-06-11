@@ -1,0 +1,111 @@
+data_cfg:
+  dataset_name: FreeGait
+  dataset_root: your_path
+  dataset_partition: ./datasets/FreeGait/FreeGait.json
+  num_workers: 1 
+  data_in_use: [false, false, true, false, false]
+  remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: FreeGait
+
+
+evaluator_cfg:
+  enable_float16: false #true #false #true
+  restore_ckpt_strict: true
+  restore_hint: 80000
+  save_name: lidargaitv2
+  eval_func: evaluate_FreeGait 
+  sampler:
+    batch_shuffle: false
+    points_in_use:  # For point-based gait recognition using point clouds
+      pointcloud_index: 0 
+      points_num: 256 #312 #256 #2048
+    batch_size: 8 
+    frames_num_fixed: 10 # fixed frames number for training
+    frames_skip_num: 0
+    #sample_type: fixed_ordered
+    sample_type: all_ordered # all indicates whole sequence used to test, while ordered means input sequence by its natural order; Other options:   fixed_unordered
+    frames_all_limit: 720 # limit the number of sampled frames to prevent out of memory
+  metric: euc # cos
+  transform:
+      - type: PointCloudsTransform
+        xyz_only: true
+        scale_aware: true
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+    lazy: False
+  - loss_term_weight: 0.1
+    scale: 31 #16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+    log_accuracy: true
+
+   
+model_cfg:
+  model: LidarGaitPlusPlus
+  pool: PPP_HAP 
+  sampling: knn
+  channel: 32 
+  npoints: [256, 192, 128]
+  nsample: 16
+  scale_aware: true 
+  normalize_dp: true 
+  SeparateFCs:
+    in_channels: 256 
+    out_channels: 256 
+    parts_num: 31 
+  SeparateBNNecks:
+    class_num: 500
+    in_channels: 256 
+    parts_num: 31 
+  scale:
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  T_max: 80000
+  eta_min: 0.0001
+  scheduler: CosineAnnealingLR
+
+
+trainer_cfg:
+  enable_float16: false #true # half_percesion float for memory reduction and speedup
+  fix_BN: false
+  with_test: true 
+  log_iter: 100
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 5000
+  save_name: lidargaitv2
+  sync_BN: true
+  total_iter: 80000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 32 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 4 #                 batch_size[1] indicates Samples sequqnce for each Identity
+    frames_num_fixed: 10 # fixed frames number for training
+    sample_type: fixed_unordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    type: TripletSampler
+    points_in_use:
+      pointcloud_index: 0
+      points_num: 256
+  transform:
+      - type: PointCloudsTransform
+        xyz_only: true
+        scale_aware: true
+        scale_prob: 0.2 
+        flip_prob: 0.1 
