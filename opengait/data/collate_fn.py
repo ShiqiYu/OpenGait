@@ -90,7 +90,7 @@ class CollateFn(object):
 
             for i in range(feature_num):
                 for j in indices[:self.frames_all_limit] if self.frames_all_limit > -1 and len(indices) > self.frames_all_limit else indices:
-                    point_cloud_index = self.points_in_use.get('pointcloud_index')
+                    point_cloud_index = self.points_in_use.get('pointcloud_index') if self.points_in_use else None
                     if self.points_in_use is not None and point_cloud_index is not None and i == point_cloud_index:
                         points_num = self.points_in_use.get('points_num')
                         sample_points = (random.choices(range(len(seqs[i][j])), k=points_num)
