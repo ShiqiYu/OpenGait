@@ -21,7 +21,6 @@ class DenoisingGait(BaseModel):
         self.r = model_cfg['r']
         self.p = model_cfg['p']
         self.threshold = model_cfg['threshold']
-        self.test_da = model_cfg['test_da']
 
         self.AppF = AppearanceFunc()
         self.flow3 = FlowFunc(radius=self.r)
