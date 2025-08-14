@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: path_for_denoisinggait_ccpg
+  dataset_root: path_for_denoisinggait_casiab
   dataset_partition: ./datasets/CASIA-B/CASIA-B.json
   num_workers: 8
   data_in_use: [True,True] # 0. denoising feature from diffusion (96x48); 1. silhouette (96x48)
