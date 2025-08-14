@@ -42,7 +42,7 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 ## Our Works
 - [**CVPR'25**] LidarGait++: Learning Local Features and Size Awareness from LiDAR Point Clouds for 3D Gait Recognition. [*Paper*](https://openaccess.thecvf.com/content/CVPR2025/papers/Shen_LidarGait_Learning_Local_Features_and_Size_Awareness_from_LiDAR_Point_CVPR_2025_paper.pdf) and [*LidarGait++ Code*](configs/lidargaitv2/README.md)
 - [**TPAMI'25**] OpenGait: A Comprehensive Benchmark Study for Gait Recognition Towards Better Practicality. [*Paper*](https://arxiv.org/pdf/2405.09138). _This extension includes a key update with in-depth insights into emerging trends and challenges of gait recognition in Sec. VII_. 
-- [**CVPR'25**] On Denoising Walking Videos for Gait Recognition. [*Paper*](https://arxiv.org/pdf/2505.18582) and [*DenoisingGait Code* (coming soon)]
+- [**CVPR'25**] On Denoising Walking Videos for Gait Recognition. [*Paper*](https://arxiv.org/pdf/2505.18582) and [*DenoisingGait Code*](opengait/modeling/models/denoisinggait.py)
 - [**Chao's Thesis**] Gait Representation Learning and Recognition, [Chinese Original](https://www.researchgate.net/publication/388768605_butaitezhengxuexiyushibiesuanfayanjiu) and [English Translation](https://www.academia.edu/127496287/Gait_Representation_Learning_and_Recognition). 
 - [**AAAI'25**] Exploring More from Multiple Gait Modalities for Human Identification, [*Paper*](https://arxiv.org/pdf/2412.11495) and [*MultiGait++ Code*](opengait/modeling/models/multigait++.py).
 - [**TBIOM'24**] A Comprehensive Survey on Deep Gait Recognition: Algorithms, Datasets, and Challenges, [*Survey Paper*](https://arxiv.org/pdf/2206.13732).
