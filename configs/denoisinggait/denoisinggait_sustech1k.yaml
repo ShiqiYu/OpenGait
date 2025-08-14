@@ -1,0 +1,113 @@
+data_cfg:
+  dataset_name: SUSTech1K
+  dataset_root: path_for_denoisinggait_sustech1k
+  dataset_partition: ./datasets/SUSTech1K/SUSTech1K.json
+  num_workers: 8
+  data_in_use: [True,True] # 0. denoising feature from diffusion (96x48); 1. silhouette (96x48)
+  remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: SUSTech1K
+
+
+evaluator_cfg:
+  enable_float16: true
+  restore_ckpt_strict: true
+  restore_hint: 40000
+  save_name: DenoisingGait_sustech1k
+  sampler:
+    batch_shuffle: false
+    batch_size: 4
+    sample_type: all_ordered # all indicates whole sequence used to test, while ordered means input sequence by its natural order; Other options:   fixed_unordered
+    frames_all_limit: 720 # limit the number of sampled frames to prevent out of memory
+  eval_func: evaluate_indoor_dataset 
+  metric: euc # cos
+  transform:
+    - type: NoOperation
+    - type: BaseSilTransform
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weight: 1.0
+    scale: 16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+    log_accuracy: true
+
+model_cfg:
+  model: DenoisingGait
+  backbone_cfg:
+    type: ResNet9
+    block: BasicBlock
+    channels: # Layers configuration for automatically model construction
+      - 64
+      - 128
+      - 256
+      - 512
+    in_channel: 1
+    layers:
+      - 1
+      - 1
+      - 1
+      - 1
+    strides:
+      - 1
+      - 2
+      - 2
+      - 1
+    maxpool: false
+  SeparateFCs:
+    in_channels: 512
+    out_channels: 256
+    parts_num: 24
+  SeparateBNNecks:
+    class_num: 250
+    in_channels: 256
+    parts_num: 24
+  bin_num:
+    - 24
+  r: 3
+  p: 0.5
+  threshold: 0.5
+
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones: # Learning Rate Reduction at each milestones
+    - 15000
+    - 25000
+    - 35000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true # half_percesion float for memory reduction and speedup
+  fix_BN: false
+  log_iter: 100
+  with_test: true
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 10000
+  save_name: DenoisingGait_sustech1k
+  sync_BN: true
+  total_iter: 40000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 8 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 4 #                 batch_size[1] indicates Samples sequqnce for each Identity
+    frames_num_fixed: 30 # fixed frames number for training
+    frames_skip_num: 8
+    # sample_type: fixed_ordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    sample_type: fixed_allordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    type: TripletSampler
+  transform:
+    - type: NoOperation
+    - type: BaseSilTransform
+
