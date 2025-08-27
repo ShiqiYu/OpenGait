@@ -5,7 +5,6 @@ from utils import get_msg_mgr, mkdir
 
 from .metric import mean_iou, cuda_dist, compute_ACC_mAP, evaluate_rank, evaluate_many
 from .re_rank import re_ranking
-from sklearn.metrics import confusion_matrix, accuracy_score
 
 def de_diag(acc, each_angle=False):
     # Exclude identical-view cases
@@ -417,46 +416,49 @@ def evaluate_CCPG(data, dataset, metric='euc'):
     return result_dict
 
 def evaluate_scoliosis(data, dataset, metric='euc'):
+
     msg_mgr = get_msg_mgr()
+    
+    from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, confusion_matrix
 
-    feature, label, class_id, view = data['embeddings'], data['labels'], data['types'], data['views']
-
-    label = np.array(label)
-    class_id = np.array(class_id)
-
-    # Update class_id with integer labels based on status
-    class_id_int = np.array([1 if status == 'positive' else 2 if status == 'neutral' else 0 for status in class_id])
-    print('class_id=', class_id_int)
-
-    features = np.array(feature)
-    c_id_int = np.argmax(features.mean(-1), axis=-1)
-    print('predicted_labels', c_id_int)
-
-    # Calculate sensitivity and specificity
-    cm = confusion_matrix(class_id_int, c_id_int, labels=[0, 1, 2])
-    FP = cm.sum(axis=0) - np.diag(cm)
-    FN = cm.sum(axis=1) - np.diag(cm)
-    TP = np.diag(cm)
-    TN = cm.sum() - (FP + FN + TP)
-
-    # Sensitivity, hit rate, recall, or true positive rate
-    TPR = TP / (TP + FN)
-    # Specificity or true negative rate
-    TNR = TN / (TN + FP)
-    accuracy = accuracy_score(class_id_int, c_id_int)
-
-    result_dict = {}
-    result_dict["scalar/test_accuracy/"] = accuracy
-    result_dict["scalar/test_sensitivity/"] = TPR
-    result_dict["scalar/test_specificity/"] = TNR
-
-    # Printing the sensitivity and specificity
-    for i, cls in enumerate(['Positive']):
-        print(f"{cls} Sensitivity (Recall): {TPR[i] * 100:.2f}%")
-        print(f"{cls} Specificity: {TNR[i] * 100:.2f}%")
-    print(f"Accuracy: {accuracy * 100:.2f}%")
-
-    return result_dict
+    logits = np.array(data['embeddings'])
+    labels = data['types']
+    
+    # Label mapping: negative->0, neutral->1, positive->2  
+    label_map = {'negative': 0, 'neutral': 1, 'positive': 2}
+    true_ids = np.array([label_map[status] for status in labels])
+    
+    pred_ids = np.argmax(logits.mean(-1), axis=-1)
+    
+    # Calculate evaluation metrics
+    # Total Accuracy: proportion of correctly predicted samples among all samples
+    accuracy = accuracy_score(true_ids, pred_ids)
+    
+    # Macro-average Precision: average of precision scores for each class
+    precision = precision_score(true_ids, pred_ids, average='macro', zero_division=0)
+    
+    # Macro-average Recall: average of recall scores for each class  
+    recall = recall_score(true_ids, pred_ids, average='macro', zero_division=0)
+    
+    # Macro-average F1: average of F1 scores for each class
+    f1 = f1_score(true_ids, pred_ids, average='macro', zero_division=0)
+    
+    # Confusion matrix (for debugging)
+    # cm = confusion_matrix(true_ids, pred_ids, labels=[0, 1, 2])
+    # class_names = ['Negative', 'Neutral', 'Positive']
+    
+    # Print results
+    msg_mgr.log_info(f"Total Accuracy: {accuracy*100:.2f}%")
+    msg_mgr.log_info(f"Macro-avg Precision: {precision*100:.2f}%") 
+    msg_mgr.log_info(f"Macro-avg Recall: {recall*100:.2f}%")
+    msg_mgr.log_info(f"Macro-avg F1 Score: {f1*100:.2f}%")
+    
+    return {
+        "scalar/test_accuracy/": accuracy,
+        "scalar/test_precision/": precision, 
+        "scalar/test_recall/": recall,
+        "scalar/test_f1/": f1
+    }
 
 def evaluate_FreeGait(data, dataset, metric='euc'):
     msg_mgr = get_msg_mgr()
