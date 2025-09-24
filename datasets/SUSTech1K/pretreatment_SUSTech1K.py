@@ -126,8 +126,8 @@ def imgs2pickle(img_groups: Tuple, output_path: Path, img_size: int = 64, verbos
             HWs =  [img.shape[:2] for img in imgs]
             # transpose to (C, H W)
             data = [cv2.resize(img, (img_size, img_size), interpolation=cv2.INTER_CUBIC) for img in imgs]
-            imgs = [img.transpose(2, 0, 1) for img in imgs]
-            data = np.asarray(data)
+            imgs = [img.transpose(2, 0, 1) for img in data]
+            data = np.asarray(imgs)
             HWs = np.asarray(HWs)
         elif modality == 'Sils_raw':
             sils = [cv2.imread(sil, cv2.IMREAD_GRAYSCALE) for sil in data_files]
