@@ -13,6 +13,7 @@ The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/
 The extension [paper](https://arxiv.org/pdf/2405.09138) has been accepted to TPAMI2025. 
 
 ## What's New
+- **[Sep 2025]** [BiggerGait](https://arxiv.org/pdf/2505.18132) has been accepted to NeurIPS2025🎉 and is available at [here](opengait/modeling/models/BiggerGait_DINOv2.py). [Here are checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Jun 2025]** [LidarGait++](https://openaccess.thecvf.com/content/CVPR2025/papers/Shen_LidarGait_Learning_Local_Features_and_Size_Awareness_from_LiDAR_Point_CVPR_2025_paper.pdf) has been accepted to CVPR2025🎉 and open-source in [configs/lidargaitv2](./configs/lidargaitv2/README.md).
 - **[Jun 2025]** The extension paper of [OpenGait](https://arxiv.org/pdf/2405.09138), further strengthened by the advancements of [DeepGaitV2](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/deepgaitv2.py), SkeletonGait, and [SkeletonGait++](opengait/modeling/models/skeletongait%2B%2B.py), has been accepted for publication in TPAMI🎉. We sincerely acknowledge the valuable contributions and continuous support from the OpenGait community.
 - **[Feb 2025]** The diffusion-based [DenoisingGait](https://arxiv.org/pdf/2505.18582) has been accepted to CVPR2025🎉 Congratulations to [Dongyang](https://scholar.google.com.hk/citations?user=1xA5KxAAAAAJ)! This is his SECOND paper!
@@ -21,12 +22,12 @@ The extension [paper](https://arxiv.org/pdf/2405.09138) has been accepted to TPA
 - **[Jun 2024]** 
 The first large-scale gait-based scoliosis screening benchmark [ScoNet](https://zhouzi180.github.io/Scoliosis1K) is accepted to MICCAI2024🎉 Congratulations to [Zirui](https://zhouzi180.github.io)! This is his FIRST paper! The code is released [here](opengait/modeling/models/sconet.py), and you can refer to [project homepage](https://zhouzi180.github.io/Scoliosis1K/) for details.
 - **[May 2024]** 
-The code of Large Vision Model based method [BigGait](https://arxiv.org/pdf/2402.19122) is available at [here](opengait/modeling/models/BigGait.py). [CCPG's checkpoints](https://huggingface.co/opengait/OpenGait).
+The code of Large Vision Model based method [BigGait](https://openaccess.thecvf.com/content/CVPR2024/papers/Ye_BigGait_Learning_Gait_Representation_You_Want_by_Large_Vision_Models_CVPR_2024_paper.pdf) is available at [here](opengait/modeling/models/BigGait.py). [CCPG's checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Apr 2024]** 
 Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, SkeletonGait++, and SwinGait will be released on [Hugging Face](https://huggingface.co/opengait/OpenGait). Additionally, previously released checkpoints will also be gradually made available on it.
 - **[Mar 2024]** [Chao](https://chaofan996.github.io) gives a talk about 'Progress in Gait Recognition'. The [video](https://event.baai.ac.cn/activities/768) and [slides](https://github.com/ChaoFan996/ChaoFan996.github.io/blob/main/240315-Progress%20in%20Gait%20Recognition.pdf) are both available😊
 - **[Mar 2024]** The code of [SkeletonGait++](https://arxiv.org/pdf/2311.13444.pdf) is released [here](opengait/modeling/models/skeletongait%2B%2B.py), and you can refer to [readme](configs/skeletongait) for details.
-- **[Mar 2024]** [BigGait](https://arxiv.org/pdf/2402.19122.pdf) has been accepted to CVPR2024🎉 Congratulations to [Dingqiang](https://bugjudger.github.io)! This is his FIRST paper!
+- **[Mar 2024]** [BigGait](https://openaccess.thecvf.com/content/CVPR2024/papers/Ye_BigGait_Learning_Gait_Representation_You_Want_by_Large_Vision_Models_CVPR_2024_paper.pdf) has been accepted to CVPR2024🎉 Congratulations to [Dingqiang](https://bugjudger.github.io)! This is his FIRST paper!
 - [Jan 2024] The code of transfomer-based [SwinGait](https://arxiv.org/pdf/2303.03301.pdf) is available at [here](opengait/modeling/models/swingait.py).
 <!--- [Dec 2023] A new state-of-the-art baseline, i.e., [DeepGaitV2](https://arxiv.org/pdf/2303.03301.pdf), is available at [here](opengait/modeling/models/deepgaitv2.py)! -->
 <!-- - [Nov 2023] The first million-level unlabeled gait dataset, i.e., [GaitLU-1M](https://ieeexplore.ieee.org/document/10242019), is released and supported in [datasets/GaitLU-1M](datasets/GaitLU-1M/README.md).
@@ -40,6 +41,7 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Works
+- [**NeurIPS'25**] BiggerGait: Unlocking Gait Recognition with Layer-wise Representations from Large Vision Models [*Paper*](https://arxiv.org/pdf/2505.18132), and [*BiggerGait Code*](opengait/modeling/models/BiggerGait_DINOv2.py).
 - [**CVPR'25**] LidarGait++: Learning Local Features and Size Awareness from LiDAR Point Clouds for 3D Gait Recognition. [*Paper*](https://openaccess.thecvf.com/content/CVPR2025/papers/Shen_LidarGait_Learning_Local_Features_and_Size_Awareness_from_LiDAR_Point_CVPR_2025_paper.pdf) and [*LidarGait++ Code*](configs/lidargaitv2/README.md)
 - [**TPAMI'25**] OpenGait: A Comprehensive Benchmark Study for Gait Recognition Towards Better Practicality. [*Paper*](https://arxiv.org/pdf/2405.09138). _This extension includes a key update with in-depth insights into emerging trends and challenges of gait recognition in Sec. VII_. 
 - [**CVPR'25**] On Denoising Walking Videos for Gait Recognition. [*Paper*](https://arxiv.org/pdf/2505.18582) and [*DenoisingGait Code*](opengait/modeling/models/denoisinggait.py)
