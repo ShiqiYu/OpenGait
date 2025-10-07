@@ -1,0 +1,127 @@
+data_cfg:
+  dataset_name: CCPG
+  # TODO
+  dataset_root: your_path # use datasets/pretreatment_rgb.py for data preprocessing!
+  dataset_partition: ./datasets/CCPG/CCPG.json
+  data_in_use: [True, False] # images / real_ratios
+  num_workers: 8
+  remove_no_gallery: false # Remove probe if no gallery for it
+  test_dataset_name: CCPG
+
+evaluator_cfg:
+  enable_float16: true
+  restore_ckpt_strict: False # Rename some module name for clarity, so it is fasle.
+  restore_hint: 30000 # BiggerGait__SmallDINOv2_Gaitbase_84Frame30_448224_6432HPP32_NoAlign_Sep12B_WiMask-30000.pt in HuggingFace
+  save_name: BiggerGait__Dinov2
+  eval_func: evaluate_CCPG
+  sampler:
+    batch_shuffle: false
+    batch_size: 8 # GPUs number
+    sample_type: all_ordered # all indicates whole sequence used to test, while ordered means input sequence by its natural order; Other options:   fixed_unordered
+    frames_all_limit: 250 # limit the number of sampled frames to prevent out of memory
+  metric: euc # cos
+  transform:
+    - type: BaseRgbTransform
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weight: 1.0
+    scale: 16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+    log_accuracy: true
+
+model_cfg:
+  model: BiggerGait__DINOv2
+  pretrained_lvm: ./pretrained_LVMs/dinov2-small                   # DINOv2-S HuggingFace Link: "git clone https://huggingface.co/facebook/dinov2-small" + "git lfs pull"
+  pretrained_mask_branch: ./pretrained_LVMs/MaskBranch_vits14.pt                # Using BigGait Code for pretraining at first, it is very lightly. pretrained_mask_branch: None or MaskBranch Download Link: https://drive.google.com/drive/folders/1zrWPUsrbCpwxoLgfom3d2irgxkBqtXqc?usp=sharing
+  image_size: 224                                                               # 448x224
+  sils_size: 32                                                                 # 64x32
+  
+  source_dim: 384
+  num_unknown: 16
+  total_layer_num: 12
+  group_layer_num: 1
+  head_num: 12
+  
+  Mask_Branch:
+    source_dim: 384
+    target_dim: 2
+    p: 0.
+    softmax: True
+
+  backbone_cfg:
+    type: ResNet9
+    block: BasicBlock
+    in_channel: 16
+    channels: # Layers configuration for automatically model construction
+      - 64
+      - 128
+      - 256
+      - 512
+    layers:
+      - 1
+      - 1
+      - 1
+      - 1
+    strides:
+      - 1
+      - 2
+      - 1
+      - 1
+    maxpool: false
+  SeparateFCs:
+    in_channels: 512
+    out_channels: 256
+    parts_num: 32
+  SeparateBNNecks:
+    class_num: 100
+    in_channels: 256
+    parts_num: 32
+  bin_num:
+    - 32
+
+optimizer_cfg:
+  lr: 0.1
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones: # Learning Rate Reduction at each milestones
+    - 15000
+    - 25000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  find_unused_parameters: True
+  enable_float16: true # half_percesion float for memory reduction and speedup
+  fix_BN: false
+  log_iter: 100
+  with_test: true
+  restore_ckpt_strict: true
+  restore_hint: 0
+  save_iter: 10000
+  save_name: BiggerGait__Dinov2
+  sync_BN: true
+  total_iter: 30000
+  sampler:
+    batch_shuffle: true
+    batch_size:
+      - 8 # TripletSampler, batch_size[0] indicates Number of Identity
+      - 4 #                 batch_size[1] indicates Samples sequqnce for each Identity
+    frames_num_fixed: 30 # fixed frames number for training
+    frames_skip_num: 4
+    frames_num_max: 40 # max frames number for unfixed training
+    frames_num_min: 20 # min frames number for unfixed traing
+    sample_type: fixed_unordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    type: TripletSampler
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: RandomHorizontalFlip
+        - type: BaseRgbTransform
