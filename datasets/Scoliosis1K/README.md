@@ -43,10 +43,10 @@ If you prefer, you can process the raw dataset into `.pkl` format.
 
 ```bash
 # For silhouette raw data
-python datasets/pretreatment.py --input_path=<path_to_raw_silhouettes> -output_path=<output_path>
+python datasets/pretreatment.py --input_path=<path_to_raw_silhouettes> --output_path=<output_path>
 
 # For pose raw data
-python datasets/pretreatment.py --input_path=<path_to_raw_pose> -output_path=<output_path> --pose --dataset=OUMVLP
+python datasets/pretreatment.py --input_path=<path_to_raw_pose> --output_path=<output_path> --pose --dataset=OUMVLP
 ```
 ---
 
