@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 from tqdm import tqdm
 import argparse
-from multiprocessing import Pool, cpu_count
+from multiprocessing import Pool
 
 MODALITIES = ['ratios_HW', 'rgb_f', 'sil', 'par', 'pose']
 RGB_SIZE = (128, 128)
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     parser.add_argument('-o', '--output_path', default='',
                         type=str, help='Output path of pickled dataset.')
     parser.add_argument('--copy-mode', type=str, help='Copy mode for handling files.', choices=['copy', 'symlink'], required=False, default='copy')
-    parser.add_argument('--num_workers', default=cpu_count(), type=int,
+    parser.add_argument('--num_workers', default=1, type=int,
                         help='Number of parallel worker processes (default: all CPU cores).')
     args = parser.parse_args()
 
@@ -158,5 +158,5 @@ if __name__ == '__main__':
         with Pool(processes=args.num_workers) as pool:
             list(tqdm(pool.imap_unordered(process_view, jobs), total=len(jobs)))
     else:
-        for job in jobs:
+        for job in tqdm(jobs):
             process_view(job)
