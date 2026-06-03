@@ -76,11 +76,20 @@ def padding_resize(x, ratios, target_h, target_w):
     ratios = ratios.view(-1)
     need_w = (h * ratios).int()
     need_padding_mask = need_w < w
-    pad_left = torch.where(need_padding_mask, (w - need_w) // 2, torch.tensor(0).to(x.device))
-    pad_right = torch.where(need_padding_mask, w - need_w - pad_left, torch.tensor(0).to(x.device)).tolist()
+
+    pad_left = (w - need_w) // 2
+    pad_right = w - need_w - pad_left
+    crop_left = torch.abs(pad_left)
+    crop_right = crop_left + w
+
     need_w = need_w.tolist()
     pad_left = pad_left.tolist()
-    x = torch.concat([F.pad(F.interpolate(x[i:i+1,...], (h, need_w[i]), mode="bilinear", align_corners=False), (pad_left[i], pad_right[i]))  if need_padding_mask[i] else F.interpolate(x[i:i+1,...], (h, need_w[i]), mode="bilinear", align_corners=False)[...,pad_left[i]:pad_left[i]+w]  for i in range(n)], dim=0)
+    pad_right = pad_right.tolist()
+    crop_left = crop_left.tolist()
+    crop_right = crop_right.tolist()
+
+    x = torch.concat([F.pad(F.interpolate(x[i:i+1,...], (h, need_w[i]), mode="bilinear", align_corners=False), (pad_left[i], pad_right[i]))  if need_padding_mask[i] else (
+                            F.interpolate(x[i:i+1,...], (h, need_w[i]), mode="bilinear", align_corners=False)[...,crop_left[i]:crop_right[i]])  for i in range(n)], dim=0)
     return x
 
 class BigGait__Dinov2_Gaitbase(BaseModel):

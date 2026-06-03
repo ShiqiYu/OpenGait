@@ -81,10 +81,17 @@ def is_bool(x):
 def is_str(x):
     return isinstance(x, str)
 
+def is_int(x):
+    return isinstance(x, int)
 
 def is_list(x):
     return isinstance(x, list) or isinstance(x, nn.ModuleList)
 
+def is_bool_list(x):
+    return is_list(x) and all(is_bool(i) for i in x)
+
+def is_int_list(x):
+    return is_list(x) and all(is_int(i) for i in x)
 
 def is_dict(x):
     return isinstance(x, dict) or isinstance(x, OrderedDict) or isinstance(x, Odict)

@@ -500,3 +500,39 @@ def evaluate_FreeGait(data, dataset, metric='euc'):
     # print_csv_format(dataset_name, results)
     msg_mgr.log_info(results)
     return results
+
+def evaluate_CCGR_MINI(data, dataset, metric='euc'):
+    # Copied from https://github.com/ShinanZou/CCGR/blob/CCGR-Benchmark/opengait/evaluation/evaluator.py
+    msg_mgr = get_msg_mgr()
+
+    features, labels, cams, time_seqs = data['embeddings'], data['labels'], data['types'], data['views']
+
+    import json
+    gallery_sets = json.load(
+        open('./datasets/CCGR-MINI/CCGR-MINI.json', 'rb'))['GALLERY_SET']
+    probe_mask = []
+    for id, ty, sq in zip(labels, cams, time_seqs):
+        if '-'.join([id, ty, sq]) in gallery_sets:
+            probe_mask.append(False)
+        else:
+            probe_mask.append(True)
+    probe_mask = np.array(probe_mask)
+    probe_features = features[probe_mask]
+    gallery_features = features[~probe_mask]
+    probe_lbls = np.asarray(labels)[probe_mask]
+    gallery_lbls = np.asarray(labels)[~probe_mask]
+
+    results = {}
+    msg_mgr.log_info(f"The test metric you choose is {metric}.")
+    dist = cuda_dist(probe_features, gallery_features, metric).cpu().numpy()
+    cmc, all_AP, all_INP = evaluate_rank(dist, probe_lbls, gallery_lbls)
+
+    mAP = np.mean(all_AP)
+    mINP = np.mean(all_INP)
+    for r in [1, 5, 10]:
+        results['scalar/test_accuracy/Rank-{}'.format(r)] = cmc[r - 1] * 100
+    results['scalar/test_accuracy/mAP'] = mAP * 100
+    results['scalar/test_accuracy/mINP'] = mINP * 100
+
+    msg_mgr.log_info(results)
+    return results

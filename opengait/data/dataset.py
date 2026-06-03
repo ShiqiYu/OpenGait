@@ -3,7 +3,7 @@ import pickle
 import os.path as osp
 import torch.utils.data as tordata
 import json
-from utils import get_msg_mgr
+from utils import get_msg_mgr, is_bool_list, is_int_list
 
 
 class DataSet(tordata.Dataset):
@@ -32,7 +32,9 @@ class DataSet(tordata.Dataset):
         return len(self.seqs_info)
 
     def __loader__(self, paths):
-        paths = sorted(paths)
+        if not is_int_list(self.data_in_use):
+            # When specified as a list of int, arbitrary order can be specified by the user
+            paths = sorted(paths)
         data_list = []
         for pth in paths:
             if pth.endswith('.pkl'):
@@ -69,9 +71,9 @@ class DataSet(tordata.Dataset):
     def __dataset_parser(self, data_config, training):
         dataset_root = data_config['dataset_root']
         try:
-            data_in_use = data_config['data_in_use']  # [n], true or false
+            self.data_in_use = data_config['data_in_use']  # [n], true or false or [m], index of data to use
         except:
-            data_in_use = None
+            self.data_in_use = None
 
         with open(data_config['dataset_partition'], "rb") as f:
             partition = json.load(f)
@@ -112,9 +114,12 @@ class DataSet(tordata.Dataset):
                         if seq_dirs != []:
                             seq_dirs = [osp.join(seq_path, dir)
                                         for dir in seq_dirs]
-                            if data_in_use is not None:
-                                seq_dirs = [dir for dir, use_bl in zip(
-                                    seq_dirs, data_in_use) if use_bl]
+                            if self.data_in_use is not None:
+                                if is_bool_list(self.data_in_use): # self.data_in_use is a bool mask list
+                                    seq_dirs = [dir for dir, use_bl in zip(
+                                        seq_dirs, self.data_in_use) if use_bl]
+                                else:   # self.data_in_use is a list of index
+                                    seq_dirs = [seq_dirs[idx] for idx in self.data_in_use if idx < len(seq_dirs)]
                             seqs_info_list.append([*seq_info, seq_dirs])
                         else:
                             msg_mgr.log_debug(

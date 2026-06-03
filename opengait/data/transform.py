@@ -3,6 +3,7 @@ import random
 import torchvision.transforms as T
 import cv2
 import math
+from einops import rearrange
 from data import transform as base_transform
 from utils import is_list, is_dict, get_valid_args
 
@@ -70,6 +71,24 @@ class BaseRgbTransform():
     def __call__(self, x):
         return (x - self.mean) / self.std
 
+class RatioHW():
+    def __call__(self, x):
+        x = x[:, 1] * 1.0 / x[:, 0]
+        return x
+
+class Rearrange():
+    """
+    Rearranges the dimensions of a tensor.
+
+    Args:
+        src_dim (str): The source dimension format (e.g., "s h w c").
+        dst_dim (str): The destination dimension format (e.g., "h c w s").
+    """
+    def __init__(self, source, destination):
+        self.pattern = f"{source} -> {destination}"
+
+    def __call__(self, x):
+        return rearrange(x, self.pattern)
 
 # **************** Data Agumentation ****************
 
