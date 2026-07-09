@@ -170,6 +170,10 @@ pretreatment.log
 # Private research notes
 /daily_reports/
 
+# Local reference documents / obsolete scratch scripts
+/LODO_CASIA.py
+/docs/*.pdf
+
 # Local scratch / backup files
 *~
 \#dockerfile\#
