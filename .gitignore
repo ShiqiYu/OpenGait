@@ -156,6 +156,7 @@ cython_debug/
 /output/
 /train-result/
 /dgv2_features/
+/dgv2_features_sustech/
 *.pt
 *.npz
 *.pkl
