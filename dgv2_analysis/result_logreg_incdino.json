@@ -1,0 +1,25 @@
+{
+  "target": "acc_all",
+  "tau": 0.05,
+  "n_pairs": 156,
+  "accuracy": 0.8525641025641025,
+  "macro_f1": 0.8406587448190934,
+  "label_dist": {
+    "0": 36,
+    "1": 60,
+    "2": 60
+  },
+  "importance": {
+    "log_people": 1.3825163883517424,
+    "FID_train_test_Inception": 1.249519123359308,
+    "Inception_FID": 1.2054147666995778,
+    "FID_train_test_DINO": 0.7569084632614106,
+    "Inception_kNN": 0.5387758311197327,
+    "Inception_MSD": 0.3783183865054019,
+    "DINO_MSD": 0.2877356868533556,
+    "Inception_1NN": 0.2512078664067015,
+    "DINO_kNN": 0.16213016393176613,
+    "DINO_FID": 0.13275250464330904,
+    "DINO_1NN": 0.0524778749789283
+  }
+}
