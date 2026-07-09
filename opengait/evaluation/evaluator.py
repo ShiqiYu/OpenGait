@@ -91,7 +91,10 @@ def single_view_gallery_evaluation(feature, label, seq_type, view, dataset, metr
         num_rank = 5 
     view_num = len(view_list)
 
+    probe_counter = {} #####
+
     for (type_, probe_seq) in probe_seq_dict[dataset].items():
+        probe_counter[type_] = 0   # ★ 追加
         acc[type_] = np.zeros((view_num, view_num, num_rank)) - 1.
         for (v1, probe_view) in enumerate(view_list):
             pseq_mask = np.isin(seq_type, probe_seq) & np.isin(
@@ -99,6 +102,12 @@ def single_view_gallery_evaluation(feature, label, seq_type, view, dataset, metr
             pseq_mask = pseq_mask if 'SUSTech1K' not in dataset   else np.any(np.asarray(
                         [np.char.find(seq_type, probe)>=0 for probe in probe_seq]), axis=0
                             ) & np.isin(view, probe_view) # For SUSTech1K only
+
+
+
+            # ★ probe 数をカウント
+            probe_counter[type_] += np.sum(pseq_mask)
+
             probe_x = feature[pseq_mask, :]
             probe_y = label[pseq_mask]
 
@@ -114,6 +123,15 @@ def single_view_gallery_evaluation(feature, label, seq_type, view, dataset, metr
                 idx = dist.topk(num_rank, largest=False)[1].cpu().numpy()
                 acc[type_][v1, v2, :] = np.round(np.sum(np.cumsum(np.reshape(probe_y, [-1, 1]) == gallery_y[idx[:, 0:num_rank]], 1) > 0,
                                                      0) * 100 / dist.shape[0], 2)
+
+
+
+    # ===== probe 数の表示 =====
+    print("\n[Probe count summary]")
+    for k, v in probe_counter.items():
+        print(f"{k}: {v}")
+
+
 
     result_dict = {}
     msg_mgr.log_info('===Rank-1 (Exclude identical-view cases)===')
@@ -457,3 +475,25 @@ def evaluate_scoliosis(data, dataset, metric='euc'):
     print(f"Accuracy: {accuracy * 100:.2f}%")
 
     return result_dict
+
+
+def dump_features(data, dataset, dump_path='./dgv2_features/dump.npz'):
+    """Save inference embeddings (+labels/types/views) to an npz file.
+
+    Wire this up via evaluator_cfg:
+        eval_func: dump_features
+        dump_path: ./dgv2_features/<subset>/train.npz
+    """
+    embeddings = np.asarray(data['embeddings'])
+    labels = np.asarray(data['labels'])
+    types = np.asarray(data['types'])
+    views = np.asarray(data['views'])
+    out_dir = os.path.dirname(dump_path)
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
+    np.savez_compressed(dump_path, embeddings=embeddings,
+                        labels=labels, types=types, views=views)
+    msg_mgr = get_msg_mgr()
+    msg_mgr.log_info('[dump_features] dataset=%s embeddings=%s -> %s' %
+                     (dataset, str(embeddings.shape), dump_path))
+    return {'scalar/dump/num_seqs': int(embeddings.shape[0])}
