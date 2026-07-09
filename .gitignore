@@ -167,6 +167,9 @@ cython_debug/
 pretreatment.log
 *.log
 
+# Private research notes
+/daily_reports/
+
 # Local scratch / backup files
 *~
 \#dockerfile\#
