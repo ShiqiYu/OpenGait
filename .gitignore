@@ -156,6 +156,7 @@ cython_debug/
 /output/
 /train-result/
 /dgv2_features/
+/dgv2_features_sustech/
 *.pt
 *.npz
 *.pkl
@@ -165,6 +166,9 @@ cython_debug/
 /dgv2_extract/*.log
 pretreatment.log
 *.log
+
+# Private research notes
+/daily_reports/
 
 # Local scratch / backup files
 *~
