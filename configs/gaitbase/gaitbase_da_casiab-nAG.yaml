@@ -1,7 +1,7 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: ./GaitDatasetB-silh
-  dataset_partition: ./datasets/CASIA-B/CASIA-B-20-2.json
+  dataset_root: ./CASIA-B/nm6
+  dataset_partition: ./datasets/CASIA-B/CASIA-B-33.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
   test_dataset_name: CASIA-B
@@ -10,7 +10,7 @@ evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
   restore_hint: 60000
-  save_name: DeepGaitV2
+  save_name: GaitBase_DA
   sampler:
     batch_shuffle: false
     batch_size: 2
@@ -32,22 +32,36 @@ loss_cfg:
     log_accuracy: true
 
 model_cfg:
-  model: DeepGaitV2
-  Backbone:
-    mode: p3d
-    in_channels: 1
+  model: Baseline
+  backbone_cfg:
+    type: ResNet9
+    block: BasicBlock
+    channels: # Layers configuration for automatically model construction
+      - 64
+      - 128
+      - 256
+      - 512
     layers:
       - 1
       - 1
       - 1
       - 1
-    channels: 
-      - 64
-      - 128 
-      - 256
-      - 512
+    strides:
+      - 1
+      - 2
+      - 2
+      - 1
+    maxpool: false
+  SeparateFCs:
+    in_channels: 512
+    out_channels: 256
+    parts_num: 16
   SeparateBNNecks:
-    class_num: 74
+    class_num: 75
+    in_channels: 256
+    parts_num: 16
+  bin_num:
+    - 16
 
 optimizer_cfg:
   lr: 0.1
@@ -62,16 +76,15 @@ scheduler_cfg:
     - 40000
     - 50000
   scheduler: MultiStepLR
-
 trainer_cfg:
   enable_float16: true # half_percesion float for memory reduction and speedup
   fix_BN: false
-  log_iter: 100
   with_test: false
+  log_iter: 100
   restore_ckpt_strict: true
   restore_hint: 0
-  save_iter: 30000
-  save_name: DeepGaitV2
+  save_iter: 60000
+  save_name: GaitBase_DA
   sync_BN: true
   total_iter: 60000
   sampler:
@@ -80,16 +93,15 @@ trainer_cfg:
       - 8 # TripletSampler, batch_size[0] indicates Number of Identity
       - 16 #                 batch_size[1] indicates Samples sequqnce for each Identity
     frames_num_fixed: 30 # fixed frames number for training
-    frames_skip_num: 4
-    sample_type: fixed_ordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
+    frames_num_max: 40 # max frames number for unfixed training
+    frames_num_min: 20 # min frames number for unfixed traing
+    sample_type: fixed_unordered # fixed control input frames number, unordered for controlling order of input tensor; Other options: unfixed_ordered or all_ordered
     type: TripletSampler
   transform:
     - type: Compose
       trf_cfg:
-        - type: RandomPerspective
-          prob: 0.2
         - type: BaseSilCuttingTransform
-        - type: RandomHorizontalFlip
-          prob: 0.2
         - type: RandomRotate
-          prob: 0.2
+          prob: 0.0
+        - type: RandomErasing
+          prob: 0.0

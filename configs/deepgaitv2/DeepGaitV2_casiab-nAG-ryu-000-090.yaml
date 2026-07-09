@@ -1,7 +1,7 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: ./GaitDatasetB-silh
-  dataset_partition: ./datasets/CASIA-B/CASIA-B-20-2.json
+  dataset_root: ./CASIA-B/GaitDatasetB-silh
+  dataset_partition: ./datasets/CASIA-B/CASIA-B-20.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
   test_dataset_name: CASIA-B
@@ -10,7 +10,7 @@ evaluator_cfg:
   enable_float16: true
   restore_ckpt_strict: true
   restore_hint: 60000
-  save_name: DeepGaitV2
+  save_name: DeepGaitV2-ryu-000-090
   sampler:
     batch_shuffle: false
     batch_size: 2
@@ -41,13 +41,13 @@ model_cfg:
       - 1
       - 1
       - 1
-    channels: 
+    channels:
       - 64
-      - 128 
+      - 128
       - 256
       - 512
   SeparateBNNecks:
-    class_num: 74
+    class_num: 75
 
 optimizer_cfg:
   lr: 0.1
@@ -71,7 +71,7 @@ trainer_cfg:
   restore_ckpt_strict: true
   restore_hint: 0
   save_iter: 30000
-  save_name: DeepGaitV2
+  save_name: DeepGaitV2-ryu-000-090
   sync_BN: true
   total_iter: 60000
   sampler:
@@ -87,9 +87,9 @@ trainer_cfg:
     - type: Compose
       trf_cfg:
         - type: RandomPerspective
-          prob: 0.2
+          prob: 0.0
         - type: BaseSilCuttingTransform
         - type: RandomHorizontalFlip
-          prob: 0.2
+          prob: 0.0
         - type: RandomRotate
-          prob: 0.2
+          prob: 0.0
