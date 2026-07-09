@@ -1,0 +1,20 @@
+{
+  "target": "acc_all",
+  "tau": 0.05,
+  "n_pairs": 156,
+  "accuracy": 0.717948717948718,
+  "macro_f1": 0.7023809523809524,
+  "label_dist": {
+    "0": 36,
+    "1": 60,
+    "2": 60
+  },
+  "importance": {
+    "FID_train_test_DeepGaitV2": 1.8027727231837696,
+    "DeepGaitV2_FID": 0.6288283897200553,
+    "DeepGaitV2_1NN": 0.5385533955326994,
+    "DeepGaitV2_kNN": 0.5193114920899119,
+    "DeepGaitV2_MSD": 0.40250553638031117,
+    "log_people": 0.042288316665711305
+  }
+}
