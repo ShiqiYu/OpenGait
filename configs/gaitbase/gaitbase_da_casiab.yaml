@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: your_path
+  dataset_root: ./CASIA-B/nm1-2
   dataset_partition: ./datasets/CASIA-B/CASIA-B.json
   num_workers: 1
   remove_no_gallery: false # Remove probe if no gallery for it
