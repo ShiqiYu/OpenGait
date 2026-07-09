@@ -145,3 +145,31 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# OpenGait local datasets / symlinks
+/CASIA-B
+/CASIA-B-png
+/GaitDatasetB-silh
+/CB-100/
+
+# OpenGait large experiment artifacts
+/output/
+/train-result/
+/dgv2_features/
+*.pt
+*.npz
+*.pkl
+
+# OpenGait logs
+/dgv2_extract/logs/
+/dgv2_extract/*.log
+pretreatment.log
+*.log
+
+# Local scratch / backup files
+*~
+\#dockerfile\#
+=
+ERROR
+\[internal\]
+transferring
