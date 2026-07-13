@@ -24,8 +24,11 @@ opt = parser.parse_args()
 def initialization(cfgs, training):
     msg_mgr = get_msg_mgr()
     engine_cfg = cfgs['trainer_cfg'] if training else cfgs['evaluator_cfg']
-    output_path = os.path.join('output/', cfgs['data_cfg']['dataset_name'],
-                               cfgs['model_cfg']['model'], engine_cfg['save_name'])
+    if isinstance(cfgs['data_cfg'], list):
+        dataset_names = "_".join([d['dataset_name'] for d in cfgs['data_cfg']])
+        output_path = os.path.join('output/', dataset_names,cfgs['model_cfg']['model'], engine_cfg['save_name'])
+    else:
+        output_path = os.path.join('output/', cfgs['data_cfg']['dataset_name'],cfgs['model_cfg']['model'], engine_cfg['save_name'])
     if training:
         msg_mgr.init_manager(output_path, opt.log_to_file, engine_cfg['log_iter'],
                              engine_cfg['restore_hint'] if isinstance(engine_cfg['restore_hint'], (int)) else 0)

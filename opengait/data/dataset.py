@@ -5,6 +5,8 @@ import torch.utils.data as tordata
 import json
 from utils import get_msg_mgr, is_bool_list, is_int_list
 
+import torch
+from pathlib import Path
 
 class DataSet(tordata.Dataset):
     def __init__(self, data_cfg, training):
@@ -12,8 +14,15 @@ class DataSet(tordata.Dataset):
             seqs_info: the list with each element indicating 
                             a certain gait sequence presented as [label, type, view, paths];
         """
+        self.dataset_name = data_cfg['dataset_name']
         self.__dataset_parser(data_cfg, training)
-        self.cache = data_cfg['cache']
+        self.cache = data_cfg['cache'] if 'cache' in data_cfg.keys() else False
+        if 'd-gait' in self.dataset_name.lower():
+            self.seqs_info = [[seq[0], f"{seq[0]}-{seq[1]}", *seq[2:]] for seq in self.seqs_info]
+        if training:
+            if 'self_supervised' in data_cfg.keys() and data_cfg['self_supervised']:
+                self.seqs_info = [[f"{seq[0]}-{seq[1]}-{seq[2]}", *seq[1:]] for seq in self.seqs_info]
+            self.seqs_info = [[f"{self.dataset_name}-{seq[0]}", *seq[1:]] for seq in self.seqs_info]
         self.label_list = [seq_info[0] for seq_info in self.seqs_info]
         self.types_list = [seq_info[1] for seq_info in self.seqs_info]
         self.views_list = [seq_info[2] for seq_info in self.seqs_info]
@@ -88,8 +97,8 @@ class DataSet(tordata.Dataset):
 
         def log_pid_list(pid_list):
             if len(pid_list) >= 3:
-                msg_mgr.log_info('[%s, %s, ..., %s]' %
-                                 (pid_list[0], pid_list[1], pid_list[-1]))
+                msg_mgr.log_info('[%s, %s, ..., %s], Len: %s' %
+                                 (pid_list[0], pid_list[1], pid_list[-1], len(pid_list)))
             else:
                 msg_mgr.log_info(pid_list)
 
