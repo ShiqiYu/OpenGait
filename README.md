@@ -13,7 +13,7 @@ The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/
 The extension [paper](https://arxiv.org/pdf/2405.09138) has been accepted to TPAMI2025. 
 
 ## What's New
-- **[Jul 2026]** [FoundationGait](https://arxiv.org/abs/2512.00691) has been accepted to ECCV2026🎉 and is available at [here](opengait/modeling/models/foundationgait.py). [Checkpoints coming soon](https://huggingface.co/opengait/OpenGait).
+- **[Jul 2026]** [FoundationGait](https://arxiv.org/abs/2512.00691) has been accepted to ECCV2026 as a **Spotlight** paper🎉 and is available at [here](opengait/modeling/models/foundationgait.py). [Checkpoints coming soon](https://huggingface.co/opengait/OpenGait).
 - **[Sep 2025]** [BiggerGait](https://openreview.net/pdf?id=LeJwcMLIlJ) has been accepted to NeurIPS2025🎉 and is available at [here](opengait/modeling/models/BiggerGait_DINOv2.py). [Here are checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Jun 2025]** [Scoliosis1K-Pose](https://arxiv.org/abs/2509.00872) has been accepted to MICCAI2025🎉. Extends [ScoNet](https://arxiv.org/pdf/2407.05726) by introducing pose annotations and clinical priors for interpretable scoliosis screening. Dataset is available on the [project homepage](https://zhouzi180.github.io/Scoliosis1K/).
 - **[Jun 2025]** [LidarGait++](https://openaccess.thecvf.com/content/CVPR2025/papers/Shen_LidarGait_Learning_Local_Features_and_Size_Awareness_from_LiDAR_Point_CVPR_2025_paper.pdf) has been accepted to CVPR2025🎉 and open-source in [configs/lidargaitv2](./configs/lidargaitv2/README.md).
@@ -43,7 +43,8 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Works
-- [**NeurIPS'25**] BiggerGait: Unlocking Gait Recognition with Layer-wise Representations from Large Vision Models [*Paper*](https://arxiv.org/pdf/2505.18132), and [*BiggerGait Code*](opengait/modeling/models/BiggerGait_DINOv2.py).
+- [**ECCV'26, Spotlight**] Silhouette-based Gait Foundation Model. [*Paper*](https://arxiv.org/pdf/2512.00691) and [*FoundationGait Code*](opengait/modeling/models/foundationgait.py)
+- [**NeurIPS'25**] BiggerGait: Unlocking Gait Recognition with Layer-wise Representations from Large Vision Models. [*Paper*](https://arxiv.org/pdf/2505.18132), and [*BiggerGait Code*](opengait/modeling/models/BiggerGait_DINOv2.py).
 - [**MICCAI'25**] Pose as Clinical Prior: Learning Dual Representations for Scoliosis Screening. [*Paper*](https://arxiv.org/abs/2509.00872) and [*Scoliosis1K Dataset*](https://zhouzi180.github.io/Scoliosis1K/).
 - [**CVPR'25**] LidarGait++: Learning Local Features and Size Awareness from LiDAR Point Clouds for 3D Gait Recognition. [*Paper*](https://openaccess.thecvf.com/content/CVPR2025/papers/Shen_LidarGait_Learning_Local_Features_and_Size_Awareness_from_LiDAR_Point_CVPR_2025_paper.pdf) and [*LidarGait++ Code*](configs/lidargaitv2/README.md)
 - [**TPAMI'25**] OpenGait: A Comprehensive Benchmark Study for Gait Recognition Towards Better Practicality. [*Paper*](https://arxiv.org/pdf/2405.09138). _This extension includes a key update with in-depth insights into emerging trends and challenges of gait recognition in Sec. VII_. 
@@ -58,7 +59,7 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [**Arxiv'23**] Exploring Deep Models for Practical Gait Recognition. [*Paper*](https://arxiv.org/pdf/2303.03301.pdf), [*DeepGaitV2 Code*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/deepgaitv2.py), and [*SwinGait Code*](https://github.com/ShiqiYu/OpenGait/blob/master/opengait/modeling/models/swingait.py).
 - [**TPAMI'23**] Learning Gait Representation from Massive Unlabelled Walking Videos: A Benchmark, [*Paper*](https://ieeexplore.ieee.org/document/10242019), [*GaitLU-1M Dataset*](datasets/GaitLU-1M/README.md), and [*GaitSSB Code*](opengait/modeling/models/gaitssb.py).
 - [**CVPR'23**] LidarGait: Benchmarking 3D Gait Recognition with Point Clouds, [*Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_LidarGait_Benchmarking_3D_Gait_Recognition_With_Point_Clouds_CVPR_2023_paper.pdf), [*SUSTech1K Dataset*](https://lidargait.github.io) and [*LidarGait Code*](datasets/SUSTech1K/README.md).
-- [**CVPR'23**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Highlight Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf), and [*GaitBase Code*](configs/gaitbase).
+- [**CVPR'23, Highlight**] OpenGait: Revisiting Gait Recognition Toward Better Practicality, [*Highlight Paper*](https://openaccess.thecvf.com/content/CVPR2023/papers/Fan_OpenGait_Revisiting_Gait_Recognition_Towards_Better_Practicality_CVPR_2023_paper.pdf), and [*GaitBase Code*](configs/gaitbase).
 - [**ECCV'22**] GaitEdge: Beyond Plain End-to-end Gait Recognition for Better Practicality, [*Paper*](https://arxiv.org/pdf/2203.03972), and [*GaitEdge Code*](configs/gaitedge/README.md).
 
 ## A Real Gait Recognition System: All-in-One-Gait
