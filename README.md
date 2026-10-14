@@ -13,6 +13,7 @@ The corresponding [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/
 The extension [paper](https://arxiv.org/pdf/2405.09138) has been accepted to TPAMI2025. 
 
 ## What's New
+- **[Oct 2026]** We’ve released a new survey covering gait recognition research from 2020 to 2026: [Modern Gait Recognition: A Survey from Deep Learning to Foundation Models](https://www.researchgate.net/publication/415739002_Modern_Gait_Recognition_A_Survey_from_Deep_Learning_to_Foundation_Models) - [Website](https://chaofan996.github.io/gait-survey/?)😊.
 - **[Jul 2026]** [FoundationGait](https://arxiv.org/abs/2512.00691) has been accepted to ECCV2026 as a **Spotlight** paper🎉 and is available at [here](opengait/modeling/models/foundationgait.py). [Checkpoints coming soon](https://huggingface.co/opengait/OpenGait).
 - **[Sep 2025]** [BiggerGait](https://openreview.net/pdf?id=LeJwcMLIlJ) has been accepted to NeurIPS2025🎉 and is available at [here](opengait/modeling/models/BiggerGait_DINOv2.py). [Here are checkpoints](https://huggingface.co/opengait/OpenGait).
 - **[Jun 2025]** [Scoliosis1K-Pose](https://arxiv.org/abs/2509.00872) has been accepted to MICCAI2025🎉. Extends [ScoNet](https://arxiv.org/pdf/2407.05726) by introducing pose annotations and clinical priors for interpretable scoliosis screening. Dataset is available on the [project homepage](https://zhouzi180.github.io/Scoliosis1K/).
