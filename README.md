@@ -43,6 +43,7 @@ Our team's latest checkpoints for projects such as DeepGaitv2, SkeletonGait, Ske
 - [Mar 2022] Dataset [GREW](https://www.grew-benchmark.org) is supported in [datasets/GREW](./datasets/GREW). -->
 
 ## Our Works
+- [**NeurIPS'26**] PuppetGait: Generalizing Gait Recognition via 3D Body-Aligned LVM Features. [*Paper*](https://openreview.net/forum?id=IzvcL0qN4m) and [*PuppetGait Code*](opengait/modeling/models/puppetgait.py).
 - [**ECCV'26, Spotlight**] Silhouette-based Gait Foundation Model. [*Paper*](https://arxiv.org/pdf/2512.00691) and [*FoundationGait Code*](opengait/modeling/models/foundationgait.py)
 - [**NeurIPS'25**] BiggerGait: Unlocking Gait Recognition with Layer-wise Representations from Large Vision Models. [*Paper*](https://arxiv.org/pdf/2505.18132), and [*BiggerGait Code*](opengait/modeling/models/BiggerGait_DINOv2.py).
 - [**MICCAI'25**] Pose as Clinical Prior: Learning Dual Representations for Scoliosis Screening. [*Paper*](https://arxiv.org/abs/2509.00872) and [*Scoliosis1K Dataset*](https://zhouzi180.github.io/Scoliosis1K/).
